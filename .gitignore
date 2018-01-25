@@ -1,0 +1,10 @@
+#Ignore everything
+*
+
+#Except some very specific files
+!.gitignore
+!MuJoCoThing/
+!MuJoCoThing/MinitaurLeg.xml
+!MuJoCoThing/CustomSimulate.cpp
+!minitaur-stl/
+!minitaur-stl/*.STL
