@@ -45,8 +45,11 @@ void mouse_button(GLFWwindow * w, int button, int act, int mods) {
 void mouse_move(GLFWwindow* window, double xpos, double ypos)
 {
 	// no buttons down: nothing to do
-	if (!button_left && !button_middle && !button_right) 
+	if (!button_left && !button_middle && !button_right) {
+		lastx = xpos;
+		lasty = ypos;
 		return;
+	}
 
 	// compute mouse displacement, save
 	double dx = xpos - lastx;
@@ -85,71 +88,6 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	}
 	if (action == GLFW_RELEASE) {
 		lastKey = -1;
-	}
-
-}
-
-void stepOverCenter(mjModel * m, mjData * d) {
-	bool go = lastKey == GLFW_KEY_SPACE;
-
-	//printf("before: %f\n", d->qvel[0]);
-	if (d->qvel[0] <= 0) {
-		d->qvel[0] = 0;
-		d->qacc[0] = 0;
-		mj_forward(m, d);
-	}
-	//printf("after: %f\n", d->qvel[0]);
-
-	if (hit && !d->sensordata[0]) {
-		hit = false;
-		prep = true;
-		gospeed = 0;
-		puts("stopped");
-	}
-	else if (!hit && d->sensordata[0]) {
-		hit = true;
-		prep = false;
-		gospeed = 0;
-		puts("done");
-	}
-	else if (go && hit) {
-		gospeed = 10;
-		puts("going");
-	}
-	else if (!prep && !hit && go) {
-		gospeed = 10;
-		puts("prep");
-	}
-
-	d->ctrl[0] = go ? 10 : 1;
-}
-
-void stepWCD(mjModel * m, mjData * d) {
-
-	int power = 100;
-
-	//evens left, odds right
-
-	if (lastKey == GLFW_KEY_W) {
-		d->ctrl[0] = d->ctrl[1] = power;
-	}
-	else if (lastKey == GLFW_KEY_S) {
-		d->ctrl[0] = d->ctrl[1] = -power;
-	}
-	else if (lastKey == GLFW_KEY_A) {
-		d->ctrl[0] = -power;
-		d->ctrl[1] = power;
-	}
-	else if (lastKey == GLFW_KEY_D) {
-		d->ctrl[0] = power;
-		d->ctrl[1] = -power;
-	}
-	else {
-		d->ctrl[0] = d->ctrl[1] = 0;
-	}
-
-	for (int i = 0; i < 6; i++) {
-		d->ctrl[i] = d->ctrl[i % 2];
 	}
 }
 
@@ -195,8 +133,8 @@ int main()
 		while (d->time - simstart < 1.0 / 60.0) {
 			mj_step1(m, d);
 
-			//replace this with the step function for your specific model
-			//stepOverCenter(m, d);
+			//place the step function for your specific model here
+
 			mj_step2(m, d);
 		}
 		
