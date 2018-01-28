@@ -30,7 +30,7 @@
   </asset>
 
   <worldbody>
-    <geom type='plane' size='1 1 1' material='plane'/>
+    <geom type='plane' size='1 1 1' material='plane' contype='1' conaffinity='1'/>
     
     <body name='thigh1' euler='0 0 0' pos='0 0 0.3'>
       <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
@@ -39,13 +39,14 @@
       <joint type='slide' limited='false' pos='0 0 0' axis='0 0 1'/>
       <joint name='thigh1_j' type='hinge' pos='0 0 0' axis='0 1 0' range='-45 45'/>
       
-      <body name='calf_long' euler='0 0 0' pos='0.1 0 0'>
-        <inertial pos='0.11635 0 0.00463' mass='0.05488' fullinertia='0.00000220501 0.00027791876 0.00027939897 0 0 0'/>
-        <geom type='capsule' fromto='0 0 0 -0.1 0 -0.173205' size='0.01'/>
+      <body name='calf_long' pos='0.1 0 0' euler='0 -60 0'>
+        <inertial pos='-0.11635 0 0.00463' mass='0.05488' fullinertia='0.00000220501 0.00027791876 0.00027939897 0 0 0'/>
+        <geom type='capsule' fromto='0 0 0 -0.22 0 0' size='0.01'/>
         <joint type='hinge' pos='0 0 0' axis='0 1 0' range='-45 45'/>
         <!--<geom type='mesh' mesh='calf2'/>-->
         
-        <body name='foot'>
+        <body name='foot' pos='-0.22 0 0'>
+          <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
           <!--<geom type='mesh' mesh='foot'/>-->
         </body>
       
@@ -57,9 +58,9 @@
         <!--<geom type='mesh' mesh='thigh'/>-->
         <joint name='thigh2_j' type='hinge' pos='0 0 0' axis='0 1 0' range='-45 45'/>
         
-        <body name='calf_short' euler='0 0 0' pos='-0.1 0 0'>
+        <body name='calf_short' euler='0 60 0' pos='-0.1 0 0'>
           <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
-          <geom type='capsule' fromto='0 0 0 0.1 0 -0.173205' size='0.01'/>
+          <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01'/>
           <joint type='hinge' pos='0 0 0' axis='0 1 0' range='-45 45'/>
           <!--<geom type='mesh' mesh='calf1'/>-->
         </body>
@@ -71,7 +72,7 @@
   </worldbody>
 
   <equality>
-    <connect body1='calf_short' body2='calf_long' anchor='0.1 0 -0.173205'/>
+    <connect body1='calf_short' body2='calf_long' anchor='0.2 0 0'/>
   </equality>
 
   <actuator>
