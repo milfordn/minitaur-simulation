@@ -3,9 +3,11 @@
 
 #include "include\mujoco.h"
 
+//Base controller class does nothing in the step function
 class ModelController {
 public:
-	virtual void step(mjModel*, mjData*) = 0;
+	ModelController(const char *);
+	virtual void step(mjModel*, mjData*);
 	void setModelFile(const char *);
 	const char * getModelFile();
 private:

@@ -1,9 +1,8 @@
-// MuJoCoThing.cpp : Defines the entry point for the console application.
-//
+#include "CustomSimulate.h"
 
-#include <cstdio>
 #include "include\mujoco.h"
 #include "include\glfw3.h"
+#include "ModelController.h"
 
 mjModel* m = NULL;                  // MuJoCo model
 mjData* d = NULL;                   // MuJoCo data
@@ -91,24 +90,24 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	}
 }
 
-int main()
+char * run(ModelController mc)
 {
 	mj_activate("mjkey.txt");
 
 	//replace OverCenterModel with any model you choose
-	m = mj_loadXML("MinitaurLeg.xml", NULL, err, sizeof(err));
+	m = mj_loadXML(mc.getModelFile(), NULL, err, sizeof(err));
 	d = mj_makeData(m);
 
 	glfwInit();
 	GLFWwindow * window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1); 
+	glfwSwapInterval(1);
 
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, mouse_button);
 	glfwSetCursorPosCallback(window, mouse_move);
 	glfwSetScrollCallback(window, scroll);
-	
+
 	mjv_defaultCamera(&cam);
 	if (m->ncam > 0) {
 		cam.type = mjCAMERA_FIXED;
@@ -127,17 +126,12 @@ int main()
 
 		mjtNum simstart = d->time;
 
-
-		//printf("%f\n", d->sensordata[0]);
-
 		while (d->time - simstart < 1.0 / 60.0) {
 			mj_step1(m, d);
-
-			//place the step function for your specific model here
-
+			mc.step(m, d);
 			mj_step2(m, d);
 		}
-		
+
 		// get framebuffer viewport
 		mjrRect viewport = { 0, 0, 0, 0 };
 		glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
@@ -161,5 +155,5 @@ int main()
 	mj_deleteModel(m);
 	mj_deleteData(d);
 
-    return 0;
+	return 0;
 }
