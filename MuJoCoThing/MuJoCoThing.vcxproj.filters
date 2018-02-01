@@ -13,9 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Filter Include="Library files">
+      <UniqueIdentifier>{46ab45c8-dad8-4e8e-aa53-e1a9c036f767}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\glfw3.h">
@@ -47,10 +47,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="glfw3.lib" />
-    <Library Include="mujoco150.lib" />
-  </ItemGroup>
-  <ItemGroup>
     <Xml Include="SpringModel.xml">
       <Filter>Resource Files</Filter>
     </Xml>
@@ -68,11 +64,21 @@
     <ClCompile Include="CustomSimulate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glfw3.dll">
+      <Filter>Library files</Filter>
+    </None>
+    <None Include="mujoco150.dll">
+      <Filter>Library files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="glfw3.lib">
+      <Filter>Library files</Filter>
+    </Library>
+    <Library Include="mujoco150.lib">
+      <Filter>Library files</Filter>
+    </Library>
   </ItemGroup>
 </Project>

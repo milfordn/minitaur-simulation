@@ -142,9 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="CustomSimulate.h" />
     <ClInclude Include="include\glfw3.h" />
     <ClInclude Include="include\mjdata.h" />
@@ -157,8 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomSimulate.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ModelController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="OverCenterModel.xml">
@@ -173,6 +168,10 @@
     <Xml Include="MinitaurLeg.xml">
       <SubType>Designer</SubType>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glfw3.dll" />
+    <None Include="mujoco150.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="glfw3.lib" />
