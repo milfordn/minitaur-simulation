@@ -22,8 +22,7 @@ bool prep;
 double gospeed;
 
 int lastKey;
-
-char err[1000];
+ModelController * mc;
 
 void scroll(GLFWwindow* window, double xoffset, double yoffset)
 {
@@ -88,15 +87,15 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	if (action == GLFW_RELEASE) {
 		lastKey = -1;
 	}
+
+	mc->keyboardCallback(w, key, scanCode, action, mods);
 }
 
-char * run(ModelController mc)
-{
-	mj_activate("mjkey.txt");
-
-	//replace OverCenterModel with any model you choose
-	m = mj_loadXML(mc.getModelFile(), NULL, err, sizeof(err));
-	d = mj_makeData(m);
+void run(ModelController * mcNew)
+{	
+	mc = mcNew;
+	m = mc->getModel();
+	d = mc->getData();
 
 	glfwInit();
 	GLFWwindow * window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
@@ -120,15 +119,13 @@ char * run(ModelController mc)
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
 	mjr_makeContext(m, &con, mjFONTSCALE_100);     // model-specific context
 
-	hit = false;
-
 	while (!glfwWindowShouldClose(window)) {
 
 		mjtNum simstart = d->time;
 
 		while (d->time - simstart < 1.0 / 60.0) {
 			mj_step1(m, d);
-			mc.step(m, d);
+			mc->step();
 			mj_step2(m, d);
 		}
 
@@ -154,6 +151,4 @@ char * run(ModelController mc)
 
 	mj_deleteModel(m);
 	mj_deleteData(d);
-
-	return 0;
 }

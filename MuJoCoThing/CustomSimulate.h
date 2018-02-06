@@ -3,6 +3,6 @@
 
 #include "ModelController.h"
 
-char * run(ModelController);
+void run(ModelController *);
 
 #endif
