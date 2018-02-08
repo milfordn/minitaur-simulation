@@ -1,15 +1,28 @@
-Wed Feb  7 18:07:55 2018
-ERROR: Could not open activation key file mjkey.txt
-
-Wed Feb  7 18:11:12 2018
-ERROR: Could not open activation key file mjkey.txt
-
-Wed Feb  7 18:15:43 2018
+Wed Feb  7 18:37:27 2018
 ERROR: Load model error: Error: could not open STL file 'models/..\minitaur-stl/Minitaur Leg Component (Thigh).stl'
 Object name = thigh, id = 0, line = 26, column = 5
 
-Wed Feb  7 18:18:06 2018
-ERROR: Load model error: XML parse error at line 0, column 0:
-Failed to open file
+Wed Feb  7 18:38:09 2018
+ERROR: Load model error: Error: could not open STL file 'models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
 
+Wed Feb  7 18:38:13 2018
+ERROR: Load model error: Error: could not open STL file 'models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
+
+Wed Feb  7 18:38:42 2018
+ERROR: Load model error: Error: could not open STL file '/models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
+
+Wed Feb  7 18:38:47 2018
+ERROR: Load model error: Error: could not open STL file '/models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
+
+Wed Feb  7 18:39:11 2018
+ERROR: Load model error: Error: could not open STL file 'models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
+
+Wed Feb  7 18:40:00 2018
+ERROR: Load model error: Error: could not open STL file 'models/models/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 26, column = 5
 

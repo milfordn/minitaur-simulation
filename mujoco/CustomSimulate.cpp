@@ -98,7 +98,7 @@ int main()
     //if( strlen(argv[1])>4 && !strcmp(argv[1]+strlen(argv[1])-4, ".mjb") )
     //    m = mj_loadModel(argv[1], 0);
     //else
-    m = mj_loadXML("models/MinitaurLegSimple.mjb", 0, error, 1000);
+    m = mj_loadXML("models/MinitaurLeg.xml", 0, error, 1000);
     if( !m )
         mju_error_s("Load model error: %s", error);
 
@@ -116,10 +116,10 @@ int main()
 	glfwSetScrollCallback(window, scroll);
 	
 	mjv_defaultCamera(&cam);
-	if (m->ncam > 0) {
+	/*if (m->ncam > 0) {
 		cam.type = mjCAMERA_FIXED;
 		cam.fixedcamid = 0;
-	}
+	}*/
 
 	mjv_defaultPerturb(&pert);
 	mjv_defaultOption(&opt);
