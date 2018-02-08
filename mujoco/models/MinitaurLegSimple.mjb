@@ -1,0 +1,75 @@
+<mujoco model='motorsim'>
+    <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='cassie-stl-meshes'/>
+    <size nuser_actuator='1' nuser_sensor='1'/>
+    <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -9.806'/>
+    
+    <visual>
+        <quality shadowsize='4096'/>
+        <map znear='0.05'/>
+    </visual>
+    
+    <default>
+        <joint limited='false'/>
+        <geom contype='0' conaffinity='0' condim='1'  solref=".005 1" solimp=".8 .8 .01" material='cassie'/>
+        <motor ctrllimited='true'/>
+    </default>
+    
+    <asset>
+        <texture type='skybox' builtin='gradient' width='128' height='128' rgb1='0.725490196078431   0.403921568627451   1.000000000000000' rgb2='1.000000000000000   0.984313725490196   0.588235294117647'/>
+        <texture name='plane' type='2d' builtin='checker'  rgb1='1.000000000000000   0.443137254901961   0.807843137254902' rgb2='0.019607843137255   1.000000000000000   0.631372549019608' width='128' height='128'/>
+        <material name='plane' reflectance='0.0' texture='plane' texrepeat='4 4' texuniform='true'/>
+        <material name='cassie' rgba='0.003921568627451   0.803921568627451   0.996078431372549 1'/>
+    </asset>
+    
+    <worldbody>
+        <geom name='floor' pos='0 0 -0.1' size='5 5 .125' type='plane' material='plane' condim='3' conaffinity='7'/>
+        <light mode='trackcom' pos='0 0 5' dir='0 0 -1'/>
+        <light directional='true' pos='0 0 3' dir='0 0 -1' diffuse='0.2 0.2 0.2' specular='0 0 0'/>
+        <camera name='trackcom' pos='0 -3 2' zaxis='0 -1 0.5' mode='trackcom'/>
+        
+        <body name='motor1casing' pos='0 0 2'>
+            <inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
+            <geom type='cylinder' fromto='0 0 0 0 0.1 0' size='0.2'/>
+            <joint name='joint_a' type='hinge' axis = '0 1 0' damping='0.1'/>
+            <body name='motor1femur' pos='0 .1 0'>
+                <inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
+                <geom type='capsule' fromto='0 0 0 0 0 -.5' size='0.03'/> 
+                <site name='elbow1' size='0.09' pos='0 .05 -.5'/>
+
+                <body name='motor1fibia' pos='0 .1 -.5'>
+                    <inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
+                    <geom type='capsule' fromto='0 0 0 0 0 -1' size='0.03'/>
+                    <joint name='joint_b' type='hinge' axis='0 1 0' limited='true' range = '-175 0' damping = '0.1'/>
+                    
+                </body>
+            </body>
+        </body>
+        <body name='motor2casing' pos='0 .45 2'>
+            <inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
+            <geom type='cylinder' fromto='0 0 0 0 -0.1 0' size='0.2'/>
+            <joint name='joint_c' type='hinge' axis = '0 1 0' damping='0.1'/>
+            <body name='motor2femur' pos='0 -.1 0'>
+                <inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
+                <geom type='capsule' fromto='0 0 0 0 0 -.5' size='0.03'/> 
+                <site name='elbow2' size='0.09' pos='0 -.05 -.5'/>
+
+                <body name='motor2fibia' pos='0 -.1 -.5'>
+                    <inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
+                    <geom type='capsule' fromto='0 0 0 0 0 -1' size='0.03'/>
+                    <joint name='joint_d' type='hinge' axis='0 1 0' limited='true' range = '0 175' damping = '0.1'/>
+                    <site name='endeffector' size='0.1' pos='0 -.025 -1'/>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+    <equality>
+        <connect body1='motor1fibia' body2='motor2fibia' anchor='0 0 -1'/>
+    </equality>
+    <actuator>
+        <!-- User parameter is the maximum no-load motor RPM -->
+        <motor name='motor_a' joint='joint_a' ctrllimited='false' user='1300'/>
+        <motor name='motor_c' joint='joint_c' ctrllimited='false' user='1300'/>
+       
+    </actuator>
+</mujoco>
+

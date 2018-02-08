@@ -1,0 +1,21 @@
+MuJoCo Pro Lab license activation key, number 6282, type 6.
+
+Issued to Oregon State University.
+
+Expires December 6, 2018.
+
+Do not share this file with anyone other than the users covered
+by your license agreement with Roboti LLC. This file activates
+MuJoCo Pro on any computer running any supported OS.
+
+Do not modify this file. Its entire content, including the
+plain text section, is used by the activation manager.
+
+4949b57d720f0f4d82c8dbf379e2b68bb3405bf8f6acffbc729fd4fc7ec2344a
+622aad86cf733b24162d2e8a1d97b1e74e111dd2f131e2bf1f18eec91ffbd9bf
+1b95302db547b4fb76ed34d50b5efb9b40642788e095a294ea572a11e2db4bd1
+978e98017496b2b3440dfdce6ed740e346ff363e0e148935ec6bf9e4b44dfc80
+c781e2ccc00629075737e12f45abb9bdc0b73133c164a7caef9db7b9e9ad764b
+b0493ba5b52ece68ecb2ccbc72f47009a6878d4b9a7a952e26110ebe441f93a0
+a729bf8403b5dee0a31c56eb55dcc10dc49545f5ead6e6acf34730695991e4cf
+26103c21d6432505aade6f6307441160484925959b23124dafa8f184dfe0ad3d
