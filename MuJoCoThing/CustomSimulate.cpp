@@ -1,9 +1,8 @@
-// MuJoCoThing.cpp : Defines the entry point for the console application.
-//
+#include "CustomSimulate.h"
 
-#include <cstdio>
 #include "include\mujoco.h"
 #include "include\glfw3.h"
+#include "ModelController.h"
 
 mjModel* m = NULL;                  // MuJoCo model
 mjData* d = NULL;                   // MuJoCo data
@@ -23,8 +22,7 @@ bool prep;
 double gospeed;
 
 int lastKey;
-
-char err[1000];
+ModelController * mc;
 
 void scroll(GLFWwindow* window, double xoffset, double yoffset)
 {
@@ -45,8 +43,11 @@ void mouse_button(GLFWwindow * w, int button, int act, int mods) {
 void mouse_move(GLFWwindow* window, double xpos, double ypos)
 {
 	// no buttons down: nothing to do
-	if (!button_left && !button_middle && !button_right) 
+	if (!button_left && !button_middle && !button_right) {
+		lastx = xpos;
+		lasty = ypos;
 		return;
+	}
 
 	// compute mouse displacement, save
 	double dx = xpos - lastx;
@@ -87,90 +88,25 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 		lastKey = -1;
 	}
 
+	mc->keyboardCallback(w, key, scanCode, action, mods);
 }
 
-void stepOverCenter(mjModel * m, mjData * d) {
-	bool go = lastKey == GLFW_KEY_SPACE;
-
-	//printf("before: %f\n", d->qvel[0]);
-	if (d->qvel[0] <= 0) {
-		d->qvel[0] = 0;
-		d->qacc[0] = 0;
-		mj_forward(m, d);
-	}
-	//printf("after: %f\n", d->qvel[0]);
-
-	if (hit && !d->sensordata[0]) {
-		hit = false;
-		prep = true;
-		gospeed = 0;
-		puts("stopped");
-	}
-	else if (!hit && d->sensordata[0]) {
-		hit = true;
-		prep = false;
-		gospeed = 0;
-		puts("done");
-	}
-	else if (go && hit) {
-		gospeed = 10;
-		puts("going");
-	}
-	else if (!prep && !hit && go) {
-		gospeed = 10;
-		puts("prep");
-	}
-
-	d->ctrl[0] = go ? 10 : 1;
-}
-
-void stepWCD(mjModel * m, mjData * d) {
-
-	int power = 100;
-
-	//evens left, odds right
-
-	if (lastKey == GLFW_KEY_W) {
-		d->ctrl[0] = d->ctrl[1] = power;
-	}
-	else if (lastKey == GLFW_KEY_S) {
-		d->ctrl[0] = d->ctrl[1] = -power;
-	}
-	else if (lastKey == GLFW_KEY_A) {
-		d->ctrl[0] = -power;
-		d->ctrl[1] = power;
-	}
-	else if (lastKey == GLFW_KEY_D) {
-		d->ctrl[0] = power;
-		d->ctrl[1] = -power;
-	}
-	else {
-		d->ctrl[0] = d->ctrl[1] = 0;
-	}
-
-	for (int i = 0; i < 6; i++) {
-		d->ctrl[i] = d->ctrl[i % 2];
-	}
-}
-
-int main()
-{
-	mj_activate("mjkey.txt");
-
-	//replace OverCenterModel with any model you choose
-	m = mj_loadXML("MinitaurLeg.xml", NULL, err, sizeof(err));
-	d = mj_makeData(m);
+void run(ModelController * mcNew)
+{	
+	mc = mcNew;
+	m = mc->getModel();
+	d = mc->getData();
 
 	glfwInit();
 	GLFWwindow * window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(1); 
+	glfwSwapInterval(1);
 
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, mouse_button);
 	glfwSetCursorPosCallback(window, mouse_move);
 	glfwSetScrollCallback(window, scroll);
-	
+
 	mjv_defaultCamera(&cam);
 	if (m->ncam > 0) {
 		cam.type = mjCAMERA_FIXED;
@@ -183,23 +119,16 @@ int main()
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
 	mjr_makeContext(m, &con, mjFONTSCALE_100);     // model-specific context
 
-	hit = false;
-
 	while (!glfwWindowShouldClose(window)) {
 
 		mjtNum simstart = d->time;
 
-
-		//printf("%f\n", d->sensordata[0]);
-
 		while (d->time - simstart < 1.0 / 60.0) {
 			mj_step1(m, d);
-
-			//replace this with the step function for your specific model
-			//stepOverCenter(m, d);
+			mc->step();
 			mj_step2(m, d);
 		}
-		
+
 		// get framebuffer viewport
 		mjrRect viewport = { 0, 0, 0, 0 };
 		glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
@@ -222,6 +151,4 @@ int main()
 
 	mj_deleteModel(m);
 	mj_deleteData(d);
-
-    return 0;
 }

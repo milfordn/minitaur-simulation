@@ -5,6 +5,7 @@
 !.gitignore
 !MuJoCoThing/
 !MuJoCoThing/MinitaurLeg.xml
-!MuJoCoThing/CustomSimulate.cpp
 !minitaur-stl/
 !minitaur-stl/*.STL
+!MuJoCoThing/*.cpp
+!MuJoCoThing/*.h
