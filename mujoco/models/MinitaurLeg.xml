@@ -1,6 +1,6 @@
 <!-- Note: Component inertias are known to be incorrect in this version -->
 <mujoco model='Minitaur'>
-  <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='models/'/>
+  <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx'/>
   <size nuser_actuator='1' nuser_sensor='1'/>
   <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -0.9806'/>
   <!-- Timestep is set to 0.0005 because our controller runs at 2 kHz (-9.806) -->
@@ -23,10 +23,10 @@
     <texture name='plane' type='2d' builtin='checker'  rgb1='1 0 0' rgb2='1 1 0' width='128' height='128'/>
     <material name='plane' reflectance='0.0' texture='plane' texrepeat='4 4' texuniform='true'/>
     <material name='cassie' rgba='0.003921568627451   0.803921568627451   0.996078431372549 1'/>
-    <mesh name='thigh' file='Minitaur Leg Component (Thigh).stl'/>
-    <mesh name='foot' file='Minitaur foot component.stl'/>
-    <mesh name='calf1' file='Minitaur Leg Component (Calf no Ankle).stl'/>
-    <mesh name='calf2' file='Minitaur Leg Component (Calf with Ankle).stl'/>
+    <mesh name='thigh' file='minitaurlegthigh.STL'/>-->
+    <mesh name='foot' file='minitaurlegfoot.STL'/>
+    <mesh name='calf1' file='minitaurlegcalf.STL'/>
+    <mesh name='calf2' file='minitaurlegcalfankle.STL'/>
   </asset>
 
   <worldbody>
