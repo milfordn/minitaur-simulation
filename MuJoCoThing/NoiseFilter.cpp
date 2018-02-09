@@ -1,4 +1,4 @@
-#include "Noise.h"
+#include "NoiseFilter.h"
 #include <ctime>
 
 std::default_random_engine NoiseFilter::rand;
@@ -25,6 +25,10 @@ void NoiseFilter::applyNoise(mjtNum * v) {
 	for (int i = 0; i < interpolated.size(); i++) {
 		v[i] += interpolated[i];
 	}
+}
+
+Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> NoiseFilter::applyNoise(Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> v) {
+	return v + additiveNoiseFrom + (additiveNoiseTo - additiveNoiseFrom) * (elapsed / period);
 }
 
 void NoiseFilter::incrementVectors() {

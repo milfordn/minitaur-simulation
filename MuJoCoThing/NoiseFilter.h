@@ -1,5 +1,5 @@
-#ifndef NOISE_H
-#define NOISE_H
+#ifndef NOISEF_H
+#define NOISEF_H
 
 #include "Eigen/Core"
 #include "include/mujoco.h"
@@ -9,6 +9,7 @@ class NoiseFilter {
 public:
 	NoiseFilter(mjtNum frequency, mjtNum magnitude, Eigen::Index vectorSize);
 	void applyNoise(mjtNum *);
+	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> applyNoise(Eigen::Matrix<mjtNum, Eigen::Dynamic, 1>);
 	void step(mjtNum interval);
 private:
 	void incrementVectors();
