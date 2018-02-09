@@ -35,27 +35,38 @@
 
   <worldbody>
     <geom type='plane' size='1 1 1' material='plane' contype='1' conaffinity='1'/>
+
+    <body name='hip' pos='0 0 0.3'>
+      <inertial pos='0 0 0' mass='0.001' diaginertia='0.001 0.001 0.001'/>
+      <geom type='box' size='0.01 0.01 0.01'/>
+      <joint type='slide' range='0.01 0.05' pos='0 0 0' axis='0 0 1'/>
     
-    <body name='thigh1' euler='0 0 0' pos='0 0 0.3'>
-      <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
-      <geom type='capsule' fromto='0 0 0 0.1 0 0' size='0.01'/>
-      <geom class='mesh-import' mesh='thigh'/>
-      <!--<joint type='slide' limited='false' pos='0 0 0' axis='0 0 1'/>-->
-      <joint name='thigh1_j' type='hinge' pos='0 0 0' axis='0 1 0' range='-1180 180' ref='90' armature='0'/>
+      <body name='thigh1' euler='0 0 0' pos='0 0 0'>
+        <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
+        <geom type='capsule' fromto='0 0 0 0.1 0 0' size='0.01'/>
+        <geom class='mesh-import' mesh='thigh'/>
+        <joint name='thigh1_j' type='hinge' pos='0 0 0' axis='0 1 0' range='-180 180' ref='90' armature='0'/>
       
-      <body name='calf_long' pos='0.1 0.01 0' euler='0 120 0'>
-        <inertial pos='0.11635 0 0.00463' mass='0.05488' fullinertia='0.00000220501 0.00027791876 0.00027939897 0 0 0'/>
-        <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
-        <geom class='mesh-import' mesh='calf2'/>
-        <joint type='hinge' pos='0 0 0' axis='0 1 0' range='-90 90' ref='-30'/>
+        <body name='calf_long' pos='0.1 0.01 0' euler='0 120 0'>
+          <inertial pos='0.11635 0 0.00463' mass='0.05488' fullinertia='0.00000220501 0.00027791876 0.00027939897 0 0 0'/>
+          <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
+          <geom class='mesh-import' mesh='calf2'/>
+          <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
+
+          <body name='mechstop' pos='0 0.01 0'>
+            <inertial pos='0 0 0' mass='0.001' diaginertia='0.001 0.001 0.001'/>
+            <geom type='cylinder' euler='0 0 90' size='0.015 0.005' contype='2' conaffinity='2'/>
+          </body>
         
-        <body name='foot' pos='0.24 0 0'>
-          <inertial pos='0 0 0' mass='0'/>
-          <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
-          <geom class='mesh-import' mesh='foot'/>
+          <body name='foot' pos='0.24 0 0'>
+            <inertial pos='0 0 0' mass='0'/>
+            <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
+            <geom class='mesh-import' mesh='foot'/>
+          </body>
+      
         </body>
       
-      </body>    
+      </body>
       
       <body name='thigh2' euler='0 180 0' pos='0 0.03 0'>
         <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
@@ -65,13 +76,12 @@
         
         <body name='calf_short' euler='0 -120 0' pos='0.1 -0.01 0'>
           <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
-          <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01'/>
-          <joint type='hinge' pos='0 0 0' axis='0 1 0' range='-90 90' ref='-30'/>
+          <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01' contype='2' conaffinity='2'/>
+          <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
           <geom class='mesh-import' mesh='calf1'/>
-        </body>
-      
-      </body>
+        </body>      
     
+      </body>
     </body>
 
   </worldbody>
