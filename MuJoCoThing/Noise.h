@@ -7,14 +7,14 @@
 
 class NoiseFilter {
 public:
-	NoiseFilter(mjtNum, mjtNum, int);
+	NoiseFilter(mjtNum frequency, mjtNum magnitude, Eigen::Index vectorSize);
 	void applyNoise(mjtNum *);
-	void step(mjtNum);
+	void step(mjtNum interval);
 private:
 	void incrementVectors();
 	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> additiveNoiseFrom;
 	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> additiveNoiseTo;	
-	mjtNum time;
+	mjtNum elapsed;
 	mjtNum period;
 	mjtNum magnitude;
 	static std::default_random_engine rand;
