@@ -6,7 +6,6 @@
 #include "include/mujoco.h"
 #include "include/glfw3.h"
 #include "ModelController.h"
-#include "pid.h"
 
 mjModel* m = NULL;                  // MuJoCo model
 mjData* d = NULL;                   // MuJoCo data
@@ -126,7 +125,6 @@ void run(ModelController * mcNew)
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
 	mjr_makeContext(m, &con, mjFONTSCALE_100);     // model-specific context
 	
-	pid *m1 = new pid(100, 0.0, 10.0); 
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -134,18 +132,9 @@ void run(ModelController * mcNew)
 		
 
 		while (d->time - simstart < 1.0 / 60.0) {
-			double output;
-			if(d->qpos[0] < -2 && d->qvel[0] > 0){
-				output = m1->calculateOutput(d->qpos[1], 0);
-			}else{
-				output = 0;
-			}
-			cout << d->qpos[0] << endl;
-			mj_step(m, d);
-			d->ctrl[0] = -output;
-			d->ctrl[1] = output;
+			
 			//mj_step1(m, d);
-			//mc->step();
+			mc->step();
 			//mj_step2(m, d);
 		}
 
