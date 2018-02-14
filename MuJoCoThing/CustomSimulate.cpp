@@ -133,9 +133,9 @@ void run(ModelController * mcNew)
 
 		while (d->time - simstart < 1.0 / 60.0) {
 			
-			//mj_step1(m, d);
+			mj_step1(m, d);
 			mc->step();
-			//mj_step2(m, d);
+			mj_step2(m, d);
 		}
 
 		// get framebuffer viewport

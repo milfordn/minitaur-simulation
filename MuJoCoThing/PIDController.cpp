@@ -24,8 +24,6 @@ void PIDController::step() {
 	}else{
 		output = 0;
 	}
-	mj_step(model, data);
-	
 	//Set the actuators to the PID output
 	data->ctrl[0] = -output;
 	data->ctrl[1] = output;
