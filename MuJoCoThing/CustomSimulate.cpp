@@ -1,7 +1,10 @@
 #include "CustomSimulate.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include <iostream>
 
-#include "include\mujoco.h"
-#include "include\glfw3.h"
+#include "include/mujoco.h"
+#include "include/glfw3.h"
 #include "ModelController.h"
 
 mjModel* m = NULL;                  // MuJoCo model
@@ -24,6 +27,7 @@ double gospeed;
 int lastKey;
 ModelController * mc;
 
+using namespace std;
 void scroll(GLFWwindow* window, double xoffset, double yoffset)
 {
 	// require model
@@ -91,6 +95,8 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	mc->keyboardCallback(w, key, scanCode, action, mods);
 }
 
+
+
 void run(ModelController * mcNew)
 {	
 	mc = mcNew;
@@ -108,22 +114,25 @@ void run(ModelController * mcNew)
 	glfwSetScrollCallback(window, scroll);
 
 	mjv_defaultCamera(&cam);
-	if (m->ncam > 0) {
-		cam.type = mjCAMERA_FIXED;
-		cam.fixedcamid = 0;
-	}
+	//if (m->ncam > 0) {
+	//	cam.type = mjCAMERA_FIXED;
+	//	cam.fixedcamid = 0;
+	//}
 
 	mjv_defaultPerturb(&pert);
 	mjv_defaultOption(&opt);
 	mjr_defaultContext(&con);
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
 	mjr_makeContext(m, &con, mjFONTSCALE_100);     // model-specific context
+	
 
 	while (!glfwWindowShouldClose(window)) {
 
 		mjtNum simstart = d->time;
+		
 
 		while (d->time - simstart < 1.0 / 60.0) {
+			
 			mj_step1(m, d);
 			mc->step();
 			mj_step2(m, d);
@@ -152,3 +161,4 @@ void run(ModelController * mcNew)
 	mj_deleteModel(m);
 	mj_deleteData(d);
 }
+
