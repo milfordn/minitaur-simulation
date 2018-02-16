@@ -36,7 +36,7 @@
       <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
       <geom type='capsule' fromto='0 0 0 0.1 0 0' size='0.01'/>
       <!--<geom type='mesh' mesh='thigh'/>-->
-      <joint type='slide' limited='false' pos='0 0 0' axis='0 0 1'/>
+      <!--<joint type='slide' limited='false' pos='0 0 0' axis='0 0 1'/>-->
       <joint name='thigh1_j' type='hinge' pos='0 0 0' axis='0 1 0' range='-45 45'/>
       
       <body name='calf_long' pos='0.1 0 0' euler='0 -60 0'>
