@@ -19,7 +19,7 @@ PIDController::~PIDController() {
 
 void PIDController::step() {
 	double output;
-	if(data->qpos[0] < -2 && data->qvel[0] > 0){ //If the position of the root body is at height -2, and the velocity vectory isn't negative (not falling)
+	if(data->qvel[0] > 0){ //If the position of the root body is at height -2, and the velocity vectory isn't negative (not falling)
 		output = controller->calculateOutput(data->qpos[1], 0); //Calculate the PID output from the motor angle
 	}else{
 		output = 0;

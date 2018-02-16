@@ -24,6 +24,5 @@ double pid::calculateOutput(double position, double velocity, double setpoint){
     integral += error;
     double derivative = velocity;
     
-    lastPosition = position;
     return error*KP + integral*KI + derivative*KD;
 }
