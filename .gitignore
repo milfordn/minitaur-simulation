@@ -8,5 +8,8 @@
 !MuJoCoThing/MinitaurLegSimple.mjb
 !minitaur-stl/
 !minitaur-stl/*.STL
+
+!MuJoCoThing/MuJoCoThing.vcxproj*
+!MuJoCoThing.sln
 !MuJoCoThing/*.cpp
 !MuJoCoThing/*.h
