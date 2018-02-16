@@ -1,9 +1,23 @@
 #include "NoiseFilter.h"
-#include <ctime>
+#include "Eigen/Dense"
 
 std::default_random_engine NoiseFilter::rand;
 
 NoiseFilter::NoiseFilter(mjtNum freq, mjtNum mag, Eigen::Index vsize) {
+	this->elapsed = 0;
+	this->period = 1. / freq;
+	this->magnitude = Eigen::VectorXd::Constant(vsize, mag);
+
+	for (int i = 0; i < vsize; i++) {
+		this->magnitude[i] = mag;
+	}
+
+	this->additiveNoiseTo = Eigen::Matrix<mjtNum, Eigen::Dynamic, 1>(vsize);
+	incrementVectors();
+	incrementVectors();
+}
+
+NoiseFilter::NoiseFilter(mjtNum freq, Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> mag, Eigen::Index vsize) {
 	this->elapsed = 0;
 	this->period = 1. / freq;
 	this->magnitude = mag;
@@ -34,6 +48,6 @@ Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> NoiseFilter::applyNoise(Eigen::Matrix<m
 void NoiseFilter::incrementVectors() {
 	additiveNoiseFrom = additiveNoiseTo;
 	for (int i = 0; i < additiveNoiseTo.size(); i++) {
-		additiveNoiseTo[i] = 2 * magnitude * (0.5 - (double)rand() / rand.max());
+		additiveNoiseTo[i] = 2 * magnitude[i] * (0.5 - (double)rand() / rand.max());
 	}
 }
