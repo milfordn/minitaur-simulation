@@ -1,23 +1,17 @@
-#include "NoiseFilter.h"
-#include "Eigen/Dense"
+#include "Noise.h"
 
-std::default_random_engine NoiseFilter::rand;
+std::default_random_engine Noise::rand;
 
-NoiseFilter::NoiseFilter(mjtNum freq, mjtNum mag, Eigen::Index vsize) {
+Noise::Noise(mjtNum freq, mjtNum mag, Eigen::Index vsize) {
 	this->elapsed = 0;
 	this->period = 1. / freq;
 	this->magnitude = Eigen::VectorXd::Constant(vsize, mag);
-
-	for (int i = 0; i < vsize; i++) {
-		this->magnitude[i] = mag;
-	}
-
 	this->additiveNoiseTo = Eigen::Matrix<mjtNum, Eigen::Dynamic, 1>(vsize);
 	incrementVectors();
 	incrementVectors();
 }
 
-NoiseFilter::NoiseFilter(mjtNum freq, Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> mag, Eigen::Index vsize) {
+Noise::Noise(mjtNum freq, Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> mag, Eigen::Index vsize) {
 	this->elapsed = 0;
 	this->period = 1. / freq;
 	this->magnitude = mag;
@@ -26,7 +20,7 @@ NoiseFilter::NoiseFilter(mjtNum freq, Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> m
 	incrementVectors();
 }
 
-void NoiseFilter::step(mjtNum interval) {
+void Noise::step(mjtNum interval) {
 	elapsed += interval;
 	if (elapsed > period) {
 		incrementVectors();
@@ -34,18 +28,18 @@ void NoiseFilter::step(mjtNum interval) {
 	}
 }
 
-void NoiseFilter::applyNoise(mjtNum * v) {
+void Noise::applyNoise(mjtNum * v) {
 	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> interpolated = additiveNoiseFrom + (additiveNoiseTo - additiveNoiseFrom) * (elapsed / period);
 	for (int i = 0; i < interpolated.size(); i++) {
 		v[i] += interpolated[i];
 	}
 }
 
-Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> NoiseFilter::applyNoise(Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> v) {
+Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> Noise::applyNoise(Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> v) {
 	return v + additiveNoiseFrom + (additiveNoiseTo - additiveNoiseFrom) * (elapsed / period);
 }
 
-void NoiseFilter::incrementVectors() {
+void Noise::incrementVectors() {
 	additiveNoiseFrom = additiveNoiseTo;
 	for (int i = 0; i < additiveNoiseTo.size(); i++) {
 		additiveNoiseTo[i] = 2 * magnitude[i] * (0.5 - (double)rand() / rand.max());
