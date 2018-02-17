@@ -1,6 +1,5 @@
 #ifndef pid_h
 #define pid_h
-#endif
 
 class pid{
     public:
@@ -15,3 +14,5 @@ class pid{
         double integral;
         double lastPosition;
 };
+
+#endif
