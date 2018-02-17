@@ -5,13 +5,14 @@
 class pid{
     public:
         pid(double KP, double KI, double KD);
-        double calculateOutput(double position, double setpoint);
-		double calculateOutput(double position, double velocity, double setpoint);
+        double calculateOutput(unsigned long tick, double setpoint, double position);
+		double calculateOutput(unsigned long tick, double setpoint, double position, double velocity);
     private:
         double KP;
         double KI;
         double KD;
         double lastError;
+		double lastTick;
         double integral;
         double lastPosition;
 };
