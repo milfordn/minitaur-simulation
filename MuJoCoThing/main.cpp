@@ -1,8 +1,8 @@
 #include "CustomSimulate.h"
-#include "KeyboardController.h"
-#include "PIDController.h"
+#include "Controllers/KeyboardController.h"
+#include "Controllers/PIDController.h"
 #include "include/glfw3.h"
-#include "ModelController.h"
+#include "Controllers/ModelController.h"
 #include "GaussianNoise.h"
 
 int main(int argc, char ** argv) {

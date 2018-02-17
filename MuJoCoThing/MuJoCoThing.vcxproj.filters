@@ -39,29 +39,56 @@
     <ClInclude Include="include\mujoco.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelController.h">
+    <ClInclude Include="CustomSimulate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CustomSimulate.h">
+    <ClInclude Include="GaussianNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\KeyboardController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\ModelController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\PIDController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="SpringModel.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="OverCenterModel.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
-    <Xml Include="WCDModel.xml">
-      <Filter>Resource Files</Filter>
-    </Xml>
     <Xml Include="MinitaurLeg.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomSimulate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GaussianNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Noise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\KeyboardController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\ModelController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\PIDController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,6 +98,9 @@
     </None>
     <None Include="mujoco150.dll">
       <Filter>Library files</Filter>
+    </None>
+    <None Include="MinitaurLegSimple.mjb">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

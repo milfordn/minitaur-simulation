@@ -5,7 +5,7 @@
 
 #include "include/mujoco.h"
 #include "include/glfw3.h"
-#include "ModelController.h"
+#include "Controllers/ModelController.h"
 
 mjModel* m = NULL;                  // MuJoCo model
 mjData* d = NULL;                   // MuJoCo data
