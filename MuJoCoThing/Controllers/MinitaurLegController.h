@@ -10,8 +10,10 @@ public:
 	void step() override;
 	void keyboardCallback(GLFWwindow *, int, int, int, int) override;
 private:
-	AutoPID ctrl1, ctrl2;
-	double angle;
+	pid ctrlR, ctrlT;
+	int sensor1, sensor2, motor1, motor2;
+	double setR;
+	double setT;
 };
 
 #endif

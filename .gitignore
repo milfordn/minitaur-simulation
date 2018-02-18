@@ -24,6 +24,7 @@ out.txt
 
 # Build files
 *.obj
+*.tmp
 
 # Build results
 [Dd]ebug/
