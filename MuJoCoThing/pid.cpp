@@ -14,6 +14,8 @@ pid::pid(double kp, double ki, double kd){
 double pid::calculateOutput(double position, double setpoint){
     double error = position - setpoint;
     integral += error;
+	if (integral > 100) integral = 100;
+	if (integral < -100) integral = -100;
     double derivative = position - lastPosition;
     
     lastPosition = position;
