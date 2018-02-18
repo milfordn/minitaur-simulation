@@ -144,7 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AutoPID.h" />
     <ClInclude Include="Controllers\KeyboardController.h" />
+    <ClInclude Include="Controllers\MinitaurLegController.h" />
     <ClInclude Include="Controllers\ModelController.h" />
     <ClInclude Include="Controllers\PIDController.h" />
     <ClInclude Include="CustomSimulate.h" />
@@ -160,7 +162,9 @@
     <ClInclude Include="pid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoPID.cpp" />
     <ClCompile Include="Controllers\KeyboardController.cpp" />
+    <ClCompile Include="Controllers\MinitaurLegController.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
     <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="CustomSimulate.cpp" />

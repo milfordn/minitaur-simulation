@@ -60,6 +60,12 @@
     <ClInclude Include="Controllers\PIDController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutoPID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\MinitaurLegController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
@@ -89,6 +95,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controllers\PIDController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AutoPID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\MinitaurLegController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,13 +1,13 @@
 #include "AutoPID.h"
 
-AutoPID::AutoPID(pid controller, int actuatorID, int sensorID) {
-	this->controller = controller;
+AutoPID::AutoPID(pid controller, int actuatorID, int sensorID) 
+: controller(controller) {
 	this->actuatorID = actuatorID;
 	this->sensorID = sensorID;
 }
 
 AutoPID::AutoPID(double kp, double ki, double kd, int actuatorID, int sensorID) 
-	: controller(kp, ki, kd)
+: controller(kp, ki, kd)
 {
 	this->actuatorID = actuatorID;
 	this->sensorID = sensorID;
