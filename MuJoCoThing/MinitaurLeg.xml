@@ -40,6 +40,7 @@
       <inertial pos='0 0 0' mass='0.000001' diaginertia='0.001 0.001 0.001'/>
       <geom type='box' size='0.01 0.01 0.01'/>
       <!--<joint type='slide' range='-0.4 0.05' pos='0 0 0' axis='0 0 1'/>-->
+      <!--<joint type='slide' limited='false' pos='0 0 0' axis='1 0 0'/>-->
     
       <body name='thigh1' euler='0 0 0' pos='0 0 0'>
         <inertial pos='0.03848 0 0.00397' mass='0.03921' fullinertia='0.00000539488 0.00005606744 0.00006107051 0 0.00000009813 0'/>
