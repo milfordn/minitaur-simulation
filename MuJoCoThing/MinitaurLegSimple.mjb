@@ -26,15 +26,15 @@
         <light mode='trackcom' pos='0 0 5' dir='0 0 -1'/>
         <light directional='true' pos='0 0 3' dir='0 0 -1' diffuse='0.2 0.2 0.2' specular='0 0 0'/>
         <camera name='trackcom' pos='0 -3 2' zaxis='0 -1 0.5' mode='trackcom'/>
-        <body name='zslider' pos='0 0 2'>
-			<body name='tempanchor1' pos='0 0 .5'>
+        <body name='zslider' pos='0 0 0'>
+		<!--<body name='tempanchor1' pos='0 0 .5'>
 				<inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
 				<joint name='tempfix2' type='slide' axis='0 0 1'/>
 			</body>
 			<inertial pos='0 0 -1' mass = '1' diaginertia='0.1 0.1 0.1'/>
-			<joint name='parent_joint' type='slide' axis='0 0 1'/>
+			<joint name='parent_joint' type='slide' axis='0 0 1'/>-->
 			<body name='motor1casing' pos='0 0 2'>
-				<inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
+				<inertial pos='0 0 -1' mass = '1' diaginertia='0.1 0.1 0.1'/>
 				<geom type='cylinder' fromto='0 0 0 0 0.1 0' size='0.2'/>
 				<joint name='joint_a' type='hinge' axis = '0 1 0' damping='0.1'/>
 				<body name='motor1femur' pos='0 .1 0'>
@@ -50,7 +50,7 @@
 				</body>
 			</body>
 			<body name='motor2casing' pos='0 .45 2'>
-				<inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
+				<inertial pos='0 0 -1' mass = '1' diaginertia='0.1 0.1 0.1'/>
 				<geom type='cylinder' fromto='0 0 0 0 -0.1 0' size='0.2'/>
 				<joint name='joint_c' type='hinge' axis = '0 1 0' damping='0.1'/>
 				<body name='motor2femur' pos='0 -.1 0'>
@@ -68,11 +68,10 @@
 				</body>
 			</body>
 		</body>
-
     </worldbody>
     <equality>
         <connect body1='motor1fibia' body2='motor2fibia' anchor='0 0 -1'/>
-		<connect body1='motor2fibia' body2='tempanchor1' anchor='0 0 -1'/>
+		<!--<connect body1='motor2fibia' body2='tempanchor1' anchor='0 0 -1'/>-->
     </equality>
     <actuator>
         <!-- User parameter is the maximum no-load motor RPM -->
