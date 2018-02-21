@@ -1,7 +1,7 @@
 <mujoco model='motorsim'>
     <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='cassie-stl-meshes'/>
     <size nuser_actuator='1' nuser_sensor='1'/>
-    <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -9.806'/>
+    <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -0.00'/>
     
     <visual>
         <quality shadowsize='4096'/>
@@ -26,7 +26,7 @@
         <light mode='trackcom' pos='0 0 5' dir='0 0 -1'/>
         <light directional='true' pos='0 0 3' dir='0 0 -1' diffuse='0.2 0.2 0.2' specular='0 0 0'/>
         <camera name='trackcom' pos='0 -3 2' zaxis='0 -1 0.5' mode='trackcom'/>
-        <body name='zslider' pos='0 0 0'>
+        <!--<body name='zslider' pos='0 0 0'>-->
 		<!--<body name='tempanchor1' pos='0 0 .5'>
 				<inertial pos='0 0 0' mass = '1' diaginertia='0.1 0.1 0.1'/>
 				<joint name='tempfix2' type='slide' axis='0 0 1'/>
@@ -40,7 +40,6 @@
 				<body name='motor1femur' pos='0 .1 0'>
 					<inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
 					<geom type='capsule' fromto='0 0 0 0 0 -.5' size='0.03'/> 
-					<site name='elbow1' size='0.09' pos='0 .05 -.5'/>
 
 					<body name='motor1fibia' pos='0 .1 -.5'>
 						<inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
@@ -56,7 +55,6 @@
 				<body name='motor2femur' pos='0 -.1 0'>
 					<inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
 					<geom type='capsule' fromto='0 0 0 0 0 -.5' size='0.03'/> 
-					<site name='elbow2' size='0.09' pos='0 -.05 -.5'/>
 
 					<body name='motor2fibia' pos='0 -.1 -.5'>
 						<inertial pos ='0 0 -.25' mass = '1' diaginertia='0.1 0.1 0.1'/>
@@ -67,7 +65,6 @@
 					</body>
 				</body>
 			</body>
-		</body>
     </worldbody>
     <equality>
         <connect body1='motor1fibia' body2='motor2fibia' anchor='0 0 -1'/>

@@ -15,10 +15,10 @@ int main(int argc, char ** argv) {
 	int keys[2] = { GLFW_KEY_A, GLFW_KEY_D };
 	double powers[2] = { -0.01, 0.01 };
 	
-	KeyboardController k(argv[1], keys, names, powers, 2);
+	//KeyboardController k(argv[1], keys, names, powers, 2);
 	
-	PositionController p(argv[1], names, 2);
-		
+	PositionController p(argv[1], names, 2, (char*)"endeffector");
+		  
 	run(&p);
 
 	//testing NoiseFilter
