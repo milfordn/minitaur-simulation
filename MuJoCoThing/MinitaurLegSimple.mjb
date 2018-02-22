@@ -1,7 +1,7 @@
 <mujoco model='motorsim'>
     <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='cassie-stl-meshes'/>
     <size nuser_actuator='1' nuser_sensor='1'/>
-    <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -0.00'/>
+    <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -9.81'/>
     
     <visual>
         <quality shadowsize='4096'/>
