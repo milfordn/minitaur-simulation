@@ -1,5 +1,5 @@
 #include "KeyboardController.h"
-#include "include\mujoco.h"
+#include "include/mujoco.h"
 
 KeyboardController::KeyboardController(const char *f, int keys[], char * actuatorNames[], double powers[], int size) 
 : ModelController(f) {
@@ -23,11 +23,15 @@ KeyboardController::~KeyboardController() {
 }
 
 void KeyboardController::step() {
+	//reset control vector
+	for (int i = 0; i < size; i++) {
+		data->ctrl[this->actuatorIDs[i]] = 0;
+	}
+
+	//if keys[i] is pressed, powers[i] is applied to actuator[i]
 	for (int i = 0; i < size; i++) {
 		if (this->keys[i] == lastKey)
-			data->ctrl[this->actuatorIDs[i]] = this->powers[i];
-		else
-			data->ctrl[this->actuatorIDs[i]] = 0;
+			data->ctrl[this->actuatorIDs[i]] += this->powers[i];
 	}
 }
 
