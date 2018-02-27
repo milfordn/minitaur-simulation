@@ -25,9 +25,8 @@ void LegControllerSimple::step() {
 	double expectedR = 0.1 * sin(angleAvg) + 0.2 * sin(acos(cos(angleAvg) / 2));
 	double totalT = (angle1 + angle2);
 
-	//setR = 0.05 * cos(data->time * mjPI * 1.75) + 0.2;
-
-	//setT = mjPI / 3 * -sin(data->time * mjPI * 1.75) + mjPI / 6;
+	setR = 0.05 * cos(data->time * mjPI * 1.75) + 0.2;
+	setT = mjPI / 3 * -sin(data->time * mjPI * 1.75) + mjPI / 6;
 
 	double dr = ctrlR.calculateOutput(expectedR, setR);
 	double dt = ctrlT.calculateOutput(totalT, setT);

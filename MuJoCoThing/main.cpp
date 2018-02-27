@@ -3,6 +3,7 @@
 #include "Controllers/PIDController.h"
 #include "Controllers/ModelController.h"
 #include "Controllers/LegControllerSimple.h"
+#include "Controllers/LegControllerCPG.h"
 #include "GaussianNoise.h"
 
 int main(int argc, char ** argv) {
@@ -15,7 +16,7 @@ int main(int argc, char ** argv) {
 	
 	//KeyboardController k(argv[1], keys, names, powers, 2);	
 	//PIDController p(argv[1], names, 2);
-	LegControllerSimple m("MinitaurLeg.xml");
+	LegControllerCPG m("MinitaurLeg.xml");
 	
 	run(&m);
 
