@@ -1,3 +1,30 @@
 Sat Feb 17 19:36:52 2018
 WARNING: Nan, Inf or huge value in QACC at DOF 0. The simulation is unstable. Time = 7.0595.
 
+Tue Feb 27 08:46:55 2018
+WARNING: Unknown warning type Time = 0.0425.
+
+Tue Feb 27 08:49:35 2018
+WARNING: Unknown warning type Time = 0.1500.
+
+Tue Feb 27 08:50:21 2018
+WARNING: Unknown warning type Time = 0.1500.
+
+Tue Feb 27 08:54:51 2018
+WARNING: Unknown warning type Time = 0.0675.
+
+Tue Feb 27 08:56:08 2018
+WARNING: Unknown warning type Time = 0.0765.
+
+Tue Feb 27 08:56:19 2018
+WARNING: Unknown warning type Time = 0.0765.
+
+Tue Feb 27 08:56:57 2018
+WARNING: Unknown warning type Time = 0.0765.
+
+Tue Feb 27 09:00:54 2018
+WARNING: Unknown warning type Time = 0.0720.
+
+Tue Feb 27 09:02:30 2018
+WARNING: Unknown warning type Time = 0.4050.
+

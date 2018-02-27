@@ -39,7 +39,7 @@
     <body name='hip' pos='0 0 0.5'>
       <inertial pos='0 0 0' mass='0.000001' diaginertia='0.001 0.001 0.001'/>
       <geom type='box' size='0.01 0.01 0.01'/>
-      <!--<joint type='slide' range='-0.4 0.05' pos='0 0 0' axis='0 0 1'/>-->
+      <joint type='slide' range='-0.4 0.05' pos='0 0 0' axis='0 0 1'/>
       <!--<joint type='slide' limited='false' pos='0 0 0' axis='1 0 0'/>-->
     
       <body name='thigh1' euler='0 0 0' pos='0 0 0'>

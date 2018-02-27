@@ -3,6 +3,7 @@
 
 #include "ModelController.h"
 #include "CPGNode.h"
+#include "AutoPID.h"
 
 class LegControllerCPG : public ModelController {
 public:
@@ -12,6 +13,7 @@ private:
 	CPGNode radiusController;
 	int sensor1, sensor2, motor1, motor2;
 	mjtNum timePrev;
+	AutoPID anglectrl1, anglectrl2;
 };
 
 #endif

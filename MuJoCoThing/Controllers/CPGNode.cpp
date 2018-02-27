@@ -1,10 +1,10 @@
 #include "CPGNode.h"
 #include <cmath>
 
-CPGNode::CPGNode(double a, double b, double mu) {
+CPGNode::CPGNode(double a, double b, double range) {
 	this->a = a;
 	this->b = b;
-	this->mu = mu;
+	this->mu = range * range;
 	this->x = 0;
 	this->y = 0;
 }
