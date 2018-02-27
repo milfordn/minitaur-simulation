@@ -63,7 +63,10 @@
     <ClInclude Include="AutoPID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\MinitaurLegController.h">
+    <ClInclude Include="Controllers\CPGNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\LegControllerSimple.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,7 +103,10 @@
     <ClCompile Include="AutoPID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\MinitaurLegController.cpp">
+    <ClCompile Include="Controllers\LegControllerSimple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\CPGNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

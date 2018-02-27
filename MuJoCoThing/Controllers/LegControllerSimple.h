@@ -4,9 +4,9 @@
 #include "ModelController.h"
 #include "AutoPID.h"
 
-class MinitaurLegController : public ModelController {
+class LegControllerSimple : public ModelController {
 public:
-	MinitaurLegController(const char *);
+	LegControllerSimple(const char *);
 	void step() override;
 	void keyboardCallback(GLFWwindow *, int, int, int, int) override;
 private:

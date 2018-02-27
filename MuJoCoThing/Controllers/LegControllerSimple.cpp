@@ -1,8 +1,8 @@
-#include "MinitaurLegController.h"
+#include "LegControllerSimple.h"
 #include <cstdio>
 #include <cmath>
 
-MinitaurLegController::MinitaurLegController(const char * f) 
+LegControllerSimple::LegControllerSimple(const char * f) 
 : ModelController (f), ctrlR(0, 0, 0), ctrlT(0, 0, 0){
 
 	sensor1 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "thigh1_spos");
@@ -17,7 +17,7 @@ MinitaurLegController::MinitaurLegController(const char * f)
 	this->setT = 0;
 }
 
-void MinitaurLegController::step() {
+void LegControllerSimple::step() {
 	double angle1 = data->sensordata[sensor1];
 	double angle2 = data->sensordata[sensor2];
 	double angleAvg = (angle1 - angle2) / 2;
@@ -25,8 +25,9 @@ void MinitaurLegController::step() {
 	double expectedR = 0.1 * sin(angleAvg) + 0.2 * sin(acos(cos(angleAvg) / 2));
 	double totalT = (angle1 + angle2);
 
-	setR = 0.05 * cos(data->time * mjPI * 1.75) + 0.2;
-	setT = mjPI / 3 * -sin(data->time * mjPI * 1.75) + mjPI / 6;
+	//setR = 0.05 * cos(data->time * mjPI * 1.75) + 0.2;
+
+	//setT = mjPI / 3 * -sin(data->time * mjPI * 1.75) + mjPI / 6;
 
 	double dr = ctrlR.calculateOutput(expectedR, setR);
 	double dt = ctrlT.calculateOutput(totalT, setT);
@@ -38,7 +39,7 @@ void MinitaurLegController::step() {
 	//printf("%f | %f -> %f | %f\n", data->sensordata[0], data->sensordata[1], data->ctrl[0], data->ctrl[1]);
 }
 
-void MinitaurLegController::keyboardCallback(GLFWwindow*, int key, int, int act, int) {
+void LegControllerSimple::keyboardCallback(GLFWwindow*, int key, int, int act, int) {
 	if (act != GLFW_PRESS) return;
 	if (key == GLFW_KEY_W)
 		setR -= 0.025;

@@ -2,7 +2,7 @@
 #include "Controllers/KeyboardController.h"
 #include "Controllers/PIDController.h"
 #include "Controllers/ModelController.h"
-#include "Controllers/MinitaurLegController.h"
+#include "Controllers/LegControllerSimple.h"
 #include "GaussianNoise.h"
 
 int main(int argc, char ** argv) {
@@ -15,7 +15,7 @@ int main(int argc, char ** argv) {
 	
 	//KeyboardController k(argv[1], keys, names, powers, 2);	
 	//PIDController p(argv[1], names, 2);
-	MinitaurLegController m("MinitaurLeg.xml");
+	LegControllerSimple m("MinitaurLeg.xml");
 	
 	run(&m);
 
