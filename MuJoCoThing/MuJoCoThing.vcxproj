@@ -154,6 +154,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CustomSimulate.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelController.cpp" />
+    <ClCompile Include="NoiseFilter.cpp" />
+    <ClCompile Include="pid.cpp" />
+    <ClCompile Include="PIDController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="OverCenterModel.xml">
