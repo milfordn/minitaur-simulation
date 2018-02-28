@@ -9,20 +9,38 @@ using std::endl;
 
 //TODO - take four leg names as input, create subclass to handle individual leg position
 
-PositionController::PositionController(const char *f, char * actuatorNames[], int size, char *endeffectorName) : ModelController(f) {
-	//allocate memory for PID controllers
-	this->angleController = new pid(15, 0.000, 5000.0); 
-	this->lengthController = new pid(15, 0.00, 5000.0);
-	this->m1 = new pid(25, 0.0, 50000);
-	this->m2 = new pid(25, 0.0, 50000);
-	this->actuatorIDs = new int[size];
+PositionController::PositionController(const char *f, const char * actuatorNames[], const char * jointNames[], const char * endeffectorNames[]) : ModelController(f) {
+	//allocate memory for leg position controllers
+	int m1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[0]);
+	int m2 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[1]);
+	int m3 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[2]);
+	int m4 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[3]);
+	int m5 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[4]);
+	int m6 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[5]);
+	int m7 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[6]);
+	int m8 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[7]);
 	
-	for (int i = 0; i < size; i++) { 
-		this->actuatorIDs[i] = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, actuatorNames[i]);
-	}
-	this->endeffectorID = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorName);
-	this->size = size;
+	int m1AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[0]);
+	int m2AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[1]);
+	int m3AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[2]);
+	int m4AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[3]);
+	int m5AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[4]);
+	int m6AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[5]);
+	int m7AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[6]);
+	int m8AngleID = mj_name2id(this->model, mjtObj::mjOBJ_JOINT, jointNames[7]);
+
+	int end1 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[0]);
+	int end2 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[1]);
+	int end3 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[2]);
+	int end4 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[3]);
+	
+	this->bodyID = mj_name2id(this->model, mjtObj::mjOBJ_BODY, (char*)"minitaur");
+	this->frontLeft = new LegPositionController(m1, m2, m1AngleID, m2AngleID, end1); 
+	this->frontRight = new LegPositionController(m3, m4, m3AngleID, m4AngleID, end2);
+	this->backLeft = new LegPositionController(m5, m6, m5AngleID, m6AngleID, end3);
+	this->backRight = new LegPositionController(m7, m8, m7AngleID, m8AngleID, end4);
 	this->tick = 0;
+	
 }
 
 PositionController::~PositionController() {
@@ -30,45 +48,35 @@ PositionController::~PositionController() {
 }
 
 void PositionController::step() {
-	mj_kinematics(model, data); //Calculate kinematics so that site_xpos isn't 0
+	mj_kinematics(model, data); //Calculate kinematics
 	
-	//Every 20,000 ticks we pick a new random location that the leg has to orient itself to (physically impossible to be within 0.5 units of origin, so account for that special case)
-	if(tick % 20000 == 0){
-		double newx = ((double)rand()/(double)RAND_MAX) * 3 - 1.5;
-		double newy = ((double)rand()/(double)RAND_MAX) * 3 - 1.5;
-		while(!((newx > 0.5 || newx < -0.5) && (newy > 0.5 || newy < -0.5))){
-			newx = ((double)rand()/(double)RAND_MAX) * 3 - 1.5;
-			newy = ((double)rand()/(double)RAND_MAX) * 3 - 1.5;
-		}
-		setposX = newx;
-		setposY = newy;
-	}
+	double angle = 1.57;
+	double length = 0.3;
+	cout << data->qpos[model->body_dofadr(bodyID)] << endl;
+	//0 is horizontal-forward, 1.57 is down.
+	frontLeft->setAngle(angle);
+	frontRight->setAngle(angle);
+	backLeft->setAngle(angle);
+	backRight->setAngle(angle);
 	
-	double x = data->site_xpos[endeffectorID]; //x coord of end effector
-	double z = data->site_xpos[endeffectorID+2] - 2; //z coord of end effector
 	
-	double desiredTheta = atan2(setposY, setposX); //Since the motors are at x,y (0, 0)
-	double desiredLength = sqrt(setposY*setposY + setposX*setposX);
+	frontLeft->setLength(length);
+	frontRight->setLength(length);
+	backLeft->setLength(length);
+	backRight->setLength(length);
 	
-	double currentTheta = (data->qpos[0] + data->qpos[2])/2; //The current angle of the leg
-	double currentLength = sqrt(x*x + z*z); //The current distance from the motors to the end effector
+	frontLeft->step(data, model);
+	frontRight->step(data, model);
+	backLeft->step(data, model);
+	backRight->step(data, model);
 	
-	double m1pos = desiredTheta + acos((desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired position of motor1
-	double m2pos = desiredTheta - acos((desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired position of motor2
+	//for(int i = 0; i < 10; i++){
+	//	cout << data->ctrl[i] << ", ";
+	//}
+	cout << endl;
 	
-	//METHOD 1
-	double output_1 = m1->calculateOutput(tick, m1pos, data->qpos[0]);
-	double output_2 = m2->calculateOutput(tick, m2pos, data->qpos[2]);
-	data->ctrl[actuatorIDs[0]] = output_1;
-	data->ctrl[actuatorIDs[1]] = output_2;
-	
-	//METHOD 2
-	/*
-	double output_1 = angleController->calculateOutput(tick, desiredTheta, currentTheta);
-	double output_2 = lengthController->calculateOutput(tick, desiredLength, currentLength);
-	data->ctrl[0] = output_1 + output_2;
-	data->ctrl[1] = output_1 - output_2;
-	*/
 	tick++;
 	
 }
+
+
