@@ -14,5 +14,5 @@ AutoPID::AutoPID(double kp, double ki, double kd, int actuatorID, int sensorID)
 }
 
 void AutoPID::run(mjData * d, double setpoint) {
-	d->ctrl[actuatorID] = controller.calculateOutput(d->sensordata[sensorID], setpoint);
+	d->ctrl[actuatorID] = controller.calculateOutput(d->time, setpoint, d->sensordata[sensorID]);
 }

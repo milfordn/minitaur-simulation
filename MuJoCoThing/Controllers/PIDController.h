@@ -12,6 +12,7 @@ public :
 	void step() override;
 private:
 	int size;
+	unsigned long tick;
 	int * actuatorIDs;
 	pid *controller;
 };

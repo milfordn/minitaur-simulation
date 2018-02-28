@@ -28,8 +28,8 @@ void LegControllerSimple::step() {
 	setR = 0.05 * cos(data->time * mjPI * 1.75) + 0.2;
 	setT = mjPI / 3 * -sin(data->time * mjPI * 1.75) + mjPI / 6;
 
-	double dr = ctrlR.calculateOutput(expectedR, setR);
-	double dt = ctrlT.calculateOutput(totalT, setT);
+	double dr = ctrlR.calculateOutput(data->time, expectedR, setR);
+	double dt = ctrlT.calculateOutput(data->time, totalT, setT);
 
 	data->ctrl[motor1] = dt - dr;
 	data->ctrl[motor2] = dt + dr;

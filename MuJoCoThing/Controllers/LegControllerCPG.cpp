@@ -9,10 +9,10 @@ LegControllerCPG::LegControllerCPG(char * f)
 	motor1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh1_a");
 	motor2 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh2_a");
 
-	anglectrl1 = AutoPID(-1.0, 0, -50, motor1, sensor1);
-	anglectrl2 = AutoPID(-1.0, 0, -50, motor2, sensor2);
+	anglectrl1 = AutoPID(0.2, 0, 0.01, motor1, sensor1);
+	anglectrl2 = AutoPID(0.2, 0, 0.01, motor2, sensor2);
 
-	radiusController.setPose(4, 10);
+	radiusController.setPose(1, 2);
 	radiusController.step(0, 0.001);
 }
 
@@ -28,6 +28,4 @@ void LegControllerCPG::step() {
 	anglectrl2.run(data, -nextAngle1);
 
 	printf("%f -> %f | %f -> %f\n", angle1, nextAngle1, angle2, -nextAngle1);
-
-	//data->ctrl[motor1] = pow;
 }
