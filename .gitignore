@@ -1,6 +1,7 @@
 <<<<<<< HEAD
-# mjkey
+# mjkey !VERY IMPORTANT! and other mujoco files
 mjkey.txt
+MUJOCO_LOG.TXT
 
 # third party library folders
 Eigen
@@ -55,21 +56,3 @@ ipch/
 *.cachefile
 *.VC.db
 *.VC.VC.opendb
-=======
-#Ignore everything
-*
-
-#Except some very specific files
-!.gitignore
-!MuJoCoThing/
-!MuJoCoThing/MinitaurLeg.xml
-!MuJoCoThing/MinitaurLegSimple.mjb
-!MuJoCoThing/MinitaurFull.xml
-!minitaur-stl/
-!minitaur-stl/*.STL
-
-!MuJoCoThing/MuJoCoThing.vcxproj*
-!MuJoCoThing.sln
-!MuJoCoThing/*.cpp
-!MuJoCoThing/*.h
->>>>>>> 6e4685ac8f5bb2a2df41407fd692d6518cf3f4fb
