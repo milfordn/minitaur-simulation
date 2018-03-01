@@ -10,7 +10,8 @@ public:
 	CPGNode(double a, double b, double mu);
 	void step(double dt);
 	void step(double dt, double measuredX);
-	double getValue();
+	double getValueX();
+	double getValueY();
 	void setPose(double wstance, double wswing);
 private:
 	double a, b, mu;

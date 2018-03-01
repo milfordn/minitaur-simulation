@@ -10,10 +10,10 @@ public:
 	LegControllerCPG(char * f);
 	void step() override;
 private:
-	CPGNode radiusController;
+	CPGNode patternGenerator;
 	int sensor1, sensor2, motor1, motor2;
 	mjtNum timePrev;
-	AutoPID anglectrl1, anglectrl2;
+	pid ctrlR, ctrlT;
 };
 
 #endif

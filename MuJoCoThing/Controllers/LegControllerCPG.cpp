@@ -2,30 +2,36 @@
 #include <cstdio>
 
 LegControllerCPG::LegControllerCPG(char * f)
-	: ModelController(f), radiusController(1, 50, mjPI / 2.75), 
-	anglectrl1(0, 0, 0, 0, 0), anglectrl2(0, 0, 0, 0, 0) {
+	: ModelController(f), patternGenerator(1, 50, mjPI / 3), 
+	ctrlR(-0.65, -0.05, -0.05), ctrlT(0.2, 0, 0.05) {
 	sensor1 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "thigh1_spos");
 	sensor2 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "thigh2_spos");
 	motor1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh1_a");
 	motor2 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh2_a");
 
-	anglectrl1 = AutoPID(0.25, 0, 0.01, motor1, sensor1);
-	anglectrl2 = AutoPID(0.25, 0, 0.01, motor2, sensor2);
-
-	radiusController.setPose(1.75, 12);
-	radiusController.step(0, 0.001);
+	patternGenerator.setPose(12, 4);
+	patternGenerator.step(0, 0.001);
 }
 
 void LegControllerCPG::step() {
 	double angle1 = data->sensordata[sensor1];
 	double angle2 = data->sensordata[sensor2];
+	double angleAvg = (angle1 - angle2) / 2;
 
-	radiusController.step(data->time - timePrev);//, angle1 - mjPI / 3);
-	double nextAngle1 = radiusController.getValue() + mjPI * 0.05;
+	double expectedR = 0.1 * sin(angleAvg) + 0.2 * sin(acos(cos(angleAvg) / 2));
+	double totalT = (angle1 + angle2);
+
+	patternGenerator.step(data->time - timePrev);
 	timePrev = data->time;
 
-	anglectrl1.run(data, nextAngle1);
-	anglectrl2.run(data, -nextAngle1);
+	double setT = patternGenerator.getValueX();
+	double setR = patternGenerator.getValueY() > 0 ? 0.125 : 0.275;
 
-	printf("%f -> %f | %f -> %f\n", angle1, nextAngle1, angle2, -nextAngle1);
+	double dr = ctrlR.calculateOutput(data->time, setR, expectedR);
+	double dt = ctrlT.calculateOutput(data->time, setT, totalT);
+
+	data->ctrl[motor1] = dt - dr;
+	data->ctrl[motor2] = dt + dr;
+
+	printf("%f -> %f | %f -> %f\n", expectedR, setR, totalT, setT);
 }

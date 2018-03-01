@@ -24,8 +24,12 @@ void CPGNode::step(double dt, double measuredX) {
 	this->step(dt);
 }
 
-double CPGNode::getValue() {
+double CPGNode::getValueX() {
 	return x;
+}
+
+double CPGNode::getValueY() {
+	return y;
 }
 
 void CPGNode::setPose(double wstance, double wswing) {
