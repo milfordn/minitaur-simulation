@@ -24,7 +24,7 @@ double pid::calculateOutput(unsigned long tick, double setpoint, double position
 	}else{
     	derivative = (lastPosition - position)/deltaT;
 	}
-	
+
     lastPosition = position;
 	lastTick = tick;
     return error*KP + integral*KI + derivative*KD;
@@ -41,7 +41,7 @@ double pid::calculateOutput(unsigned long tick, double setpoint, double position
 	}else{
     	derivative = velocity/deltaT;
 	}
-	
+
 	lastTick = tick;
     return error*KP + integral*KI + derivative*KD;
 }

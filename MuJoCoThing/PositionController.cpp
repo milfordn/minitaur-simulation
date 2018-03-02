@@ -38,6 +38,7 @@ PositionController::PositionController(const char *f, const char * actuatorNames
 	this->frontRight = new LegPositionController(m3, m4, m3AngleID, m4AngleID, end2);
 	this->backLeft = new LegPositionController(m5, m6, m5AngleID, m6AngleID, end3);
 	this->backRight = new LegPositionController(m7, m8, m7AngleID, m8AngleID, end4);
+
 	this->tick = 0;
 }
 
@@ -74,5 +75,6 @@ void PositionController::step() {
 	
 	tick++;
 }
+
 
 

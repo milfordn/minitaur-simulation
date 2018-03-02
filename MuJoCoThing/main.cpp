@@ -9,6 +9,7 @@
 using std::cout;
 using std::endl;
 
+
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
 	//char * names[2] = { (char*)"motor_a", (char*)"motor_c" };
@@ -46,6 +47,11 @@ int main(int argc, char ** argv) {
 	};
 
 	PositionController p(argv[1], motorNames, jointNames, endeffectorNames);
+	//char * names[2] = { (char*)"motor_a", (char*)"motor_c" };
+	//int keys[2] = { GLFW_KEY_A, GLFW_KEY_D };
+	//double powers[2] = { -0.01, 0.01 };
+	//KeyboardController k(argv[1], keys, names, powers, 2);
+	
 		  
 	run(&p);
 
