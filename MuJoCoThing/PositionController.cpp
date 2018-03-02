@@ -34,13 +34,11 @@ PositionController::PositionController(const char *f, const char * actuatorNames
 	int end3 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[2]);
 	int end4 = mj_name2id(this->model, mjtObj::mjOBJ_SITE, endeffectorNames[3]);
 	
-	this->bodyID = mj_name2id(this->model, mjtObj::mjOBJ_BODY, (char*)"minitaur");
 	this->frontLeft = new LegPositionController(m1, m2, m1AngleID, m2AngleID, end1); 
 	this->frontRight = new LegPositionController(m3, m4, m3AngleID, m4AngleID, end2);
 	this->backLeft = new LegPositionController(m5, m6, m5AngleID, m6AngleID, end3);
 	this->backRight = new LegPositionController(m7, m8, m7AngleID, m8AngleID, end4);
 	this->tick = 0;
-	
 }
 
 PositionController::~PositionController() {
@@ -49,34 +47,32 @@ PositionController::~PositionController() {
 
 void PositionController::step() {
 	mj_kinematics(model, data); //Calculate kinematics
+	double desiredLength = .102;
+	double desiredAngle = 1.57;
 	
-	double angle = 1.57;
-	double length = 0.3;
-	cout << data->qpos[model->body_dofadr(bodyID)] << endl;
-	//0 is horizontal-forward, 1.57 is down.
-	frontLeft->setAngle(angle);
-	frontRight->setAngle(angle);
-	backLeft->setAngle(angle);
-	backRight->setAngle(angle);
+	if(tick % 10000 == 0){
+		desiredLength = ((double)rand()/(double)RAND_MAX) * .178 + .102;
+		desiredAngle = ((double)rand()/(double)RAND_MAX) * 3.14 - 1.57;
+		cout << "SWITCHING TO " << desiredAngle << ", " << desiredLength << endl;
+		frontLeft->setAngle(desiredAngle);
+		frontRight->setAngle(desiredAngle);
+		backLeft->setAngle(desiredAngle);
+		backRight->setAngle(desiredAngle);
+
+		frontLeft->setLength(desiredLength);
+		frontRight->setLength(desiredLength);
+		backLeft->setLength(desiredLength);
+		backRight->setLength(desiredLength);
+	}
 	
 	
-	frontLeft->setLength(length);
-	frontRight->setLength(length);
-	backLeft->setLength(length);
-	backRight->setLength(length);
 	
 	frontLeft->step(data, model);
 	frontRight->step(data, model);
 	backLeft->step(data, model);
 	backRight->step(data, model);
 	
-	//for(int i = 0; i < 10; i++){
-	//	cout << data->ctrl[i] << ", ";
-	//}
-	cout << endl;
-	
 	tick++;
-	
 }
 
 

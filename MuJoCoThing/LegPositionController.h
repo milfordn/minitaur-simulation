@@ -7,7 +7,8 @@ public :
 	void step(struct _mjData *, struct _mjModel *);
 	void setLength(double);
 	void setAngle(double);
-	void release(struct _mjData *);
+	void setPgain(double);
+	void release();
 private:
 	unsigned long tick;
 	pid *m1; //Torque-level PID controller for controlling angle of motor 1
@@ -19,11 +20,8 @@ private:
 	int m1JointID;
 	int m2JointID;
 	int endID;
-	
-	double desiredLength;
-	double desiredAngle;
-	
-	const double L1 = 0.1; //Length of thigh
-	const double L2 = 0.2; //Length of shin
+	bool active = true;
+	double desiredLength = .173205;
+	double desiredAngle = 1.5708;
 };
 
