@@ -12,18 +12,20 @@ pid::pid(double kp, double ki, double kd){
     lastPosition = 0;
 	lastTick = 0;
 }
-double pid::calculateOutput(unsigned long tick, double setpoint, double position){
-	int deltaT = tick - lastTick;
+
+double pid::calculateOutput(double tick, double setpoint, double position){
+	double deltaT = tick - lastTick;
 	
     double error = setpoint - position;
     integral += error * deltaT;
     double derivative = (lastPosition - position)/deltaT;
+	if (isinf(derivative)) derivative = 0;
     
     lastPosition = position;
 	lastTick = tick;
     return error*KP + integral*KI + derivative*KD;
 }
-double pid::calculateOutput(unsigned long tick, double setpoint, double position, double velocity){
+double pid::calculateOutput(double tick, double setpoint, double position, double velocity){
 	int deltaT = tick - lastTick;
 	
 	double error = setpoint - position;

@@ -1,3 +1,6 @@
+#ifndef PIDCTRL_H
+#define PIDCTRL_H
+
 #include "ModelController.h"
 #include "include/glfw3.h"
 #include "pid.h"
@@ -14,3 +17,4 @@ private:
 	pid *controller;
 };
 
+#endif

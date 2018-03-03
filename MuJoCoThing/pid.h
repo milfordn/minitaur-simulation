@@ -4,8 +4,8 @@
 class pid{
     public:
         pid(double KP, double KI, double KD);
-        double calculateOutput(unsigned long tick, double setpoint, double position);
-		double calculateOutput(unsigned long tick, double setpoint, double position, double velocity);
+        double calculateOutput(double tick, double setpoint, double position);
+		double calculateOutput(double tick, double setpoint, double position, double velocity);
     private:
         double KP;
         double KI;
