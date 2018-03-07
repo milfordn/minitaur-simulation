@@ -13,8 +13,8 @@ LegPositionController::LegPositionController(int m1ID, int m2ID, int m1JointID, 
 	//allocate memory for PID controllers
 	//this->angleController = new pid(15, 0.000, 5000.0); 
 	//this->lengthController = new pid(15, 0.00, 5000.0);
-	this->m1 = new pid(1, 0.0, 100);
-	this->m2 = new pid(1, 0.0, 100);
+	this->m1 = new pid(1, 0.0, 50);
+	this->m2 = new pid(1, 0.0, 50);
 	
 	this->m1ID = m1ID;
 	this->m2ID = m2ID;
@@ -47,9 +47,13 @@ void LegPositionController::step(struct _mjData* data, struct _mjModel* model) {
 	double output_1 = m1->calculateOutput(tick, m1pos, currentm1pos);
 	double output_2 = m2->calculateOutput(tick, m2pos, currentm2pos);
 	
-	
-	data->ctrl[m1ID] = output_1;
-	data->ctrl[m2ID] = output_2;
+	if(active){
+		data->ctrl[m1ID] = output_1;
+		data->ctrl[m2ID] = output_2;
+	}else{
+		data->ctrl[m1ID] = 0;
+		data->ctrl[m2ID] = 0;
+	}
 
 	//METHOD 2
 	/*

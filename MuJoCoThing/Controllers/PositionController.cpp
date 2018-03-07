@@ -7,7 +7,6 @@
 using std::cout;
 using std::endl;
 
-//TODO - take four leg names as input, create subclass to handle individual leg position
 
 PositionController::PositionController(const char *f, const char * actuatorNames[], const char * jointNames[], const char * endeffectorNames[]) : ModelController(f) {
 	//allocate memory for leg position controllers
@@ -51,22 +50,31 @@ void PositionController::step() {
 	double desiredLength = .102;
 	double desiredAngle = 1.57;
 	
-	if(tick % 10000 == 0){
-		desiredLength = ((double)rand()/(double)RAND_MAX) * .178 + .102;
-		desiredAngle = ((double)rand()/(double)RAND_MAX) * 3.14 - 1.57;
-		cout << "SWITCHING TO " << desiredAngle << ", " << desiredLength << endl;
-		frontLeft->setAngle(desiredAngle);
-		frontRight->setAngle(desiredAngle);
-		backLeft->setAngle(desiredAngle);
-		backRight->setAngle(desiredAngle);
-
-		frontLeft->setLength(desiredLength);
-		frontRight->setLength(desiredLength);
-		backLeft->setLength(desiredLength);
-		backRight->setLength(desiredLength);
+	double activeP = 1.5;
+	double inactiveP = 0.28;
+	
+	frontLeft->setAngle(desiredAngle);
+	frontRight->setAngle(desiredAngle);
+	backLeft->setAngle(desiredAngle);
+	backRight->setAngle(desiredAngle);
+	
+	if(data->qvel[0] < 0){
+		desiredLength = 0.28;
+		frontLeft->setPgain(inactiveP);
+		frontRight->setPgain(inactiveP);
+		backLeft->setPgain(inactiveP);
+		backRight->setPgain(inactiveP);
+	}else{
+		frontLeft->setPgain(activeP);
+		frontRight->setPgain(activeP);
+		backLeft->setPgain(activeP);
+		backRight->setPgain(activeP);
 	}
 	
-	
+	frontLeft->setLength(desiredLength);
+	frontRight->setLength(desiredLength);
+	backLeft->setLength(desiredLength);
+	backRight->setLength(desiredLength);
 	
 	frontLeft->step(data, model);
 	frontRight->step(data, model);

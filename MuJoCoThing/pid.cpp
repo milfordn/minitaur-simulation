@@ -1,7 +1,5 @@
 #include "pid.h"
 #include "math.h"
-#include <chrono>
-#include <iostream>
 
 pid::pid(double kp, double ki, double kd){
     KP = kp;

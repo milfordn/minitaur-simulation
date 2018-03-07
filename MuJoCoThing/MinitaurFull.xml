@@ -40,8 +40,8 @@
             <inertial pos='0 0 0' mass='0.1' diaginertia='0.0001 0.0001 0.0001'/>
             <geom type='box' size='0.21 0.1 0.075' material='cassie'/>
 
-            <!-- Up/Down motion  
-            <joint type='slide' limited='false' axis='0 0 1'/>-->
+            <!-- Up/Down motion  -->
+            <joint type='slide' limited='false' axis='0 0 1'/>
 
             <!-- Forward/Backward motion 
             <joint type='slide' limited='false' axis='1 0 0'/> -->
