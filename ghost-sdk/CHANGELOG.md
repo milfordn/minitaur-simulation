@@ -8,6 +8,57 @@ The version numbers are referenced to the git tags.
 
 ## [Unreleased]
 
+## [0.1.12] - 2017-02-26
+
+### Added
+- Support and documentation for user I2C
+- Support and documentation for user digital I/O
+
+## [0.1.11] - 2017-02-13
+### Added
+- Full support for joysticks in simulation
+- Gait work for NGR
+- Support for Minitaur E new variant with upgraded electronics
+- CI-built ARM libs
+- Full support for Taranis Q X7 joystick
+
+## [0.1.10] - 2017-01-25
+### Fixed
+- microsecond counter overflow bug causing behavior updates to stop after 71 minutes
+
+### Added
+- support for gamepad joysticks in simulations (partial) #38
+- support for Dynamixel protocol 1 (partial)
+- support for Dynamixel protocol 2 (full)
+- support for async Dynamixel update in PWM or POSITION modes #31
+- posture controller support for 2DOF legs
+- posture controller support for leg pairs with 3DOF legs
+- S.bus driver full support
+- ioctl support for body LED lighting
+- ioctl support for switching radio receiver
+- Gait work in progress
+
+## [0.1.9] - 2017-12-14
+### Added
+- posture controller (internal)
+- sim implementation (internal)
+- ROS translation updates
+- various other updates
+
+## [0.1.8] - 2017-11-29
+### Fixed
+- Better VN100 parameters, switched to hardware filter
+
+### Added
+- improved urdf (internal)
+- compiles with Visual C++ compiler
+- Sbus driver partial #20
+- SmartPort driver partial #21
+- "None" architecture external physics engine support partial
+- PWM FrSKY support (Taranis Q7)
+- Lowpass for pose z control using the remote
+- Slightly increased default yaw sensitivity
+
 ## [0.1.7] - 2107-11-21
 ### Fixed
 - issue #17 - may interfere with mbm (to test)

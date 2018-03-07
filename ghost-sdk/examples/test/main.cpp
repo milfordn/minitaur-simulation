@@ -1,5 +1,5 @@
 #include <SDK.h>
-#include <behavior.h>
+#include <main.h>
 
 class example_behavior;
 

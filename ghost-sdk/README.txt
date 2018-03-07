@@ -1,3 +1,3 @@
-Public documentation is at http://ghostrobotics.gitlab.io/SDK/. Support can be found at https://gitlab.com/ghostrobotics/SDK/issues?scope=all&state=all
+Public documentation is at http://ghostrobotics.gitlab.io/SDK/. Support can be found by emailing support@ghostrobotics.io
 
-Artifact generated on Tue Nov 21 23:50:52 UTC 2017
+Artifact generated on Mon Feb 26 15:03:56 UTC 2018
