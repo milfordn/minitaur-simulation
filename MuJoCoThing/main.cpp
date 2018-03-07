@@ -1,13 +1,11 @@
 #include "CustomSimulate.h"
-#include "KeyboardController.h"
-#include "PIDController.h"
-#include "PositionController.h"
-#include "include/glfw3.h"
-#include "ModelController.h"
-#include "NoiseFilter.h"
-#include <iostream>
-using std::cout;
-using std::endl;
+#include "./Controllers/KeyboardController.h"
+#include "./Controllers/PIDController.h"
+#include "./Controllers/PositionController.h"
+#include "./Controllers/ModelController.h"
+#include "./Controllers/LegControllerSimple.h"
+#include "./Controllers/LegControllerCPG.h"
+#include "GaussianNoise.h"
 
 
 int main(int argc, char ** argv) {
@@ -56,16 +54,16 @@ int main(int argc, char ** argv) {
 	run(&p);
 
 	//testing NoiseFilter
-	/*NoiseFilter f(0.1, 1, 4);
-	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> base((Eigen::Index)4);
-	base.setZero();
+	//GaussianNoise g(Eigen::Vector4d(-5, -2, 2, 5), Eigen::Vector4d(2, 1, 2, 4));
+	//Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> base(4);
+	//base.setZero();
 
-	for (int i = 0; i < 100; i++) {
-		f.step(1);
-		Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> res = f.applyNoise(base);
-		printf("%f, %f, %f, %f\n", res[0], res[1], res[2], res[3]);
-	}
-	scanf_s("");*/
+	//for (int i = 0; i < 100; i++) {
+	//	g.step();
+	//	Eigen::Matrix<mjtNum, Eigen::Dynamic, 1> res = g.applyNoise(base);
+	//	printf("%f, %f, %f, %f\n", res[0], res[1], res[2], res[3]);
+	//}
+	//scanf_s("");
 
 
 	return 0;

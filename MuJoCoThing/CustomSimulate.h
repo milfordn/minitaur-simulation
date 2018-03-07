@@ -1,7 +1,7 @@
 #ifndef CSIM_H
 #define CSIM_H
 
-#include "ModelController.h"
+#include "Controllers/ModelController.h"
 
 void run(ModelController *);
 

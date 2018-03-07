@@ -1,5 +1,5 @@
 #include "PositionController.h"
-#include "include/mujoco.h"
+#include "../include/mujoco.h"
 #include <iostream>
 #include <math.h>
 #include <random>

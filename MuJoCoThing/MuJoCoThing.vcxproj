@@ -71,9 +71,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);.</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -142,7 +144,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AutoPID.h" />
+    <ClInclude Include="Controllers\CPGNode.h" />
+    <ClInclude Include="Controllers\KeyboardController.h" />
+    <ClInclude Include="Controllers\LegControllerCPG.h" />
+    <ClInclude Include="Controllers\LegControllerSimple.h" />
+    <ClInclude Include="Controllers\ModelController.h" />
+    <ClInclude Include="Controllers\PIDController.h" />
     <ClInclude Include="CustomSimulate.h" />
+    <ClInclude Include="GaussianNoise.h" />
     <ClInclude Include="include\glfw3.h" />
     <ClInclude Include="include\mjdata.h" />
     <ClInclude Include="include\mjmodel.h" />
@@ -150,33 +160,31 @@
     <ClInclude Include="include\mjvisualize.h" />
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
-    <ClInclude Include="ModelController.h" />
+    <ClInclude Include="Noise.h" />
+    <ClInclude Include="pid.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoPID.cpp" />
+    <ClCompile Include="Controllers\CPGNode.cpp" />
+    <ClCompile Include="Controllers\KeyboardController.cpp" />
+    <ClCompile Include="Controllers\LegControllerCPG.cpp" />
+    <ClCompile Include="Controllers\LegControllerSimple.cpp" />
+    <ClCompile Include="Controllers\ModelController.cpp" />
+    <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="CustomSimulate.cpp" />
-    <ClCompile Include="KeyboardController.cpp" />
+    <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ModelController.cpp" />
-    <ClCompile Include="NoiseFilter.cpp" />
+    <ClCompile Include="Noise.cpp" />
     <ClCompile Include="pid.cpp" />
-    <ClCompile Include="PIDController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="OverCenterModel.xml">
-      <SubType>Designer</SubType>
-    </Xml>
-    <Xml Include="SpringModel.xml">
-      <SubType>Designer</SubType>
-    </Xml>
-    <Xml Include="WCDModel.xml">
-      <SubType>Designer</SubType>
-    </Xml>
     <Xml Include="MinitaurLeg.xml">
       <SubType>Designer</SubType>
     </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw3.dll" />
+    <None Include="MinitaurLegSimple.mjb" />
     <None Include="mujoco150.dll" />
   </ItemGroup>
   <ItemGroup>

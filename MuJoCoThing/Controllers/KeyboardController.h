@@ -2,7 +2,7 @@
 #define KEYCTRL_H
 
 #include "ModelController.h"
-#include "include/glfw3.h"
+#include "../include/glfw3.h"
 
 class KeyboardController : public ModelController {
 public :

@@ -1,5 +1,5 @@
 #include "PIDController.h"
-#include "include/mujoco.h"
+#include "../include/mujoco.h"
 #include <iostream>
 
 PIDController::PIDController(const char *f, char * actuatorNames[], int size) : ModelController(f) {
