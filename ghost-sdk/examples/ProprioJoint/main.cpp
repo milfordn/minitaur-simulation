@@ -10,9 +10,8 @@
 #include <Smath.h>
 #include <Motor.h>
 #include <Behavior.h>
-#include <DebugOutput.h>
 
-DebugOutput dbo;
+
 
 /**
  * State machine representation:
@@ -62,7 +61,6 @@ public:
 		 	posDes = posDes - 0.00314;
 		}
 		joint[0].setPosition(posDes);//Set motor position to newly incremented desired position.
-			
 	}
 
 	bool running() {
@@ -73,13 +71,8 @@ public:
 	}
 };
 
-void debug() {
-	printf("%f\n", S->joints[0].position);
-}
-
 int main(int argc, char *argv[]) {
 	init(RobotParams_Type_MINITAUR, argc, argv);
-	setDebugRate(100);
 	ProprioJoint proprioJoint; //Declare instance of our behavior
 	//Disable the safety shut off feature:
 	//IT IS POSSIBLE TO DAMAGE THE MOTOR; BE CAREFUL WHEN USING

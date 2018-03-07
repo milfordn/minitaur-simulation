@@ -1,4 +1,5 @@
-PORT=COM5
+
+PORT=COM4
 
 SDK_LOCATION=../..
 BFLAGS=-mcpu=cortex-m4 -mthumb -mlittle-endian -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O1 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -Wall -Wextra  -g 
@@ -13,8 +14,9 @@ all:
 	@$(ARCH)g++ $(BFLAGS) $(LDFLAGS)  -o main.elf main.o $(LDLIBS)
 	@$(ARCH)size --format=berkeley main.elf
 	@$(ARCH)objcopy --output-target=binary main.elf main.bin
-	# @$(SDK_LOCATION)/tools/stm32ld.exe $(PORT) 230400 mblc main.bin 1
 	@python $(SDK_LOCATION)/tools/stm32loader.py -p $(PORT) -b 230400 -y mblc -E 524288 -L 0 -ew main.bin
 
+# @$(SDK_LOCATION)/tools/stm32ld.exe $(PORT) 230400 mblc main.bin 1
+	
 clean:
 	rm -f main.elf main.bin main.o

@@ -8,19 +8,16 @@
 #define SDK_h
 
 #include "simple.pb.h"
-//#include "MCUClass.h"
 #include "DebugOutput.h"
 #include "SMath.h"
-
 #include "Peripheral.h"
 #include "Behavior.h"
-// #include "JoyBase.h"
 
 #include <vector>
 #if defined(_MSC_VER)
 typedef int64_t useconds_t;
 #else
-#include <sys/types.h>//for useconds_t
+#include <sys/types.h> // for useconds_t
 #endif
 
 /** @addtogroup SDK Basic SDK operations
@@ -30,7 +27,7 @@ typedef int64_t useconds_t;
 /**
  * Defined separately for each platform, in units of Hz
  */
-extern const int CONTROL_RATE;
+extern int CONTROL_RATE;
 
 /**
  * Pointer to the global RobotState
@@ -85,12 +82,6 @@ bool init(RobotParams_Type type, int argc, char *argv[]);
  */
 int begin();
 
-
-// Native handles to platforms
-//FIXME another solution is some kind of interface, but this seems more flexible
-// interface needs: init(),
-//MCUClass * mcu();
-
 /**
  * @brief Add to list of peripherals
  */
@@ -101,9 +92,11 @@ void addPeripheral(Peripheral *);
  * @param flag True to enable
  */
 void safetyShutoffEnable(bool flag);
+
 /**
  * @brief Enable or disable the soft start init procedure
- * @details This behavior initializes the robot limbs in a way that avoid self-intersection and positions them for nominal operation when the robot first turns on
+ * @details This behavior initializes the robot limbs in a way that avoid self-intersection and positions 
+ * them for nominal operation when the robot first turns on
  * 
  * @param flag True to enable
  */
@@ -114,13 +107,6 @@ void * obc();
 void * sim();
 
 /**
- * @brief Return handle to Joystick used on the MCU
- */
-// JoyBase * joystick();
-
-
-//#if defined(ARM_MATH_CM4)
-/**
  * @brief Microsecond sleep function. 
  * @details **Warning:** This kind of delay *must not* be used in Behavior::update(). This function
  * works the same in Unix-like systems and the MCU.
@@ -128,6 +114,19 @@ void * sim();
  */
 extern "C" int usleep(useconds_t us);
 
+// TODO eventually the internal implementations should also use these
+#if !(defined(ARM_MATH_CM4) || defined(ARCH_obc))
+/**
+ * @brief Actuation update (critical, hard real-time)
+ * @details Should be called by the implementation
+ */
+int sdkUpdateA();
+/**
+ * @brief Behavior and other task update (less critical, but still should be called as often as possition)
+ * @details Should be called by the implementation
+ */
+int sdkUpdateB();
+#endif
 
 /** @} */ // end of addtogroup
 
@@ -139,13 +138,24 @@ extern "C" int usleep(useconds_t us);
 /**
  * Enum to store file descriptors on the MCU (for use with ioctl, write, read, ...).
  * unistd.h defines STDIN=0, STDOUT=1, STDERR=2. See https://en.wikipedia.org/wiki/File_descriptor
- * On the MCU all three of these point to the USB programming port; on the computer the
+ * On the MCU all three of these point to the USB programming port
  */
-enum MCUFD {
+enum MCUFD
+{
 	/**
-	 * Control the used LED on the mainboard (command > 0 turns it on)
+	 * Control the user LED lighting.
+	 * 
+	 * Legacy usage (args == NULL, might be deprecated): command > 0 turns on the mainboard user LED, command = 0 turns it off
+	 * 
+	 * If args != NULL, command must be IOCTL_CMD_WR (for now). 
+	 * 
+	 * args is: uint8_t args[2] = {LED_ID, brightness}.
+	 * 
+	 * For digital LEDs, brightness=0 means off, brightness>0 means on. For PWM controlled LEDs, brightness is on a 0~255 scale.
+	 * 
+	 * The LED_ID is subject to change (see MCUClass.cpp or other platform-specific implementation), but for now: 0~9 = on-mainboard LEDs, 10~19 = OBC LEDs, 20~49 = limb-attached LEDs, 50~59 = body-attached LEDs, 60+ may be payload
 	 */
-	LED_USER_FILENO=3,
+	LED_USER_FILENO = 3,
 	/**
 	 * Control the 12V/1 power rail on the mainboard if present (command > 0 turns it on)
 	 */
@@ -181,30 +191,55 @@ enum MCUFD {
 	 */
 	LOGGER_FILENO,
 	/**
-	 * Control joystick sensitivities using ioctl()
+	 * Control joystick sensitivities. 
+	 * 
+	 * Command = IOCTL_CMD_JOYSTICK_SET_SENS, in which case args is: float args[2] = {speed_sens, yaw_sens}
+	 * 
+	 * or command = IOCTL_CMD_JOYSTICK_SET_TYPE, in which case args is args = &joyType, where joyType is of type JoyType
 	 */
 	JOYSTICK_FILENO,
 	/**
-	 * Control ADC's for analog measurements
+	 * Read in analog mode from GPIO pins. Command must be IOCTL_CMD_RD, and args is a {uint16_t=pin, uint16_t=result} tuple.
+	 * 
+	 * For example:
+	 *    uint16_t params[2] = {pinNumber, 0};
+	 *    ioctl(ADC_FILENO, IOCTL_CMD_RD, params);
+	 *    uint16_t result = params[1];
 	 */
 	ADC_FILENO,
+	/**
+	 * Control toe-attached sensors. Command can be > 0 to enable, 0 to disable. args is ignored.
+	 */
+	TOE_SENSORS_FILENO,
+	/**
+	 * Control digital pins. Command must be IOCTL_CMD_RD or IOCTL_CMD_WR, and args is a {uint16_t=pin, uint16_t=value/result} tuple.
+	 * When using IOCTL_CMD_WR, the second element is the value written to the pin (0 or 1), and when using IOCTL_CMD_RD, result is updated with
+	 * the logical value at the pin (0 or 1)
+	 */
+	DIO_FILENO,
 };
+
+// Coded colors for toe lighting (subject to change)
+// Here is a uint8_t coding (bitwise) RRGGBBUU
+// This will be transmitted over PWM and the last few bits are the worst affected
+#define LED_CODE0_COLOR_MAGENTA (0b100010 << 2)
+#define LED_CODE0_COLOR_CYAN (0b001010 << 2)
+#define LED_CODE0_COLOR_YELLOW (0b101000 << 2)
+#define LED_CODE0_COLOR_WHITE (0b101010 << 2)
+#define LED_CODE0_COLOR_GRAY (0b010101 << 2)
+#define LED_CODE0_COLOR_OFF (0)
 
 /**
  * @brief MCU hardware device control function
  * @details This is meant to emulate userspace ioctl on Unix devices. For more information,
- * see https://www.gnu.org/software/libc/manual/html_node/IOCTLs.html or http://www.makelinux.net/ldd3/chp-6-sect-1.
+ * see https://www.gnu.org/software/libc/manual/html_node/IOCTLs.html or http://www.makelinux.net/ldd3/chp-6-sect-1.shtml
  * 
- * At this point only digital I/O is represented, but in the future ADC, SPI, I2C, etc. will be added
- *
  * @param filedes An element of enum MCUFD, or STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO
  * @param command Command to send device (see MCUFD for device-specific effect)
  * @param args Optional argument to command (usually a struct)
  *
- * @return [description]
  */
 extern "C" int ioctl(int filedes, int command, void *args = NULL);
-//#endif
 
 /**
  * For some ioctl() files (see MCUFD) such as I2C, the cmd can be to read or write. Use
@@ -216,18 +251,9 @@ extern "C" int ioctl(int filedes, int command, void *args = NULL);
  * cmd = IOCTL_CMD_WR to write.
  */
 #define IOCTL_CMD_WR	(1)
-/**
- * Set joystick sensitivity. args is a float[2] = {speed_sens, yaw_sens}
- */
 #define IOCTL_CMD_JOYSTICK_SET_SENS	(0)
-/**
- * Set joystick type to one of the enum JoyType
- */
 #define IOCTL_CMD_JOYSTICK_SET_TYPE	(1)
-/**
- * Read an ADC pin (args is a {uint16_t=pin, uint16_t=result} tuple)
- */
-#define IOCTL_CMD_ADC_READ	(0)
+#define IOCTL_CMD_ADC_READ IOCTL_CMD_RD
 
 /** @} */ // end of addtogroup
 
