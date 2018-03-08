@@ -1,5 +1,6 @@
-# mjkey
+# mjkey !VERY IMPORTANT! and other mujoco files
 mjkey.txt
+MUJOCO_LOG.TXT
 
 # third party library folders
 Eigen
@@ -24,6 +25,7 @@ out.txt
 
 # Build files
 *.obj
+*.tmp
 
 # Build results
 [Dd]ebug/
