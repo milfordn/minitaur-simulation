@@ -1,5 +1,6 @@
 #include "CPGNode.h"
 #include <cmath>
+#include <cstdio>
 
 CPGNode::CPGNode(double a, double b, double range) {
 	this->a = a;
@@ -7,13 +8,43 @@ CPGNode::CPGNode(double a, double b, double range) {
 	this->mu = range * range;
 	this->x = 0;
 	this->y = 0;
+	this->feedbackType = FEEDBACK_NONE;
 }
 
 void CPGNode::step(double dt) {
 	double r = x * x + y * y;
 	double w = wstance / (exp(-b * y) + 1) + wswing / (exp(b * y) + 1);
+	
+	//sensor hit in the latter half of the swing phase during normal operation
+	if (y < 0 && x > 0 && feedback > 0 && feedbackType == FEEDBACK_NONE) {
+		this->feedbackType = FEEDBACK_FAST;
+		puts("FAST TRANSITION");
+	}
+	//sensor not hit in the latter half of the swing phase during normal operation
+	else if (y < 0 && x > 0 && feedback < 0 && feedbackType == FEEDBACK_NONE) {
+		this->feedbackType = FEEDBACK_STOP;
+		puts("STOP TRANSITION");
+	}
+	//we're in a specific feedback condition and the sensor changes
+	else if (
+		(feedback > 0 && feedbackType == FEEDBACK_STOP) ||
+		(feedback < 0 && feedbackType == FEEDBACK_FAST)
+		) {
+		this->feedbackType = FEEDBACK_NONE;
+		puts("NO FEEDBACK");
+	}
+
+	double u = 0;
+	if (feedbackType == FEEDBACK_FAST) {
+		u = y < 0 ? 1 : -1;
+		u *= 300;
+	}
+	else if (feedbackType == FEEDBACK_STOP) {
+		u = -w * x;
+	}
+
 	double dx = a * (mu - r) * x - w * y;
-	double dy = b * (mu - r) * y + w * x;
+	double dy = b * (mu - r) * y + w * x;// +u;
 
 	x += dx * dt;
 	y += dy * dt;
@@ -35,4 +66,12 @@ double CPGNode::getValueY() {
 void CPGNode::setPose(double wstance, double wswing) {
 	this->wstance = wstance;
 	this->wswing = wswing;
+}
+
+void CPGNode::setFeedbackType(int type) {
+	this->feedbackType = type;
+}
+
+void CPGNode::setFeedback(double sensor) {
+	this->feedback = sensor;
 }

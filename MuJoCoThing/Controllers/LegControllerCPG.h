@@ -11,7 +11,7 @@ public:
 	void step() override;
 private:
 	CPGNode patternGenerator;
-	int sensor1, sensor2, motor1, motor2;
+	int sensor1, sensor2, sensorTouch, motor1, motor2;
 	mjtNum timePrev;
 	pid ctrlR, ctrlT;
 };
