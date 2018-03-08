@@ -1,8 +1,8 @@
 #ifndef ModelController_h
 #define ModelController_h
 
-#include "include/mujoco.h"
-#include "include/glfw3.h"
+#include "../include/mujoco.h"
+#include "../include/glfw3.h"
 
 //Base controller class does nothing in the step function
 class ModelController {

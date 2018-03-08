@@ -1,5 +1,5 @@
 #include "KeyboardController.h"
-#include "include/mujoco.h"
+#include "../include/mujoco.h"
 
 KeyboardController::KeyboardController(const char *f, int keys[], char * actuatorNames[], double powers[], int size) 
 : ModelController(f) {

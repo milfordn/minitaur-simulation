@@ -6,6 +6,7 @@ class pid{
         pid(double KP, double KI, double KD);
         double calculateOutput(double tick, double setpoint, double position);
 		double calculateOutput(double tick, double setpoint, double position, double velocity);
+		void setPgain(double p);
     private:
         double KP;
         double KI;

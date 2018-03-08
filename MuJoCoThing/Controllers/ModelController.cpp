@@ -4,8 +4,11 @@ ModelController::ModelController(const char * f) {
 	setModelFile(f);
 
 	char error[1000];
-
 	this->model = mj_loadXML(f, NULL, error, sizeof(error));
+	if(!this->model){
+		mju_error_s("Couldn't load model: %s", error);
+	}
+	
 	this->data = mj_makeData(model);
 }
 

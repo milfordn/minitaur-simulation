@@ -1,7 +1,5 @@
 #include "pid.h"
 #include "math.h"
-#include <chrono>
-#include <iostream>
 
 pid::pid(double kp, double ki, double kd){
     KP = kp;
@@ -18,9 +16,14 @@ double pid::calculateOutput(double tick, double setpoint, double position){
 	
     double error = setpoint - position;
     integral += error * deltaT;
-    double derivative = (lastPosition - position)/deltaT;
-	if (isinf(derivative)) derivative = 0;
-    
+	
+	double derivative;
+	if(deltaT == 0){
+		derivative = 0;
+	}else{
+    	derivative = (lastPosition - position)/deltaT;
+	}
+
     lastPosition = position;
 	lastTick = tick;
     return error*KP + integral*KI + derivative*KD;
@@ -30,8 +33,17 @@ double pid::calculateOutput(double tick, double setpoint, double position, doubl
 	
 	double error = setpoint - position;
     integral += error * deltaT;
-    double derivative = velocity/deltaT;
-    
+	
+    double derivative;
+	if(deltaT == 0){
+		derivative = 0;
+	}else{
+    	derivative = velocity/deltaT;
+	}
+
 	lastTick = tick;
     return error*KP + integral*KI + derivative*KD;
+}
+void pid::setPgain(double p){
+	KP = p;
 }
