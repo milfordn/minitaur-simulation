@@ -72,9 +72,18 @@
     <ClInclude Include="Controllers\LegControllerCPG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Controllers\PositionController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\LegPositionController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="MinitaurFull.xml">
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>
@@ -113,6 +122,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controllers\LegControllerCPG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\PositionController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\LegPositionController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
