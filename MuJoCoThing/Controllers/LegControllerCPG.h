@@ -3,7 +3,7 @@
 
 #include "ModelController.h"
 #include "CPGNode.h"
-#include "AutoPID.h"
+#include "../AutoPID.h"
 
 class LegControllerCPG : public ModelController {
 public:

@@ -2,8 +2,8 @@
 #define PIDCTRL_H
 
 #include "ModelController.h"
-#include "include/glfw3.h"
-#include "pid.h"
+#include "../include/glfw3.h"
+#include "../pid.h"
 
 class PIDController : public ModelController {
 public :

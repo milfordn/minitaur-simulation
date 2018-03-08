@@ -2,7 +2,7 @@
 #define MTCTRL_H
 
 #include "ModelController.h"
-#include "AutoPID.h"
+#include "../AutoPID.h"
 
 class LegControllerSimple : public ModelController {
 public:
