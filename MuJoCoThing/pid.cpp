@@ -29,7 +29,7 @@ double pid::calculateOutput(double tick, double setpoint, double position){
     return error*KP + integral*KI + derivative*KD;
 }
 double pid::calculateOutput(double tick, double setpoint, double position, double velocity){
-	int deltaT = tick - lastTick;
+	double deltaT = tick - lastTick;
 	
 	double error = setpoint - position;
     integral += error * deltaT;
