@@ -23,13 +23,14 @@ public:
 
 	//1 for fast transition, 0 for no change, -1 for stop
 	void setFeedbackType(int type);
+	void setCoupling(double c);
 
 	void setFeedback(double sensor);
 private:
 	double a, b, mu;
 	double x, y;
 	double wstance, wswing;
-	double feedback;
+	double feedback, coupling;
 	int feedbackType;
 };
 

@@ -40,11 +40,11 @@ void CPGNode::step(double dt) {
 		u *= 300;
 	}
 	else if (feedbackType == FEEDBACK_STOP) {
-		u = -w * x;
+		u = -w * x - coupling;
 	}
 
 	double dx = a * (mu - r) * x - w * y;
-	double dy = b * (mu - r) * y + w * x;// +u;
+	double dy = b * (mu - r) * y + w * x + coupling;// +u;
 
 	x += dx * dt;
 	y += dy * dt;
@@ -70,6 +70,11 @@ void CPGNode::setPose(double wstance, double wswing) {
 
 void CPGNode::setFeedbackType(int type) {
 	this->feedbackType = type;
+}
+
+void CPGNode::setCoupling(double c)
+{
+	this->coupling = c;
 }
 
 void CPGNode::setFeedback(double sensor) {
