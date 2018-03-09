@@ -11,14 +11,15 @@
     </visual>
 
     <default>
-    <joint limited='true'/>
-    <geom contype='0' conaffinity='0' condim='1' solref=".005 1" solimp=".8 .8 .01" material='collision'/>
-    <motor ctrllimited='true'/>
-    <mesh scale='0.001 0.001 0.001'/>
+      <joint limited='true'/>
+      <geom contype='0' conaffinity='0' condim='1' solref=".005 1" solimp=".8 .8 .01" material='collision'/>
+      <equality solref='0.005 1'/>
+      <motor ctrllimited='true'/>
+      <mesh scale='0.001 0.001 0.001'/>
 
-    <default class='mesh-import'>
-        <geom type='mesh' euler='0 90 90' material='cassie'/>
-    </default>
+      <default class='mesh-import'>
+          <geom type='mesh' euler='0 90 90' material='cassie'/>
+      </default>
     </default>
 
     <asset>
