@@ -42,7 +42,11 @@ PositionController::PositionController(const char *f, const char * actuatorNames
 }
 
 PositionController::~PositionController() {
-	free(this);
+	//free(this);
+	free(frontLeft);
+	free(frontRight);
+	free(backLeft);
+	free(backRight);
 }
 
 void PositionController::step() {
