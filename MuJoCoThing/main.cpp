@@ -44,7 +44,7 @@ int main(int argc, char ** argv) {
 		(char*)"endeffectorBR",
 	};
 
-	PositionController p(argv[1], motorNames, jointNames, endeffectorNames);
+	LegControllerCPG p("MinitaurLeg.xml");
 	//char * names[2] = { (char*)"motor_a", (char*)"motor_c" };
 	//int keys[2] = { GLFW_KEY_A, GLFW_KEY_D };
 	//double powers[2] = { -0.01, 0.01 };
