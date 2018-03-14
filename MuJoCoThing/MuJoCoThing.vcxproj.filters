@@ -78,6 +78,12 @@
     <ClInclude Include="Controllers\LegPositionController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CPGNetwork.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\MinitaurControllerCPG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
@@ -128,6 +134,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Controllers\LegPositionController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPGNetwork.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers\MinitaurControllerCPG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

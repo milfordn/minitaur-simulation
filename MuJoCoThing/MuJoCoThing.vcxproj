@@ -150,9 +150,11 @@
     <ClInclude Include="Controllers\LegControllerCPG.h" />
     <ClInclude Include="Controllers\LegControllerSimple.h" />
     <ClInclude Include="Controllers\LegPositionController.h" />
+    <ClInclude Include="Controllers\MinitaurControllerCPG.h" />
     <ClInclude Include="Controllers\ModelController.h" />
     <ClInclude Include="Controllers\PIDController.h" />
     <ClInclude Include="Controllers\PositionController.h" />
+    <ClInclude Include="CPGNetwork.h" />
     <ClInclude Include="CustomSimulate.h" />
     <ClInclude Include="GaussianNoise.h" />
     <ClInclude Include="include\glfw3.h" />
@@ -172,9 +174,11 @@
     <ClCompile Include="Controllers\LegControllerCPG.cpp" />
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\LegPositionController.cpp" />
+    <ClCompile Include="Controllers\MinitaurControllerCPG.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
     <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="Controllers\PositionController.cpp" />
+    <ClCompile Include="CPGNetwork.cpp" />
     <ClCompile Include="CustomSimulate.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />

@@ -41,7 +41,7 @@
             <geom type='box' size='0.21 0.1 0.075' material='cassie'/>
 
             <!-- Up/Down motion  -->
-            <joint type='slide' limited='false' axis='0 0 1'/>
+            <!--<joint type='slide' limited='false' axis='0 0 1'/>-->
 
             <!-- Forward/Backward motion 
             <joint type='slide' limited='false' axis='1 0 0'/> -->

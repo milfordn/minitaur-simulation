@@ -16,6 +16,7 @@ public:
 	Matrix<double, Eigen::Dynamic, 1> getXVector();
 	void setCoupling(Eigen::MatrixXd);
 	void applyCoupling();
+	CPGNode * getNode(int i);
 private:
 	vector<CPGNode> Nodes;
 	Eigen::MatrixXd coupling;
