@@ -238,4 +238,30 @@
         <motor name='thigh2BR_a' joint='thigh2BR_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
     </actuator>
 
+    <sensor>
+        <jointpos name='thigh1FL_spos' joint='thigh1FL_j'/>
+        <jointpos name='thigh2FL_spos' joint='thigh2FL_j'/>
+
+        <jointpos name='thigh1FR_spos' joint='thigh1FR_j'/>
+        <jointpos name='thigh2FR_spos' joint='thigh2FR_j'/>
+
+        <jointpos name='thigh1BL_spos' joint='thigh1BL_j'/>
+        <jointpos name='thigh2BL_spos' joint='thigh2BL_j'/>
+
+        <jointpos name='thigh1BR_spos' joint='thigh1BR_j'/>
+        <jointpos name='thigh2BR_spos' joint='thigh2BR_j'/>
+
+        <jointvel name='thigh1FL_svel' joint='thigh1FL_j'/>
+        <jointvel name='thigh2FL_svel' joint='thigh2FL_j'/>
+
+        <jointvel name='thigh1FR_svel' joint='thigh1FR_j'/>
+        <jointvel name='thigh2FR_svel' joint='thigh2FR_j'/>
+        
+        <jointvel name='thigh1BL_svel' joint='thigh1BL_j'/>
+        <jointvel name='thigh2BL_svel' joint='thigh2BL_j'/>
+        
+        <jointvel name='thigh1BR_svel' joint='thigh1BR_j'/>        
+        <jointvel name='thigh2BR_svel' joint='thigh2BR_j'/>
+    </sensor>
+
 </mujoco>
