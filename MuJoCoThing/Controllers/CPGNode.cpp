@@ -8,6 +8,7 @@ CPGNode::CPGNode(double a, double b, double range) {
 	this->mu = range * range;
 	this->x = 0;
 	this->y = 0;
+	this->coupling = 0;
 	this->feedbackType = FEEDBACK_NONE;
 }
 
@@ -50,9 +51,9 @@ void CPGNode::step(double dt) {
 	y += dy * dt;
 }
 
-void CPGNode::step(double dt, double measuredX) {
-	this->x = measuredX;
-	this->step(dt);
+void CPGNode::setInitialConditions(double x, double y) {
+	this->x = x;
+	this->y = y;
 }
 
 double CPGNode::getValueX() {

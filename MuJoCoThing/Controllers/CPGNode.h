@@ -13,7 +13,7 @@ public:
 	//mu controls amplitude
 	CPGNode(double a, double b, double mu);
 	void step(double dt);
-	void step(double dt, double measuredX);
+	void setInitialConditions(double x, double y);
 
 	double getValueX();
 	double getValueY();

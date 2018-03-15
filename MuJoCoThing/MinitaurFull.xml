@@ -42,16 +42,16 @@
             <geom type='box' size='0.21 0.1 0.075' material='cassie'/>
 
             <!-- Up/Down motion  -->
-            <!--<joint type='slide' limited='false' axis='0 0 1'/>-->
+            <joint type='slide' limited='false' axis='0 0 1'/>
 
             <!-- In plane rotation -->
-            <joint type='hinge' limited='false' axis='0 1 0' />
+            <!--<joint type='hinge' limited='false' axis='0 1 0' />-->
 
-            <!-- Forward/Backward motion 
-            <joint type='slide' limited='false' axis='1 0 0'/> -->
+             <!--Forward/Backward motion--> 
+            <joint type='slide' limited='false' axis='1 0 0'/> 
 
             <!-- Left/Right motion -->
-            <!-- <joint type='slide' limited='false' axis='0 1 0'/> -->
+             <!--<joint type='slide' limited='false' axis='0 1 0'/>--> 
 
             <!-- front left leg-->
             <body pos='0.2 0.14 0' euler='0 0 0'>
