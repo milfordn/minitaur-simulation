@@ -67,6 +67,19 @@ void ForwardVelocityController::step() {
 	//.191 + .089*sin(angle)
 	//Difference in length between two pairs
 
+
+	// RAIBERT VARIABLES
+	
+	//hipActuatorTorque;
+	//hipAngle
+	//desiredHipAngle
+	//positionFeedbackGain
+	//velocityFeedbackGain
+	//hipActuatorTorque = -positionFeedbackGain(hipAngle - desiredHipAngle) - velocityFeedbackGain(hipAngle)	
+
+
+
+
 	pair1Theta += 0.001 * pair1Speed;
 	pair2Theta += 0.001 * pair2Speed;
 
