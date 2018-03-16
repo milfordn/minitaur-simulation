@@ -37,7 +37,12 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	this->frontRight = new LegPositionController(m3, m4, m3AngleID, m4AngleID, end2);
 	this->backLeft = new LegPositionController(m5, m6, m5AngleID, m6AngleID, end3);
 	this->backRight = new LegPositionController(m7, m8, m7AngleID, m8AngleID, end4);
-
+	pair1Theta = 1.57;
+	pair2Theta = 1.57;;
+	pair1Length = 0.2;
+	pair2Length = 0.2;
+	pair1Incrementor = 1;
+	pair2Incrementor = -1;
 }
 
 ForwardVelocityController::~ForwardVelocityController() {
@@ -45,9 +50,52 @@ ForwardVelocityController::~ForwardVelocityController() {
 }
 
 void ForwardVelocityController::step() {
+	double PI = 3.14159265359;
 	mj_kinematics(model, data); //Calculate kinematics
+	//Back left and front right work together
+	//Back right and front left work together
+	//Difference in angle between two pairs -> goes to 0 as speed increases (bounding vs trotting)
+	//Difference in angle of two legs inside a pair -> goes to max as speed increases (pairs switch from opposites to front/back)
+		//Need maximum difference in leg angle?
+	//leg1 = leg3
+	//leg2 = leg4
 
-/*
+
+	//Legs pointing forward always(?) have longer length
+	//If leg moving forward, length short
+	//If leg moving backward, length long
+
+	//.191 + .089*sin(angle)
+	//Difference in length between two pairs
+
+	pair1Theta += 0.001 * pair1Incrementor;
+	pair2Theta += 0.001 * pair2Incrementor;
+
+	cout << pair1Theta << ", " << pair2Theta << ", " << pair1Length << ", " << pair2Length << ". " << endl;
+
+	if(pair1Theta > PI/2 + PI/6) pair1Incrementor = -1;
+	if(pair1Theta < PI/2 - PI/6) pair1Incrementor = 1;
+
+	if(pair2Theta > PI/2 + PI/6) pair2Incrementor = -1;
+	if(pair2Theta < PI/2 - PI/6) pair2Incrementor = 1;
+
+	pair1Length = 0.191 + 0.019 * sin(pair1Theta) * pair1Incrementor;
+	pair2Length = 0.191 + 0.019 * sin(pair2Theta) * pair2Incrementor;
+
+	frontLeft->setAngle(pair1Theta);
+	frontRight->setAngle(pair2Theta);
+	backLeft->setAngle(pair2Theta);
+	backRight->setAngle(pair1Theta);
+
+	frontLeft->setLength(pair1Length);
+	frontRight->setLength(pair2Length);
+	backLeft->setLength(pair2Length);
+	backRight->setLength(pair1Length);
+
+	frontLeft->step(data, model);
+	frontRight->step(data, model);
+	backLeft->step(data, model);
+	backRight->step(data, model);/*
   double desiredLength = .102;
 	double desiredAngle = 1.57;
 

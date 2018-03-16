@@ -11,4 +11,10 @@ private:
 	LegPositionController *frontRight;
 	LegPositionController *backLeft;
 	LegPositionController *backRight;
+	double pair1Theta;
+	double pair2Theta;
+	double pair1Length;
+	double pair2Length;
+	int pair1Incrementor;
+	int pair2Incrementor;
 };
