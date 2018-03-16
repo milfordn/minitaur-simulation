@@ -15,6 +15,6 @@ private:
 	double pair2Theta;
 	double pair1Length;
 	double pair2Length;
-	int pair1Incrementor;
-	int pair2Incrementor;
+	double pair1Speed;
+	double pair2Speed;
 };

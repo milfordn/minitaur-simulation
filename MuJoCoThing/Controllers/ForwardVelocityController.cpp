@@ -41,8 +41,8 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	pair2Theta = 1.57;;
 	pair1Length = 0.2;
 	pair2Length = 0.2;
-	pair1Incrementor = 1;
-	pair2Incrementor = -1;
+	pair1Speed = 2.0;
+	pair2Speed = -2.0;
 }
 
 ForwardVelocityController::~ForwardVelocityController() {
@@ -61,26 +61,21 @@ void ForwardVelocityController::step() {
 	//leg2 = leg4
 
 
-	//Legs pointing forward always(?) have longer length
 	//If leg moving forward, length short
 	//If leg moving backward, length long
 
 	//.191 + .089*sin(angle)
 	//Difference in length between two pairs
 
-	pair1Theta += 0.001 * pair1Incrementor;
-	pair2Theta += 0.001 * pair2Incrementor;
+	pair1Theta += 0.001 * pair1Speed;
+	pair2Theta += 0.001 * pair2Speed;
 
-	cout << pair1Theta << ", " << pair2Theta << ", " << pair1Length << ", " << pair2Length << ". " << endl;
+	if(pair1Theta > PI/2 + PI/6 || pair1Theta < PI/2 - PI/6) pair1Speed *= -1;
 
-	if(pair1Theta > PI/2 + PI/6) pair1Incrementor = -1;
-	if(pair1Theta < PI/2 - PI/6) pair1Incrementor = 1;
+	if(pair2Theta > PI/2 + PI/6 || pair2Theta < PI/2 - PI/6) pair2Speed *= -1;
 
-	if(pair2Theta > PI/2 + PI/6) pair2Incrementor = -1;
-	if(pair2Theta < PI/2 - PI/6) pair2Incrementor = 1;
-
-	pair1Length = 0.191 + 0.019 * sin(pair1Theta) * pair1Incrementor;
-	pair2Length = 0.191 + 0.019 * sin(pair2Theta) * pair2Incrementor;
+	pair1Length = 0.191 + 0.018 * sin(pair1Theta) * pair1Speed;
+	pair2Length = 0.191 + 0.018 * sin(pair2Theta) * pair2Speed;
 
 	frontLeft->setAngle(pair1Theta);
 	frontRight->setAngle(pair2Theta);
