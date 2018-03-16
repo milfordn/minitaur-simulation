@@ -41,8 +41,8 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	pair2Theta = 1.57;;
 	pair1Length = 0.2;
 	pair2Length = 0.2;
-	pair1Speed = 2.0;
-	pair2Speed = -2.0;
+	pair1Speed = 0.1;
+	pair2Speed = -0.1;
 }
 
 ForwardVelocityController::~ForwardVelocityController() {
@@ -76,6 +76,10 @@ void ForwardVelocityController::step() {
 
 	pair1Length = 0.191 + 0.018 * sin(pair1Theta) * pair1Speed;
 	pair2Length = 0.191 + 0.018 * sin(pair2Theta) * pair2Speed;
+//	frontLeft->release();
+//	frontRight->release();
+//	backLeft->release();
+//	backRight->release();
 
 	frontLeft->setAngle(pair1Theta);
 	frontRight->setAngle(pair2Theta);
@@ -90,39 +94,8 @@ void ForwardVelocityController::step() {
 	frontLeft->step(data, model);
 	frontRight->step(data, model);
 	backLeft->step(data, model);
-	backRight->step(data, model);/*
-  double desiredLength = .102;
-	double desiredAngle = 1.57;
-
-	double activeP = 1.5;
-	double inactiveP = 0.28;
-
-	frontLeft->setAngle(desiredAngle);
-	frontRight->setAngle(desiredAngle);
-	backLeft->setAngle(desiredAngle);
-	backRight->setAngle(desiredAngle);
-
-	if(data->qvel[0] < 0){
-		desiredLength = 0.28;
-		frontLeft->setPgain(inactiveP);
-		frontRight->setPgain(inactiveP);
-		backLeft->setPgain(inactiveP);
-		backRight->setPgain(inactiveP);
-	}else{
-		frontLeft->setPgain(activeP);
-		frontRight->setPgain(activeP);
-		backLeft->setPgain(activeP);
-		backRight->setPgain(activeP);
-	}
-
-	frontLeft->setLength(desiredLength);
-	frontRight->setLength(desiredLength);
-	backLeft->setLength(desiredLength);
-	backRight->setLength(desiredLength);
-
-	frontLeft->step(data, model);
-	frontRight->step(data, model);
-	backLeft->step(data, model);
 	backRight->step(data, model);
-*/
+	cout << endl;
+
+
 }
