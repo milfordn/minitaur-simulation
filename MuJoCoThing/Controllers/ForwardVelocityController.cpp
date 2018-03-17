@@ -41,8 +41,8 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	pair2Theta = 1.57;;
 	pair1Length = 0.2;
 	pair2Length = 0.2;
-	pair1Speed = 0.1;
-	pair2Speed = -0.1;
+	pair1Speed = 1;
+	pair2Speed = -1;
 }
 
 ForwardVelocityController::~ForwardVelocityController() {
@@ -67,15 +67,15 @@ void ForwardVelocityController::step() {
 	//.191 + .089*sin(angle)
 	//Difference in length between two pairs
 
-	pair1Theta += 0.001 * pair1Speed;
-	pair2Theta += 0.001 * pair2Speed;
+	pair1Theta += 0.0001 * pair1Speed;
+	pair2Theta += 0.0001 * pair2Speed;
 
 	if(pair1Theta > PI/2 + PI/6 || pair1Theta < PI/2 - PI/6) pair1Speed *= -1;
 
 	if(pair2Theta > PI/2 + PI/6 || pair2Theta < PI/2 - PI/6) pair2Speed *= -1;
 
-	pair1Length = 0.191 + 0.018 * sin(pair1Theta) * pair1Speed;
-	pair2Length = 0.191 + 0.018 * sin(pair2Theta) * pair2Speed;
+	pair1Length = 0.191 + 0.018 * sin(pair1Theta);
+	pair2Length = 0.191 + 0.018 * sin(pair2Theta);
 //	frontLeft->release();
 //	frontRight->release();
 //	backLeft->release();

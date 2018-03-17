@@ -13,8 +13,8 @@ LegPositionController::LegPositionController(int m1ID, int m2ID, int m1JointID, 
 	//allocate memory for PID controllers
 	//this->angleController = new pid(15, 0.000, 5000.0);
 	//this->lengthController = new pid(15, 0.00, 5000.0);
-	this->m1 = new pid(1, 0.0, 10);
-	this->m2 = new pid(1, 0.0, 10);
+	this->m1 = new pid(0.3, 0.0, 10);
+	this->m2 = new pid(0.3, 0.0, 10);
 
 	this->m1ID = m1ID;
 	this->m2ID = m2ID;
