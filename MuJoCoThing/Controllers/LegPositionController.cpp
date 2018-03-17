@@ -42,7 +42,6 @@ void LegPositionController::step(struct _mjData* data, struct _mjModel* model) {
 
 	double m1pos = desiredAngle - asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor1
 	double m2pos = desiredAngle + asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor2
-	cout << "current: " << currentTheta << " vs " << desiredAngle << ", " << currentLength << " vs " << desiredLength << ";" << endl;
 	//METHOD 1
 	double output_1 = m1->calculateOutput(tick, m1pos, currentm1pos);
 	double output_2 = m2->calculateOutput(tick, m2pos, currentm2pos);

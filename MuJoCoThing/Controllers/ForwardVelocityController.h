@@ -13,8 +13,6 @@ private:
 	LegPositionController *backRight;
 	double pair1Theta;
 	double pair2Theta;
-	double pair1Length;
-	double pair2Length;
 	double pair1Speed;
 	double pair2Speed;
 };
