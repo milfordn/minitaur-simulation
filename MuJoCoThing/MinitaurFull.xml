@@ -87,7 +87,7 @@
                     <body name='calf_short_FL' euler='0 -120 0' pos='0.1 0.01 0'>
                         <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
                         <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01' />
-						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range='-60 120' />
+						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false' />
                         <geom class='mesh-import' mesh='calf1'/>
                     </body>
                 </body>
@@ -127,7 +127,7 @@
                     <body name='calf_short_FR' euler='0 -120 0' pos='0.1 -0.01 0'>
                         <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
                         <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01' />
-						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range='-60 120'/>
+						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
                         <geom class='mesh-import' mesh='calf1'/>
                     </body>
                 </body>
@@ -167,7 +167,7 @@
                     <body name='calf_short_BL' euler='0 -120 0' pos='0.1 0.01 0'>
                         <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
                         <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01' />
-						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range='-60 120'/>
+						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
                         <geom class='mesh-import' mesh='calf1'/>
                     </body>
                 </body>
@@ -188,7 +188,7 @@
                             <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
                             <geom type='cylinder' pos='0 0.01 0' euler='0 0 90' size='0.015 0.005' condim='3' contype='3' conaffinity='2'/>
                             <geom class='mesh-import' mesh='calf2' euler='180 90 90'/>
-                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range = "-120 60"/>
+                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
 
                             <body pos='0.24 0 0'>
                                 <inertial pos='0 0 0' mass='0'/>
@@ -223,17 +223,17 @@
     </equality>
 
     <actuator>
-        <motor name='thigh1FL_a' joint='thigh1FL_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
-        <motor name='thigh2FL_a' joint='thigh2FL_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
+        <motor name='thigh1FL_a' joint='thigh1FL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh2FL_a' joint='thigh2FL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
 
-        <motor name='thigh1FR_a' joint='thigh1FR_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
-        <motor name='thigh2FR_a' joint='thigh2FR_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
+        <motor name='thigh1FR_a' joint='thigh1FR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh2FR_a' joint='thigh2FR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
 
-        <motor name='thigh1BL_a' joint='thigh1BL_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
-        <motor name='thigh2BL_a' joint='thigh2BL_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
+        <motor name='thigh1BL_a' joint='thigh1BL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh2BL_a' joint='thigh2BL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
 
-        <motor name='thigh1BR_a' joint='thigh1BR_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
-        <motor name='thigh2BR_a' joint='thigh2BR_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
+        <motor name='thigh1BR_a' joint='thigh1BR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh2BR_a' joint='thigh2BR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
     </actuator>
 
     <sensor>
