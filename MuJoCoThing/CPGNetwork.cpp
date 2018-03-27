@@ -26,6 +26,7 @@ Eigen::VectorXd CPGNetwork::getXVector() {
 }
 
 void CPGNetwork::step(mjtNum dt) {
+	applyCoupling();
 	for (int i = 0; i < Nodes.size(); i++) {
 		Nodes[i].step(dt);
 	}

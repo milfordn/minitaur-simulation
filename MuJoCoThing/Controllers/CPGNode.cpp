@@ -47,6 +47,7 @@ void CPGNode::step(double dt) {
 	double dx = a * (mu - r) * x - w * y;
 	double dy = b * (mu - r) * y + w * x + coupling;// +u;
 
+	printf("%f + \n", coupling);
 	x += dx * dt;
 	y += dy * dt;
 }

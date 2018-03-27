@@ -16,7 +16,7 @@ LegControllerCPG::LegControllerCPG(char * f)
 }
 
 LegControllerCPG::LegControllerCPG(mjModel * m, mjData * d, char * s1, char * a1, char * s2, char * a2, CPGNode * cpg) 
-	: ModelController(m, d), ctrlR(4, 0, 0.2), ctrlT(0.75, 0, 0.05) {
+	: ModelController(m, d), ctrlR(5, 0, 0.2), ctrlT(0.75, 0, 0.05) {
 	sensor1 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, s1);
 	sensor2 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, s2);
 	motor1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, a1);
@@ -42,7 +42,7 @@ void LegControllerCPG::step() {
 	double x = -patternGenerator->getValueX();
 
 	double setT = x;
-	double setR = y > 0 ? 0.125 : 0.2;
+	double setR = y > 0 ? 0.125 : 0.25;
 
 	double dr = ctrlR.calculateOutput(data->time, setR, measuredR);
 	double dt = ctrlT.calculateOutput(data->time, setT, measuredT);
@@ -51,6 +51,6 @@ void LegControllerCPG::step() {
 	data->ctrl[motor2] = dt - dr;
 
 	//printf("%f -> %f | %f -> %f\n", setR - measuredR, dr, setT - totalT, dt);
-	printf("%f -> %f | %f -> %f\n", measuredR, setR, measuredT, setT);
+	//printf("%f -> %f | %f -> %f\n", measuredR, setR, measuredT, setT);
 	//printf("%f\n", measuredR);
 }

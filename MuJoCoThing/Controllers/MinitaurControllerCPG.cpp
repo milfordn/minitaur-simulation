@@ -1,7 +1,7 @@
 #include "MinitaurControllerCPG.h"
 
 MinitaurControllerCPG::MinitaurControllerCPG(char * f) : ModelController(f),
-	Net(4, 5, 50, mjPI / 6)
+	Net(4, 5, 50, mjPI / 4)
 {
 	this->fl = new LegControllerCPG(model, data, "thigh1FL_spos", "thigh1FL_a", "thigh2FL_spos", "thigh2FL_a", Net.getNode(0));
 	this->fr = new LegControllerCPG(model, data, "thigh1FR_spos", "thigh1FR_a", "thigh2FR_spos", "thigh2FR_a", Net.getNode(1));
@@ -21,21 +21,18 @@ MinitaurControllerCPG::MinitaurControllerCPG(char * f) : ModelController(f),
 				1, -1, -1, 0;
 
 	Net.setCoupling(coupling);
+
+	for (int i = 0; i < 1000; i++)
+		Net.step(0.05);
 }
 
 void MinitaurControllerCPG::step() {
-	mjtNum dt = data->time - lastTime;
 	lastTime = data->time;
 	Net.applyCoupling();
-	//Net.step(dt);
 	
 	fl->step();
 	fr->step();
 	bl->step();
 	br->step();
-
-	/*for (int i = 0; i < 4; i++)
-		printf("%f | ", Net.getNode(i)->getValueX());
-	putchar('\n');*/
 }
 
