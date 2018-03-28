@@ -1,18 +1,41 @@
 #include <stdio.h>
 #include <SDK.h>
 #include <Motor.h>
+#include <math.h>
 
 class Example : public Behavior {
 	void begin() {
-
+		//control the robot via its joints
+		C -> mode = RobotCommand_Mode_JOINT;
 	}
 
 	void update() {
-		//control the robot via its joints
-		C -> mode = RobotCommand_Mode_JOINT;
 
 		//enable joint 0, and give it an open loop command
-		joint[0].setOpenLoop(0.1);
+		//joint[0].setOpenLoop(0.1);
+
+		//set pd gain, proportional followed by derivative
+		joint[0].setGain(0.4, 0.00286);
+
+		for(int i = 0; i < 2000000; i++){
+			if (i == 500000)
+				joint[0].setPosition(-2);
+			if (i == 1000000)
+				joint[0].setPosition(-1);
+			if (i == 1500000)
+				joint[0].setPosition(0);
+			if (i == 2000000){
+				joint[0].setPosition(1);
+				i = 0;
+			}
+		}
+
+
+		//values found for the pd controller
+		//p critical = 2.4
+		//t critical = 22 ms
+		//p = 1.44
+		//d = 0.00286
 	}
 
 	void end() {
