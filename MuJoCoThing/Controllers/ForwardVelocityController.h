@@ -15,4 +15,8 @@ private:
 	double pair2Theta;
 	double pair1Speed;
 	double pair2Speed;
+	double time[1000];
+	double length[1000];
+	double angle[1000];
+	unsigned long tick;
 };

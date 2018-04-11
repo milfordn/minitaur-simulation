@@ -41,6 +41,7 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	pair2Theta = 1.57;;
 	pair1Speed = 1.0;
 	pair2Speed = -1.0;
+	tick = 0;
 }
 
 ForwardVelocityController::~ForwardVelocityController() {
@@ -50,35 +51,30 @@ ForwardVelocityController::~ForwardVelocityController() {
 void ForwardVelocityController::step() {
 	double PI = 3.14159265359;
 	mj_kinematics(model, data); //Calculate kinematics
-	//Back left and front right work together
-	//Back right and front left work together
-	//Difference in angle between two pairs -> goes to 0 as speed increases (bounding vs trotting)
-	//Difference in angle of two legs inside a pair -> goes to max as speed increases (pairs switch from opposites to front/back)
-		//Need maximum difference in leg angle?
-	//leg1 = leg3
-	//leg2 = leg4
-
-
-	//If leg moving forward, length short
-	//If leg moving backward, length long
-
-	//.191 + .089*sin(angle)
-	//Difference in length between two pairs
-
+	double t = data->time;
+	
+/*
 	pair1Theta += 0.001 * pair1Speed;
 	pair2Theta += 0.001 * pair2Speed;
 
-	if(pair1Theta > PI/2 + PI/6 || pair1Theta < PI/2 - PI/6) pair1Speed *= -1;
+	if(pair1Theta > PI/2 + PI/6) pair1Speed = 1;
+	else if(pair1Theta < PI/2 - PI/6) pair1Speed = -1;
 
-	if(pair2Theta > PI/2 + PI/6 || pair2Theta < PI/2 - PI/6) pair2Speed *= -1;
+	if(pair2Theta > PI/2 + PI/6) pair1Speed = 1;
+	else if(pair2Theta < PI/2 - PI/6) pair2Speed = -1;
 
 	double pair1Length = 0.191 + 0.018 * sin(pair1Theta) * pair1Speed;
 	double pair2Length = 0.191 + 0.018 * sin(pair2Theta) * pair2Speed;
+*/
 
-//	frontLeft->release();
-//	frontRight->release();
-//	backLeft->release();
-//	backRight->release();
+  //FUNCTION TO MATCH: THETA = sin(x - 1/2sin(x))
+	double speed = 5;
+	double offset = PI;
+	pair1Theta = PI/2 - (PI/6)*sin((speed*(t)) - (0.5)*sin(speed*(t)));
+	pair2Theta = PI/2 - (PI/6)*sin((speed*(t+offset)) - (0.5)*sin(speed*(t+offset)));
+
+	double pair1Length = 0.191 + 0.018 * (12) * (((cos(speed * (t)) - 2) * cos((sin(speed * (t))) / 2 - speed*t) / 12) - PI/12);
+	double pair2Length = 0.191 + 0.018 * (12) * (((cos(speed * (t+offset)) - 2) * cos((sin(speed * (t+offset))) / 2 - speed*(t+offset)) / 12) - PI/12);
 
 	frontLeft->setAngle(pair1Theta);
 	frontRight->setAngle(pair2Theta);
@@ -95,5 +91,23 @@ void ForwardVelocityController::step() {
 	backLeft->step(data, model);
 	backRight->step(data, model);
 
-
+	if(tick % 10 == 0 && tick < 10000){
+		time[tick/10] = t;
+		length[tick/10] = pair1Length;
+		angle[tick/10] = pair1Theta;
+	}if(tick == 10000){
+		for(int i = 0; i < 1000; i++){
+			cout << time[i] << ",";
+		}
+		cout << endl;
+		for(int i = 0; i < 1000; i++){
+			cout << length[i] << ",";
+		}
+		cout << endl;
+		for(int i = 0; i < 1000; i++){
+			cout << angle[i] << ",";
+		}
+		cout << endl;
+	}
+	tick++;
 }
