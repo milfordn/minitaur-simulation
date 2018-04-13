@@ -52,7 +52,7 @@ void ForwardVelocityController::step() {
 	double PI = 3.14159265359;
 	mj_kinematics(model, data); //Calculate kinematics
 	double t = data->time;
-	
+
 /*
 	pair1Theta += 0.001 * pair1Speed;
 	pair2Theta += 0.001 * pair2Speed;
@@ -68,46 +68,36 @@ void ForwardVelocityController::step() {
 */
 
   //FUNCTION TO MATCH: THETA = sin(x - 1/2sin(x))
-	double speed = 5;
-	double offset = PI;
-	pair1Theta = PI/2 - (PI/6)*sin((speed*(t)) - (0.5)*sin(speed*(t)));
-	pair2Theta = PI/2 - (PI/6)*sin((speed*(t+offset)) - (0.5)*sin(speed*(t+offset)));
+	double speed = 5.0;
 
-	double pair1Length = 0.191 + 0.018 * (12) * (((cos(speed * (t)) - 2) * cos((sin(speed * (t))) / 2 - speed*t) / 12) - PI/12);
-	double pair2Length = 0.191 + 0.018 * (12) * (((cos(speed * (t+offset)) - 2) * cos((sin(speed * (t+offset))) / 2 - speed*(t+offset)) / 12) - PI/12);
+	double offset1 = 0;
+	double offset2 = PI/2;
+	double offset3 = PI;
+	double offset4 = 3*PI/2;
 
-	frontLeft->setAngle(pair1Theta);
-	frontRight->setAngle(pair2Theta);
-	backLeft->setAngle(pair2Theta);
-	backRight->setAngle(pair1Theta);
+	double leg1Theta = PI/2 - (PI/6)*sin((speed*(t+offset1)) - (0.5)*sin(speed*(t+offset1)));
+	double leg2Theta = PI/2 - (PI/6)*sin((speed*(t+offset2)) - (0.5)*sin(speed*(t+offset2)));
+	double leg3Theta = PI/2 - (PI/6)*sin((speed*(t+offset3)) - (0.5)*sin(speed*(t+offset3)));
+	double leg4Theta = PI/2 - (PI/6)*sin((speed*(t+offset4)) - (0.5)*sin(speed*(t+offset4)));
 
-	frontLeft->setLength(pair1Length);
-	frontRight->setLength(pair2Length);
-	backLeft->setLength(pair2Length);
-	backRight->setLength(pair1Length);
+	double leg1Length = 0.191 + 0.018 * (((cos(speed * (t+offset1)) - 1) * cos((sin(speed * (t+offset1))) - speed*(t+offset1))) - PI);
+	double leg2Length = 0.191 + 0.018 * (((cos(speed * (t+offset2)) - 1) * cos((sin(speed * (t+offset2))) - speed*(t+offset2))) - PI);
+	double leg3Length = 0.191 + 0.018 * (((cos(speed * (t+offset3)) - 1) * cos((sin(speed * (t+offset3))) - speed*(t+offset3))) - PI);
+	double leg4Length = 0.191 + 0.018 * (((cos(speed * (t+offset4)) - 1) * cos((sin(speed * (t+offset4))) - speed*(t+offset4))) - PI);
+
+	frontLeft->setAngle(leg1Theta);
+	frontRight->setAngle(leg2Theta);
+	backLeft->setAngle(leg3Theta);
+	backRight->setAngle(leg4Theta);
+
+	frontLeft->setLength(leg1Length);
+	frontRight->setLength(leg2Length);
+	backLeft->setLength(leg3Length);
+	backRight->setLength(leg4Length);
 
 	frontLeft->step(data, model);
 	frontRight->step(data, model);
 	backLeft->step(data, model);
 	backRight->step(data, model);
-
-	if(tick % 10 == 0 && tick < 10000){
-		time[tick/10] = t;
-		length[tick/10] = pair1Length;
-		angle[tick/10] = pair1Theta;
-	}if(tick == 10000){
-		for(int i = 0; i < 1000; i++){
-			cout << time[i] << ",";
-		}
-		cout << endl;
-		for(int i = 0; i < 1000; i++){
-			cout << length[i] << ",";
-		}
-		cout << endl;
-		for(int i = 0; i < 1000; i++){
-			cout << angle[i] << ",";
-		}
-		cout << endl;
-	}
 	tick++;
 }

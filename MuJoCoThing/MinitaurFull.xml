@@ -37,15 +37,15 @@
         <geom type='plane' size='100 100 100' material='plane' condim='3' contype='1' conaffinity='1'/>
 
         <body name='minitaur' pos='0 0 0.4'>
-            <camera mode="fixed" pos="1.3 -0.7 0.25" xyaxes = ".4 1 0 -.3 0 1"/>
+            <camera mode="track" pos="1.3 -0.7 0.25" xyaxes = ".4 1 0 -.3 0 1"/>
             <inertial pos='0 0 0' mass='0.1' diaginertia='0.0001 0.0001 0.0001'/>
             <geom type='box' size='0.21 0.1 0.075' material='cassie'/>
 
             <!-- Up/Down motion  -->
             <joint type='slide' limited='false' axis='0 0 1'/>
 
-            <!-- In plane rotation
-            <joint type='hinge' limited='false' axis='0 1 0' />-->
+            <!-- In plane rotation-->
+            <joint type='hinge' limited='false' axis='0 1 0' damping='0.8'/>
 
              <!--Forward/Backward motion-->
             <joint type='slide' limited='false' axis='1 0 0'/>
