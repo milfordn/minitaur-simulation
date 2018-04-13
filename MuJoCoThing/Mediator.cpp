@@ -13,7 +13,7 @@ Mediator::Mediator(Controller * nc, System * ns)
 	time = 0;
 }
 
-//pass in -1 for infinite time
+//pass a negative number for infinite time
 void Mediator::run(double ms)
 {
 	while (ms < 0 || this->time < ms) {

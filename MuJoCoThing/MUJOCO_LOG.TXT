@@ -118,3 +118,7 @@ WARNING: Unknown warning type Time = 0.0000.
 Wed Feb 28 12:51:00 2018
 WARNING: Unknown warning type Time = 0.0000.
 
+Thu Apr 12 23:13:18 2018
+ERROR: Couldn't load model: Error: could not open STL file '..\minitaur-stl/Minitaur Leg Component (Thigh).stl'
+Object name = thigh, id = 0, line = 31, column = 5
+

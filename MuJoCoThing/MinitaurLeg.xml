@@ -28,10 +28,10 @@
     <material name='plane' reflectance='0.0' texture='plane' texrepeat='4 4' texuniform='true'/>
     <material name='cassie' rgba='0.003921568627451   0.803921568627451   0.996078431372549 1'/>
     <material name='collision' rgba='0 1 0 0.25'/>
-    <mesh name='thigh' file='Minitaur Leg Component (Thigh).stl'/>
-    <mesh name='foot' file='Minitaur foot component.stl'/>
-    <mesh name='calf1' file='Minitaur Leg Component (Calf no Ankle).stl'/>
-    <mesh name='calf2' file='Minitaur Leg Component (Calf with Ankle).stl'/>
+	<mesh name='thigh' file='thigh.STL'/>
+	<mesh name='foot' file='foot.STL'/>
+	<mesh name='calf1' file='calf.STL'/>
+	<mesh name='calf2' file='ankle.STL'/>
   </asset>
 
   <worldbody>

@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AutoPID.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Controllers\CPGNode.h" />
     <ClInclude Include="Controllers\KeyboardController.h" />
     <ClInclude Include="Controllers\LegControllerCPG.h" />
@@ -160,11 +161,15 @@
     <ClInclude Include="include\mjvisualize.h" />
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
+    <ClInclude Include="Mediator.h" />
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="Systems\MujocoSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoPID.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Controllers\CPGNode.cpp" />
     <ClCompile Include="Controllers\KeyboardController.cpp" />
     <ClCompile Include="Controllers\LegControllerCPG.cpp" />
@@ -174,8 +179,11 @@
     <ClCompile Include="CustomSimulate.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mediator.cpp" />
     <ClCompile Include="Noise.cpp" />
     <ClCompile Include="pid.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="Systems\MujocoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
