@@ -12,23 +12,23 @@ class Example : public Behavior {
 	void update() {
 
 		//enable joint 0, and give it an open loop command
-		//joint[0].setOpenLoop(0.1);
+		joint[0].setOpenLoop(0.1);
 
 		//set pd gain, proportional followed by derivative
-		joint[0].setGain(0.4, 0.00286);
+		// joint[0].setGain(0.4, 0.00286);
 
-		for(int i = 0; i < 2000000; i++){
-			if (i == 500000)
-				joint[0].setPosition(-2);
-			if (i == 1000000)
-				joint[0].setPosition(-1);
-			if (i == 1500000)
-				joint[0].setPosition(0);
-			if (i == 2000000){
-				joint[0].setPosition(1);
-				i = 0;
-			}
-		}
+		// for(int i = 0; i < 2000000; i++){
+		// 	if (i == 500000)
+		// 		joint[0].setPosition(-2);
+		// 	if (i == 1000000)
+		// 		joint[0].setPosition(-1);
+		// 	if (i == 1500000)
+		// 		joint[0].setPosition(0);
+		// 	if (i == 2000000){
+		// 		joint[0].setPosition(1);
+		// 		i = 0;
+		// 	}
+		// }
 
 
 		//values found for the pd controller
@@ -74,11 +74,12 @@ int main(int argc, char* argv[]){
 	behaviors.begin();
 
 	//set the debug rate for logging purposes
-	setDebugRate(100);
+	setDebugRate(10);
 
 	return begin();
 }
 
 void debug(){
-	printf("%u\t%f\n", S -> millis, joint[0].getPosition());
+	printf("%u \t %f \t", S -> millis, joint[0].getPosition());
+	printf("%f \n", joint[0].getCurrent());
 }
