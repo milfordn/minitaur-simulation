@@ -44,8 +44,8 @@
             <!-- Up/Down motion  -->
             <joint type='slide' limited='false' axis='0 0 1'/>
 
-            <!-- In plane rotation
-            <joint type='hinge' limited='false' axis='0 1 0' damping='0.8'/>-->
+            <!-- In plane rotation-->
+            <joint type='hinge' limited='false' axis='0 1 0' damping='0.8'/>
 
              <!--Forward/Backward motion-->
             <joint type='slide' limited='false' axis='1 0 0'/>
