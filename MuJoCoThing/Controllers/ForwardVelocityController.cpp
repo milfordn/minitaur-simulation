@@ -41,6 +41,7 @@ ForwardVelocityController::ForwardVelocityController(const char *f, const char *
 	pair2Theta = 1.57;;
 	pair1Speed = 1.0;
 	pair2Speed = -1.0;
+	t = data->time;
 	tick = 0;
 }
 
@@ -51,39 +52,32 @@ ForwardVelocityController::~ForwardVelocityController() {
 void ForwardVelocityController::step() {
 	double PI = 3.14159265359;
 	mj_kinematics(model, data); //Calculate kinematics
-	double t = data->time;
-
-/*
-	pair1Theta += 0.001 * pair1Speed;
-	pair2Theta += 0.001 * pair2Speed;
-
-	if(pair1Theta > PI/2 + PI/6) pair1Speed = 1;
-	else if(pair1Theta < PI/2 - PI/6) pair1Speed = -1;
-
-	if(pair2Theta > PI/2 + PI/6) pair1Speed = 1;
-	else if(pair2Theta < PI/2 - PI/6) pair2Speed = -1;
-
-	double pair1Length = 0.191 + 0.018 * sin(pair1Theta) * pair1Speed;
-	double pair2Length = 0.191 + 0.018 * sin(pair2Theta) * pair2Speed;
-*/
-
+	double speed = 5;
+	double t_delta = data->time - t;
+	t = data->time;
   //FUNCTION TO MATCH: THETA = sin(x - 1/2sin(x))
-	double speed = 5.0;
 
 	double offset1 = 0;
 	double offset2 = PI/2;
 	double offset3 = PI;
 	double offset4 = 3*PI/2;
 
-	double leg1Theta = PI/2 - (PI/6)*sin((speed*(t+offset1)) - (0.5)*sin(speed*(t+offset1)));
-	double leg2Theta = PI/2 - (PI/6)*sin((speed*(t+offset2)) - (0.5)*sin(speed*(t+offset2)));
-	double leg3Theta = PI/2 - (PI/6)*sin((speed*(t+offset3)) - (0.5)*sin(speed*(t+offset3)));
-	double leg4Theta = PI/2 - (PI/6)*sin((speed*(t+offset4)) - (0.5)*sin(speed*(t+offset4)));
+	double height = PI;
 
-	double leg1Length = 0.191 + 0.018 * (((cos(speed * (t+offset1)) - 1) * cos((sin(speed * (t+offset1))) - speed*(t+offset1))) - PI);
-	double leg2Length = 0.191 + 0.018 * (((cos(speed * (t+offset2)) - 1) * cos((sin(speed * (t+offset2))) - speed*(t+offset2))) - PI);
-	double leg3Length = 0.191 + 0.018 * (((cos(speed * (t+offset3)) - 1) * cos((sin(speed * (t+offset3))) - speed*(t+offset3))) - PI);
-	double leg4Length = 0.191 + 0.018 * (((cos(speed * (t+offset4)) - 1) * cos((sin(speed * (t+offset4))) - speed*(t+offset4))) - PI);
+	double leg1Theta = PI/2 - (PI/6)*sin(speed*(t) - (0.5)*sin(speed*t - offset1) - offset1);
+	double leg2Theta = PI/2 - (PI/6)*sin(speed*(t) - (0.5)*sin(speed*t - offset2) - offset2);
+	double leg3Theta = PI/2 - (PI/6)*sin(speed*(t) - (0.5)*sin(speed*t - offset3) - offset3);
+	double leg4Theta = PI/2 - (PI/6)*sin(speed*(t) - (0.5)*sin(speed*t - offset4) - offset4);
+
+	double leg1Length = 0.191 + 0.018 * (((cos(speed*t - offset1)) - 1) * cos(sin(speed*t - offset1) + speed*t - offset1) - height);
+	double leg2Length = 0.191 + 0.018 * (((cos(speed*t - offset2)) - 1) * cos(sin(speed*t - offset2) + speed*t - offset2) - height);
+	double leg3Length = 0.191 + 0.018 * (((cos(speed*t - offset3)) - 1) * cos(sin(speed*t - offset3) + speed*t - offset3) - height);
+	double leg4Length = 0.191 + 0.018 * (((cos(speed*t - offset4)) - 1) * cos(sin(speed*t - offset4) + speed*t - offset4) - height);
+
+	//double leg1Stiffness = -(cos(t+offset1) - 1)*cos(sin(t+offset1) -;
+	double leg2Stiffness;
+	double leg3Stiffness;
+	double leg4Stiffness;
 
 	frontLeft->setAngle(leg1Theta);
 	frontRight->setAngle(leg2Theta);
@@ -94,10 +88,14 @@ void ForwardVelocityController::step() {
 	frontRight->setLength(leg2Length);
 	backLeft->setLength(leg3Length);
 	backRight->setLength(leg4Length);
-
+/*
+	frontLeft->setPgain(leg1Stiffness);
+	frontRight->setPgain(leg2Stiffness);
+	backLeft->setPgain(leg3Stiffness);
+	backRight->setPgain(leg4Stiffness);
+*/
 	frontLeft->step(data, model);
 	frontRight->step(data, model);
 	backLeft->step(data, model);
 	backRight->step(data, model);
-	tick++;
 }

@@ -18,5 +18,6 @@ private:
 	double time[1000];
 	double length[1000];
 	double angle[1000];
+	double t;
 	unsigned long tick;
 };
