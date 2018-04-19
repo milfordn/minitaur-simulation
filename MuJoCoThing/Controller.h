@@ -8,7 +8,7 @@ using std::string;
 
 class Controller {
 public:
-	virtual void step(double dt) = 0;
+	virtual void step(double dt) {};
 	void setSensorRef(unordered_map<string, double> *);
 	void setActuatorRef(unordered_map<string, double> *);
 protected:

@@ -84,6 +84,9 @@
     <ClInclude Include="Systems\MujocoSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
@@ -137,6 +140,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Systems\MujocoSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

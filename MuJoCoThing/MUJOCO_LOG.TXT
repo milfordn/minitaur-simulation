@@ -122,3 +122,60 @@ Thu Apr 12 23:13:18 2018
 ERROR: Couldn't load model: Error: could not open STL file '..\minitaur-stl/Minitaur Leg Component (Thigh).stl'
 Object name = thigh, id = 0, line = 31, column = 5
 
+Wed Apr 18 15:04:52 2018
+ERROR: GLEW initalization error: Missing GL version
+
+Wed Apr 18 15:06:51 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 1.4580.
+
+Wed Apr 18 15:06:51 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:07:52 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 3.8080.
+
+Wed Apr 18 15:07:52 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:09:50 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 17.7480.
+
+Wed Apr 18 15:09:50 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:10:37 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 21.1480.
+
+Wed Apr 18 15:10:37 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:14:09 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 10.4720.
+
+Wed Apr 18 15:14:09 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:15:28 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 10.2000.
+
+Wed Apr 18 15:15:28 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:16:14 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 13.8890.
+
+Wed Apr 18 15:16:14 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:17:09 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 7.9730.
+
+Wed Apr 18 15:17:09 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Wed Apr 18 15:17:19 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 1.9380.
+
+Wed Apr 18 15:17:19 2018
+ERROR: mjvScene scale too small in mjv_room2model
+

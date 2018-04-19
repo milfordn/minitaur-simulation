@@ -1,4 +1,5 @@
 #include "Mediator.h"
+#include <cstdio>
 
 Mediator::Mediator(Controller * nc, System * ns)
 {
@@ -14,9 +15,9 @@ Mediator::Mediator(Controller * nc, System * ns)
 }
 
 //pass a negative number for infinite time
-void Mediator::run(double ms)
+void Mediator::run(double secs)
 {
-	while (ms < 0 || this->time < ms) {
+	while (secs < 0 || this->time < secs) {
 		double dt = s->step();
 		c->step(dt);
 		this->time += dt;

@@ -1,37 +1,26 @@
-#include "./Controllers/ModelController.h"
-#include "stdio.h"
-#include "CustomSimulate.h"
-#ifdef LEGACY_SIMULATE
+#include "render.h"
 
-#include "stdlib.h"
-#include <iostream>
+#ifndef LEGACY_SIMULATE
 
-#include "./include/mujoco.h"
-#include "./include/glfw3.h"
-
-mjModel* model = NULL;              // MuJoCo model
-mjData* dat = NULL;                 // MuJoCo data
+mjModel* model = NULL;                  // MuJoCo model
 mjvCamera cam;                      // abstract camera
 mjvPerturb pert;                    // perturbation object
 mjvOption opt;                      // visualization options
 mjvScene scn;                       // abstract scene
 mjrContext con;                     // custom GPU context
 
+mjtNum simstart;
+
+GLFWwindow * window = NULL;
+
 bool button_left;
 bool button_middle;
 bool button_right;
 double lastx, lasty;
 
-bool hit;
-bool prep;
-double gospeed;
-
 int lastKey;
-ModelController * mc;
 
-using namespace std;
-void scroll(GLFWwindow* window, double xoffset, double yoffset)
-{
+void scroll(GLFWwindow* window, double xoffset, double yoffset) {
 	// require model
 	if (!model)
 		return;
@@ -46,8 +35,7 @@ void mouse_button(GLFWwindow * w, int button, int act, int mods) {
 	button_right = (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS);
 }
 
-void mouse_move(GLFWwindow* window, double xpos, double ypos)
-{
+void mouse_move(GLFWwindow* window, double xpos, double ypos) {
 	// no buttons down: nothing to do
 	if (!button_left && !button_middle && !button_right) {
 		lastx = xpos;
@@ -93,79 +81,78 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	if (action == GLFW_RELEASE) {
 		lastKey = -1;
 	}
-
-	mc->keyboardCallback(w, key, scanCode, action, mods);
 }
 
-void run(ModelController * mcNew)
-{	
-	mc = mcNew;
-	model = mc->getModel();
-	dat = mc->getData();
+void window_close_callback(GLFWwindow * w) {
+	// close GLFW, free visualization storage
+	glfwTerminate();
+	mjv_freeScene(&scn);
+	mjr_freeContext(&con);
+}
+
+void init(mjModel * m, int xres, int yres) {
+	if (window) return;
+
+	model = m;
 
 	glfwInit();
-	GLFWwindow * window = glfwCreateWindow(1200, 900, "Demo", NULL, NULL);
+	window = glfwCreateWindow(xres, yres, "Minitaur", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, mouse_button);
 	glfwSetCursorPosCallback(window, mouse_move);
-	glfwSetScrollCallback(window, scroll);
+	glfwSetScrollCallback(window, scroll); 
+	glfwSetWindowCloseCallback(window, window_close_callback);
 
-	mjv_defaultCamera(&cam);
-	//if (m->ncam > 0) {
-	//	cam.type = mjCAMERA_FIXED;
-	//	cam.fixedcamid = 0;
-	//}
-
+	mjv_defaultCamera(&cam);	
 	mjv_defaultPerturb(&pert);
 	mjv_defaultOption(&opt);
 	mjr_defaultContext(&con);
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
 	mjr_makeContext(model, &con, mjFONTSCALE_100);     // model-specific context
-	
+}
 
-	while (!glfwWindowShouldClose(window)) {
+void render(mjData * d) {
+	if (!window) return;
+	//only run this 60 times per second
+	if (d->time - simstart < 1.0 / 60.0) return;
 
-		mjtNum simstart = dat->time;
-		
+	simstart = d->time;
 
-		while (dat->time - simstart < 1.0 / 60.0) {
-			
-			mj_step1(model, dat);
-			mc->step();
-			mj_step2(model, dat);
-		}
+	// get framebuffer viewport
+	mjrRect viewport = { 0, 0, 0, 0 };
+	glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
 
-		// get framebuffer viewport
-		mjrRect viewport = { 0, 0, 0, 0 };
-		glfwGetFramebufferSize(window, &viewport.width, &viewport.height);
+	// update scene and render
+	mjv_updateScene(model, d, &opt, &pert, &cam, mjCAT_ALL, &scn);
+	mjr_render(viewport, &scn, &con);
 
-		// update scene and render
-		mjv_updateScene(model, dat, &opt, &pert, &cam, mjCAT_ALL, &scn);
-		mjr_render(viewport, &scn, &con);
+	// swap OpenGL buffers (blocking call due to v-sync)
+	glfwSwapBuffers(window);
 
-		// swap OpenGL buffers (blocking call due to v-sync)
-		glfwSwapBuffers(window);
+	// process pending GUI events, call GLFW callbacks
+	glfwPollEvents();
 
-		// process pending GUI events, call GLFW callbacks
-		glfwPollEvents();
-	}
+}
 
-	// close GLFW, free visualization storage
-	glfwTerminate();
-	mjv_freeScene(&scn);
-	mjr_freeContext(&con);
-
-	mj_deleteModel(model);
-	mj_deleteData(dat);
+void close() {
+	if (window) glfwSetWindowShouldClose(window, true);
 }
 
 #else
+#include <cstdio>
 
-void run(ModelController * m) {
-	puts("Legacy mode not enabled - be sure to #define LEGACY_SIMULATE somewhere");
+void init(mjModel * m, int a, int b) {
+	puts("Legacy Simulate is enabled - Disable it to use the new features");
 }
 
+void render(mjData * d) {
+	puts("Legacy Simulate is enabled - Disable it to use the new features");
+}
+
+void close() {
+	puts("Legacy Simulate is enabled - Disable it to use the new features");
+}
 #endif

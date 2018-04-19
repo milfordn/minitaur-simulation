@@ -1,4 +1,6 @@
 #include "MujocoSystem.h"
+#include "../System.h"
+#include "../render.h"
 
 MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
 {
@@ -21,6 +23,7 @@ MujocoSystem::~MujocoSystem()
 {
 	mj_deleteModel(model);
 	mj_deleteData(data);
+	if (graphics) close();
 }
 
 void MujocoSystem::setRealTime(bool b)
@@ -28,26 +31,39 @@ void MujocoSystem::setRealTime(bool b)
 	this->realTime = b;
 }
 
+void MujocoSystem::setGraphics(bool b)
+{
+	if (b)
+		init(model, 1024, 768);
+	else if (graphics)
+		close();
+
+	this->graphics = b;
+}
+
 double MujocoSystem::step()
 {
+	//read actuator data
 	for (int i = 0; i < model->nu; i++) {
 		string name = mj_id2name(model, mjtObj::mjOBJ_ACTUATOR, i);
 		data->ctrl[i] = (*actuatorRef)[name];
 	}
+
 	mj_step2(model, data);
-	mrend->render(data);
+
+	//render
+	if(graphics) render(data);
+
 	mj_step1(model, data);
+
+	//write sensor data
 	for (int i = 0; i < model->nsensor; i++) {
 		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
 		(*actuatorRef)[name] = data->sensordata[i];
 	}
+
+	//timekeeping
 	double dt = data->time - lastTime;
 	lastTime = data->time;
 	return dt;
-}
-
-void MujocoSystem::setGraphics(bool b)
-{
-	this->graphics = b;
-	this->mrend = new MujocoRenderer(model);
 }
