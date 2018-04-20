@@ -59,7 +59,7 @@ double MujocoSystem::step()
 	//write sensor data
 	for (int i = 0; i < model->nsensor; i++) {
 		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
-		(*actuatorRef)[name] = data->sensordata[i];
+		(*sensorRef)[name] = data->sensordata[i];
 	}
 
 	//timekeeping

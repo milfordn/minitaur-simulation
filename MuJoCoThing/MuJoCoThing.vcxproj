@@ -162,6 +162,7 @@
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
     <ClInclude Include="Mediator.h" />
+    <ClInclude Include="NewControllers\PIDController.h" />
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
     <ClInclude Include="render.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mediator.cpp" />
+    <ClCompile Include="NewControllers\PIDController.cpp" />
     <ClCompile Include="Noise.cpp" />
     <ClCompile Include="pid.cpp" />
     <ClCompile Include="render.cpp" />

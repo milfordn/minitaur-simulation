@@ -12,7 +12,7 @@ pid::pid(double kp, double ki, double kd){
 }
 
 double pid::calculateOutput(double tick, double setpoint, double position){
-	double deltaT = tick - lastTick;
+	double deltaT = tick;
 	
     double error = setpoint - position;
     integral += error * deltaT;

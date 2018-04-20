@@ -1,6 +1,7 @@
 #include "Mediator.h"
-#include "Systems\MujocoSystem.h"
+#include "Systems/MujocoSystem.h"
 #include "Controller.h"
+#include "NewControllers/PIDController.h"
 
 
 int main(int argc, char ** argv) {
@@ -39,12 +40,12 @@ int main(int argc, char ** argv) {
 		(char*)"endeffectorBR",
 	};
 
-	Controller c;
+	PIDController c;
 	MujocoSystem mjSys("MinitaurLeg.xml");
 	mjSys.setGraphics(true);
 
 	Mediator m(&c, &mjSys);
-	m.run(5);
+	m.run(-1);
 
 	return 0;
 }
