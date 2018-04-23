@@ -12,7 +12,7 @@ class Example : public Behavior {
 	void update() {
 
 		//enable joint 0, and give it an open loop command
-		joint[0].setOpenLoop(0.1);
+		//joint[0].setOpenLoop(0.1);
 
 		//set pd gain, proportional followed by derivative
 		// joint[0].setGain(0.4, 0.00286);
@@ -36,6 +36,16 @@ class Example : public Behavior {
 		//t critical = 22 ms
 		//p = 1.44
 		//d = 0.00286
+
+		//motor zeros (joint pointed vertically up)
+		//j0 = 5.63
+		//j1 = 5.50 
+		//j2 = 2.96
+		//j3 = 4.60
+		//j4 = 2.98
+		//j5 = 5.39
+		//j6 = 4.36
+		//j7 = 1.28
 	}
 
 	void end() {
@@ -48,9 +58,9 @@ int main(int argc, char* argv[]){
 	init(RobotParams_Type_MINITAUR, argc, argv);
 
 	//configure joints
-	#define NUM_MOTORS 6
-	const float zeros[NUM_MOTORS] = {0, 0, 0, 0, 0, 0};
-	const float directions[NUM_MOTORS] = {1, 1, 1, 1, 1, 1};
+	#define NUM_MOTORS 8
+	const float zeros[NUM_MOTORS] = {0, 0, 0, 0, 0, 0, 0, 0};
+	const float directions[NUM_MOTORS] = {1, 1, 1, 1, 1, 1, 1, 1};
 	P -> joints_count = S -> joints_count = C -> joints_count = NUM_MOTORS;
 
 	//set zeros and directions
@@ -80,6 +90,7 @@ int main(int argc, char* argv[]){
 }
 
 void debug(){
-	printf("%u \t %f \t", S -> millis, joint[0].getPosition());
-	printf("%f \n", joint[0].getCurrent());
+	for(int i = 0; i < 8; i++)
+		printf("%f \t", joint[i].getRawPosition());
+	printf("\n");
 }
