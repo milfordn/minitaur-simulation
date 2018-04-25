@@ -38,13 +38,13 @@ class Example : public Behavior {
 		//d = 0.00286
 
 		//motor zeros (joint pointed vertically up)
-		//j0 = 5.63
-		//j1 = 5.50 
-		//j2 = 2.96
-		//j3 = 4.60
+		//j0 = 5.65
+		//j1 = 5.60 
+		//j2 = 2.92
+		//j3 = 4.80
 		//j4 = 2.98
-		//j5 = 5.39
-		//j6 = 4.36
+		//j5 = 5.50
+		//j6 = 4.47
 		//j7 = 1.28
 	}
 
