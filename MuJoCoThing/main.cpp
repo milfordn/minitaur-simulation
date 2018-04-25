@@ -1,8 +1,8 @@
+
 #include "Mediator.h"
 #include "Systems/MujocoSystem.h"
 #include "Controller.h"
 #include "NewControllers/PIDController.h"
-
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
@@ -11,8 +11,8 @@ int main(int argc, char ** argv) {
 	//double powers[2] = { -0.01, 0.01 };
 	//KeyboardController k(argv[1], keys, names, powers, 2);
 
-	const char * motorNames[8] = { 
-		(char*)"thigh1FL_a", 
+	const char * motorNames[8] = {
+		(char*)"thigh1FL_a",
 		(char*)"thigh2FL_a",
 		(char*)"thigh1FR_a",
 		(char*)"thigh2FR_a",
@@ -21,9 +21,9 @@ int main(int argc, char ** argv) {
 		(char*)"thigh1BR_a",
 		(char*)"thigh2BR_a",
 	};
-	
+
 	const char * jointNames[8] = {
-		(char*)"thigh1FL_j", 
+		(char*)"thigh1FL_j",
 		(char*)"thigh2FL_j",
 		(char*)"thigh1FR_j",
 		(char*)"thigh2FR_j",
@@ -32,7 +32,7 @@ int main(int argc, char ** argv) {
 		(char*)"thigh1BR_j",
 		(char*)"thigh2BR_j",
 	};
-	
+
 	const char * endeffectorNames[4] = {
 		(char*)"endeffectorFL",
 		(char*)"endeffectorFR",

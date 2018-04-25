@@ -98,7 +98,7 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 }
 
 void run(ModelController * mcNew)
-{	
+{
 	mc = mcNew;
 	model = mc->getModel();
 	dat = mc->getData();
@@ -113,16 +113,17 @@ void run(ModelController * mcNew)
 	glfwSetCursorPosCallback(window, mouse_move);
 	glfwSetScrollCallback(window, scroll);
 
-	mjv_defaultCamera(&cam);
-	//if (m->ncam > 0) {
-	//	cam.type = mjCAMERA_FIXED;
-	//	cam.fixedcamid = 0;
-	//}
+	//mjv_defaultCamera(&cam);
+	if (m->ncam > 0) {
+		cam.type = mjCAMERA_FIXED;
+		cam.fixedcamid = 0;
+	}
 
 	mjv_defaultPerturb(&pert);
 	mjv_defaultOption(&opt);
 	mjr_defaultContext(&con);
 	mjv_makeScene(&scn, 1000);                     // space for 1000 objects
+<<<<<<< HEAD
 	mjr_makeContext(model, &con, mjFONTSCALE_100);     // model-specific context
 	
 
@@ -134,6 +135,19 @@ void run(ModelController * mcNew)
 		while (dat->time - simstart < 1.0 / 60.0) {
 			
 			mj_step1(model, dat);
+=======
+	mjr_makeContext(m, &con, mjFONTSCALE_100);     // model-specific context
+
+
+	while (!glfwWindowShouldClose(window)) {
+
+		mjtNum simstart = d->time;
+
+
+		while (d->time - simstart < 1.0 / 60.0) {
+
+			mj_step1(m, d);
+>>>>>>> 5a75f897986c1580e4f137513fc0e7f5f9a978d2
 			mc->step();
 			mj_step2(model, dat);
 		}

@@ -1,5 +1,6 @@
 #include "../pid.h"
-
+#ifndef LEG_CONTROLLER_H
+#define LEG_CONTROLLER_H
 class LegPositionController{
 public :
 	LegPositionController(int m1, int m2, int m1Angle, int m2Angle, int end);
@@ -24,4 +25,4 @@ private:
 	double desiredLength = .173205;
 	double desiredAngle = 1.5708;
 };
-
+#endif
