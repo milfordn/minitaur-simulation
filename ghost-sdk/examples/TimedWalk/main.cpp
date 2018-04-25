@@ -9,7 +9,9 @@
 
 #if defined(ROBOT_MINITAUR)
 // Subject to change for individual robots
-const float motZeros[8] = {2.82, 3.435, 3.54, 3.076, 1.03, 3.08, 6.190, 1.493};
+const float motZeros[8] = {5.65, 5.60, 2.93, 4.80, 2.98, 5.50, 4.47, 1.28};
+//this direction const is for the current config of motors
+const float motDirections[8] = {1, 1, -1, -1, -1, -1, -1, -1};
 #endif
 
 // Seconds passed
@@ -84,8 +86,10 @@ int main(int argc, char *argv[])
 {
 #if defined(ROBOT_MINITAUR)
 	init(RobotParams_Type_MINITAUR, argc, argv);
-	for (int i = 0; i < P->joints_count; ++i)
+	for (int i = 0; i < P->joints_count; ++i){
 		P->joints[i].zero = motZeros[i];
+		P -> joints[i].direction = motDirections[i];
+	}
 #elif defined(ROBOT_MINITAUR_E)
 	init(RobotParams_Type_MINITAUR_E, argc, argv);
 #else
