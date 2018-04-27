@@ -1,8 +1,7 @@
-#include "./Mediator.h"
-#include "./Systems/MujocoSystem.h"
+#include "Mediator.h"
+#include "Systems/MujocoSystem.h"
 #include "Controller.h"
 #include "./NewControllers/PIDController.h"
-
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
