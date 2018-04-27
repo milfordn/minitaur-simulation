@@ -14,9 +14,11 @@ MujocoSystem::MujocoSystem(char * file)
 	this->model = mj_loadXML(file, NULL, error, sizeof(error));
 	if (!this->model) {
 		mju_error_s("Couldn't load model: %s", error);
+		printf("%s\n", error);
 	}
-
-	this->data = mj_makeData(model);
+	else {
+		this->data = mj_makeData(model);
+	}
 }
 
 MujocoSystem::~MujocoSystem()
@@ -43,6 +45,8 @@ void MujocoSystem::setGraphics(bool b)
 
 double MujocoSystem::step()
 {
+	if(!model) return 0;
+
 	//read actuator data
 	for (int i = 0; i < model->nu; i++) {
 		string name = mj_id2name(model, mjtObj::mjOBJ_ACTUATOR, i);
