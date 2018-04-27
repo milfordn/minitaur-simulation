@@ -178,7 +178,6 @@
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
     <ClCompile Include="Controllers\PIDController.cpp" />
-    <ClCompile Include="CustomSimulate.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mediator.cpp" />

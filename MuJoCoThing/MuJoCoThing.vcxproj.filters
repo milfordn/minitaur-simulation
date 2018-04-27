@@ -97,9 +97,6 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CustomSimulate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GaussianNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
