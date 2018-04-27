@@ -42,10 +42,11 @@ int main(int argc, char ** argv) {
 
 	PIDController c;
 	MujocoSystem mjSys("MinitaurLeg.xml");
+	mjSys.setRealTime(false);
 	mjSys.setGraphics(true);
 
 	Mediator m(&c, &mjSys);
-	m.run(-1);
+	m.run(5);
 
 	return 0;
 }

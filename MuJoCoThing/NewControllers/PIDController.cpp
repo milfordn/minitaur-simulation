@@ -36,7 +36,7 @@ void PIDController::step(double dt) {
 
 	counter += dt;
 
-	printf("%f <-> %f | %f\n", expectedR, setR, totalT);
+	//printf("%f <-> %f | %f\n", expectedR, setR, totalT);
 
 	(*actuatorRef)["thigh1_a"] = dth + dr;
 	(*actuatorRef)["thigh2_a"] = dth - dr;

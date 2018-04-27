@@ -116,10 +116,6 @@ void init(mjModel * m, int xres, int yres) {
 
 void render(mjData * d) {
 	if (!window) return;
-	//only run this 60 times per second
-	if (d->time - simstart < 1.0 / 60.0) return;
-
-	simstart = d->time;
 
 	// get framebuffer viewport
 	mjrRect viewport = { 0, 0, 0, 0 };

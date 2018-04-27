@@ -3,6 +3,7 @@
 
 #include "../include/mujoco.h"
 #include "../System.h"
+#include <ctime>
 
 class MujocoSystem : public System {
 public:
@@ -10,13 +11,15 @@ public:
 	MujocoSystem(char * file);
 	~MujocoSystem();
 	void setGraphics(bool b);
-	void setRealTime(bool b); //unimplemented
+	void setRealTime(bool b);
 	double step() override;
 private:
+	bool shouldRender();
 	mjData * data;
 	mjModel * model;
 	bool graphics, realTime;
-	double lastTime;
+	double lastTime, lastRender;
+	clock_t lastRealTime;
 };
 
 #endif

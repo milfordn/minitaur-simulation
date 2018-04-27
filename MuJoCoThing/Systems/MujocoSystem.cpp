@@ -16,6 +16,8 @@ MujocoSystem::MujocoSystem(char * file)
 		mju_error_s("Couldn't load model: %s", error);
 	}
 
+	this->realTime = true;
+	this->lastTime = 0;
 	this->data = mj_makeData(model);
 }
 
@@ -52,7 +54,11 @@ double MujocoSystem::step()
 	mj_step2(model, data);
 
 	//render
-	if(graphics) render(data);
+	if (graphics && shouldRender()) {
+		render(data);
+		lastRender = data->time;
+		lastRealTime = clock();
+	}
 
 	mj_step1(model, data);
 
@@ -66,4 +72,12 @@ double MujocoSystem::step()
 	double dt = data->time - lastTime;
 	lastTime = data->time;
 	return dt;
+}
+
+bool MujocoSystem::shouldRender()
+{
+	if (realTime)
+		return data->time - lastRender > 1.0 / 60.0;
+	else
+		return (clock() - lastRealTime) / (double)CLOCKS_PER_SEC > 1.0 / 60.0;
 }
