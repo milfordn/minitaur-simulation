@@ -6,6 +6,7 @@
 #include "./Controllers/LegControllerSimple.h"
 #include "./Controllers/LegControllerCPG.h"
 #include "./Controllers/ForwardVelocityController.h"
+#include "./Controllers/SingleUnitController.h"
 #include "GaussianNoise.h"
 
 
@@ -39,13 +40,14 @@ int main(int argc, char ** argv) {
 	};
 
 	const char * endeffectorNames[4] = {
-		(char*)"endeffectorFL",
-		(char*)"endeffectorFR",
-		(char*)"endeffectorBL",
-		(char*)"endeffectorBR",
+		(char*)"foot1",
+		(char*)"foot2",
+		(char*)"foot3",
+		(char*)"foot4",
 	};
 
-	ForwardVelocityController p(argv[1], motorNames, jointNames, endeffectorNames);
+	SingleUnitController p(argv[1], motorNames, jointNames, endeffectorNames);
+	//ForwardVelocityController p(argv[1], motorNames, jointNames, endeffectorNames);
 	//char * names[2] = { (char*)"motor_a", (char*)"motor_c" };
 	//int keys[2] = { GLFW_KEY_A, GLFW_KEY_D };
 	//double powers[2] = { -0.01, 0.01 };

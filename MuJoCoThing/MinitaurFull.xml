@@ -1,7 +1,7 @@
 <mujoco model='Minitaur'>
   <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='../minitaur-stl'/>
   <size nuser_actuator='1' nuser_sensor='1'/>
-  <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -1'/>
+  <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -9'/>
   <!-- Timestep is set to 0.0005 because our controller runs at 2 kHz (-9.806) -->
   <!-- Larger values still have stable dynamics -->
     <visual>
@@ -36,22 +36,28 @@
     <worldbody>
         <geom type='plane' size='100 100 100' material='plane' condim='3' contype='1' conaffinity='1'/>
 
-        <body name='minitaur' pos='0 0 0.4'>
-            <camera mode="track" pos="1.3 -0.7 0.25" xyaxes = ".4 1 0 -.3 0 1"/>
-            <inertial pos='0 0 0' mass='0.1' diaginertia='0.0001 0.0001 0.0001'/>
+        <body name='minitaur' pos='0 0 0.3'>
+            <camera mode="fixed" pos="1.3 -0.7 0.25" xyaxes = ".4 1 0 -.3 0 1"/>
+            <inertial pos='0 0 0' mass='5.755' diaginertia='0.05 0.05 0.05'/>
             <geom type='box' size='0.21 0.1 0.075' material='cassie'/>
 
-            <!-- Up/Down motion  -->
-            <joint type='slide' limited='false' axis='0 0 1'/>
-
-            <!-- In plane rotation-->
-            <joint type='hinge' limited='false' axis='0 1 0' damping='0.8'/>
-
-             <!--Forward/Backward motion-->
+            <!--Forward/Backward motion -->
             <joint type='slide' limited='false' axis='1 0 0'/>
 
+            <!-- Up/Down motion -->
+            <joint type='slide' limited='false' axis='0 0 1' ref='0.3'/>
+
             <!-- Left/Right motion -->
-             <joint type='slide' limited='false' axis='0 1 0'/>
+            <joint type='slide' limited='false' axis='0 1 0'/>
+
+            <!-- Pitch only
+            <joint type='hinge' limited='false' axis='0 1 0'/>
+
+            <!-- Roll only
+            <joint type='hinge' limited='false' axis='1 0 0'/>
+
+            <!-- Rotation -->
+            <joint type='ball' limited='false'/>
 
             <!-- front left leg-->
             <body pos='0.2 0.14 0' euler='0 0 0'>
@@ -74,6 +80,7 @@
                                 <inertial pos='0 0 0' mass='0'/>
                                 <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
                                 <geom class='mesh-import' mesh='foot' euler='180 90 90' />
+                                <site name='foot1' size='0.001'/>
                             </body>
                         </body>
                     </body>
@@ -114,6 +121,7 @@
                                 <inertial pos='0 0 0' mass='0'/>
                                 <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
                                 <geom class='mesh-import' mesh='foot' euler='180 90 90' />
+                                <site name='foot2' size='0.001'/>
                             </body>
                         </body>
                     </body>
@@ -154,6 +162,7 @@
                                 <inertial pos='0 0 0' mass='0'/>
                                 <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
                                 <geom class='mesh-import' mesh='foot' euler='180 90 90' />
+                                <site name='foot3' size='0.001'/>
                             </body>
                         </body>
                     </body>
@@ -194,6 +203,7 @@
                                 <inertial pos='0 0 0' mass='0'/>
                                 <geom type='sphere' size='0.015' contype='1' conaffinity='1'/>
                                 <geom class='mesh-import' mesh='foot' euler='180 90 90' />
+                                <site name='foot4' size='0.001'/>
                             </body>
                         </body>
                     </body>
@@ -223,17 +233,17 @@
     </equality>
 
     <actuator>
-        <motor name='thigh1FL_a' joint='thigh1FL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
-        <motor name='thigh2FL_a' joint='thigh2FL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh1FL_a' joint='thigh1FL_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+        <motor name='thigh2FL_a' joint='thigh2FL_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
 
-        <motor name='thigh1FR_a' joint='thigh1FR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
-        <motor name='thigh2FR_a' joint='thigh2FR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh1FR_a' joint='thigh1FR_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+        <motor name='thigh2FR_a' joint='thigh2FR_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
 
-        <motor name='thigh1BL_a' joint='thigh1BL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
-        <motor name='thigh2BL_a' joint='thigh2BL_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh1BL_a' joint='thigh1BL_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+        <motor name='thigh2BL_a' joint='thigh2BL_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
 
-        <motor name='thigh1BR_a' joint='thigh1BR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
-        <motor name='thigh2BR_a' joint='thigh2BR_j' gear='1' ctrllimited='true' ctrlrange='-1 1'/>
+        <motor name='thigh1BR_a' joint='thigh1BR_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+        <motor name='thigh2BR_a' joint='thigh2BR_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
     </actuator>
 
     <sensor>

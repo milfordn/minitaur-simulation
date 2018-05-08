@@ -112,12 +112,11 @@ void run(ModelController * mcNew)
 	glfwSetMouseButtonCallback(window, mouse_button);
 	glfwSetCursorPosCallback(window, mouse_move);
 	glfwSetScrollCallback(window, scroll);
-
 	if (m->ncam > 0) {
 		cam.type = mjCAMERA_FIXED;
 		cam.fixedcamid = 0;
 	}
-	//mjv_defaultCamera(&cam);
+	mjv_defaultCamera(&cam);
 
 	mjv_defaultPerturb(&pert);
 	mjv_defaultOption(&opt);
