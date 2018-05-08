@@ -1,10 +1,11 @@
 # mjkey !VERY IMPORTANT! and other mujoco files
 mjkey.txt
-MUJOCO_LOG.TXT
+/MuJoCoThing/MUJOCO_LOG.TXT
 
 # third party library folders
 Eigen
 include
+sample
 
 # not sure what this is but I'm tossing it
 out.txt
@@ -27,6 +28,11 @@ out.txt
 *.obj
 *.tmp
 *.out
+<<<<<<< HEAD
+=======
+*.csv
+*.pdf
+>>>>>>> raibert_controller
 
 # Build results
 [Dd]ebug/

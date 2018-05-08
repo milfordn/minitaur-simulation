@@ -10,6 +10,8 @@ public :
 	void setAngle(double);
 	void setPgain(double);
 	void release();
+	double getLength();
+	double getAngle();
 private:
 	unsigned long tick;
 	pid *m1; //Torque-level PID controller for controlling angle of motor 1
@@ -24,5 +26,9 @@ private:
 	bool active = true;
 	double desiredLength = .173205;
 	double desiredAngle = 1.5708;
+	double currentAngle;
+	double currentLength;
+	double L1;
+	double L2;
 };
 #endif
