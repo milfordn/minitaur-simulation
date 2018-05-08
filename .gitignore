@@ -5,6 +5,7 @@ mjkey.txt
 # third party library folders
 Eigen
 include
+sample
 
 # not sure what this is but I'm tossing it
 out.txt
@@ -26,6 +27,9 @@ out.txt
 # Build files
 *.obj
 *.tmp
+*.out
+*.csv
+*.pdf
 
 # Build results
 [Dd]ebug/
