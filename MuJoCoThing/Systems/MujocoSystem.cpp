@@ -68,18 +68,20 @@ double MujocoSystem::step()
 		lastRender = data->time;
 		lastRealTime = clock();
 	}
-
+	
 	mj_step1(model, data);
-
-	for (int i = 0; i < model->nsensordata; i+=0) {
+	int offset = 0;
+	for (int i = 0; i < model->nsensor; i++) {
 		std::vector<double> temp;
-		for(int j = 0; j < model->sensor_dim[i]; j++){
-			temp.push_back(data->sensordata[i+j]);
-			i++;
+		int j = 0;
+		while(j < model->sensor_dim[i]){
+			temp.push_back(data->sensordata[offset+i+j]);
+			j++;
 		}
+		offset += j-1;
+
 		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
 		(*sensorRef)[name] = temp;
-		cout << name << endl;
 	}
 	//timekeeping
 	double dt = data->time - lastTime;

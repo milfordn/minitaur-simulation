@@ -16,6 +16,7 @@ CPGController::CPGController(double params[28]){
 
 }
 void CPGController::step(double dt){
+  cout << "here" << endl;
   double pitch = (*sensorRef)["body_gyro"][0];
   double roll = (*sensorRef)["body_gyro"][1];
   double yaw = (*sensorRef)["body_gyro"][2];
@@ -25,7 +26,7 @@ void CPGController::step(double dt){
   //set motor positions
   double L1 = 0.1;
   double L2 = 0.2;
-  for(int i = 0; i < 8; i+=2){
+  for(int i = 0; i < 0; i+=2){
     double currentm1pos = (*sensorRef)[sensorNames[i]][0];
     double currentm2pos = (*sensorRef)[sensorNames[i+1]][0];
     double currentAngle = (currentm1pos + currentm2pos)/2; //The current angle of the leg
