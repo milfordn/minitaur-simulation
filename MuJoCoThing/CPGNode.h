@@ -1,8 +1,6 @@
 #ifndef CPG_H
 #define CPG_H
 
-#include "ModelController.h"
-
 class CPGNode {
 public:
 	//A and B control the speed of convergence for X and Y respectively

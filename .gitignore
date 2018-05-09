@@ -4,8 +4,12 @@ mjkey.txt
 
 # third party library folders
 Eigen
+
+# Mujoco folders
 include
 sample
+doc
+model
 
 # not sure what this is but I'm tossing it
 out.txt

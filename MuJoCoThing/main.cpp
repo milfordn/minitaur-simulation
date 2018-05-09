@@ -1,19 +1,7 @@
 #include "Mediator.h"
-#include "Systems/MujocoSystem.h"
 #include "Controller.h"
-#include "./NewControllers/PIDController.h"
-/*
-#include "CustomSimulate.h"
-#include "./Controllers/KeyboardController.h"
-#include "./Controllers/PIDController.h"
-#include "./Controllers/PositionController.h"
-#include "./Controllers/ModelController.h"
-#include "./Controllers/LegControllerSimple.h"
-#include "./Controllers/LegControllerCPG.h"
-#include "./Controllers/ForwardVelocityController.h"
-#include "./Controllers/SingleUnitController.h"
-#include "GaussianNoise.h"
-*/
+#include "./Systems/MujocoSystem.h"
+#include "./NewControllers/CPGController.h"
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
@@ -45,14 +33,15 @@ int main(int argc, char ** argv) {
 		(char*)"foot3",
 		(char*)"foot4",
 	};
+	double params[28] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-	PIDController c;
-	MujocoSystem mjSys("MinitaurLeg.xml");
-	mjSys.setRealTime(false);
+	CPGController c = CPGController(params);
+	MujocoSystem mjSys((char*)"MinitaurFull.xml");
+	mjSys.setRealTime(true);
 	mjSys.setGraphics(true);
 
 	Mediator m(&c, &mjSys);
-	m.run(5);
+	m.run(50);
 
 	return 0;
 }

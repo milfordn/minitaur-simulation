@@ -1,7 +1,9 @@
 #include "MujocoSystem.h"
 #include "../System.h"
 #include "../render.h"
-
+#include <iostream>
+using std::cout;
+using std::endl;
 MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
 {
 	mj_copyModel(model, m);
@@ -69,6 +71,7 @@ double MujocoSystem::step()
 	mj_step1(model, data);
 
 	//write sensor data
+	//possible bug - gyro and accel both output 3 numbers, not 1 - might mess up indexing in sensordata
 	for (int i = 0; i < model->nsensor; i++) {
 		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
 		(*sensorRef)[name] = data->sensordata[i];
