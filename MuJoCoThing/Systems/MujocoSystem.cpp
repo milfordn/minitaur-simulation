@@ -4,6 +4,7 @@
 #include <iostream>
 using std::cout;
 using std::endl;
+using std::cin;
 MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
 {
 	mj_copyModel(model, m);
@@ -70,13 +71,16 @@ double MujocoSystem::step()
 
 	mj_step1(model, data);
 
-	//write sensor data
-	//possible bug - gyro and accel both output 3 numbers, not 1 - might mess up indexing in sensordata
-	for (int i = 0; i < model->nsensor; i++) {
+	for (int i = 0; i < model->nsensordata; i;) {
+		std::vector temp<double>;
+		for(int j = 0; j < data->sensor_dim[i]; j++){
+			temp.push_back(data->sensordata[i+j]);
+			i++;
+		}
 		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
-		(*sensorRef)[name] = data->sensordata[i];
+		(*sensorRef)[name] = temp;
+		cout << name << endl;
 	}
-
 	//timekeeping
 	double dt = data->time - lastTime;
 	lastTime = data->time;

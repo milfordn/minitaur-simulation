@@ -1,6 +1,8 @@
 #include "Controller.h"
+#include <vector>
+#include <string>
 
-void Controller::setSensorRef(unordered_map<string, double> * sref)
+void Controller::setSensorRef(unordered_map<string, std::vector<double>> * sref)
 {
 	this->sensorRef = sref;
 }

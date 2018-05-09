@@ -35,7 +35,7 @@ int main(int argc, char ** argv) {
 	};
 	double params[28] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-	CPGController c = CPGController(params);
+	CPGController c(params);
 	MujocoSystem mjSys((char*)"MinitaurFull.xml");
 	mjSys.setRealTime(true);
 	mjSys.setGraphics(true);

@@ -16,6 +16,10 @@ private:
 	double time;
   pid* motors[8];
 
+  double pitch = 0;
+  double roll = 0;
+  double yaw= 0;
+
   char * motorNames[8] = {
     (char*)"thigh1FL_a",
     (char*)"thigh2FL_a",

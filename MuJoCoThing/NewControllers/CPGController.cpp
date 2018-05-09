@@ -11,12 +11,14 @@ CPGController::CPGController(double params[28]){
   backLeft = new CPGNode(params[14], params[15], params[16], params[17], params[18], params[19], params[20]);
   backLeft = new CPGNode(params[21], params[22], params[23], params[24], params[25], params[26], params[27]);
   for(int i = 0; i < 8; i++){
-    motors[i] = new pid(100, 0, 0.1);
+    motors[i] = new pid(0.01, 0, 0.0);
   }
 
 }
 void CPGController::step(double dt){
-  double pitch = (*sensorRef)["body_gyro"];
+  double pitch = (*sensorRef)["gyro_x"];
+  double roll = (*sensorRef)["gyro_y"];
+  double yaw = (*sensorRef)["gyro_z"];
   double desiredAngle = 0.2*sin(time/10);
   double desiredLength = 0.191;
 
@@ -28,15 +30,15 @@ void CPGController::step(double dt){
     double currentm2pos = (*sensorRef)[sensorNames[i+1]];
     double currentAngle = (currentm1pos + currentm2pos)/2; //The current angle of the leg
     double currentLength = L1 * sin(currentAngle - currentm1pos) + sqrt(L2*L2 - L1*L1*cos(currentAngle - currentm1pos)*cos(currentAngle - currentm1pos)); //The current distance from the motors to the end effector
-    double m1pos = desiredAngle + asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor1
-    double m2pos = desiredAngle - asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor2
+    double m1pos = desiredAngle - asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor1
+    double m2pos = desiredAngle + asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor2
 
     double output_1 = motors[i]->calculateOutput(time, m1pos, currentm1pos);
     double output_2 = motors[i+1]->calculateOutput(time, m2pos, currentm2pos);
 
     (*actuatorRef)[motorNames[i]] = output_1;
     (*actuatorRef)[motorNames[i+1]] = output_2;
-    if(i == 0) cout << desiredAngle << " vs " << currentAngle << endl;
+    //if(i == 0) cout << sensorNames[i] << ": " << currentm1pos << ", " << sensorNames[i+1] << ": " << currentm2pos << endl;
 
   }
   time += dt;

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <vector>
 using std::unordered_map;
 using std::string;
 
@@ -12,7 +13,7 @@ public:
 	void setSensorRef(unordered_map<string, double> *);
 	void setActuatorRef(unordered_map<string, double> *);
 protected:
-	unordered_map<string, double> * sensorRef;
+	unordered_map<string, std::vector<double>> * sensorRef;
 	unordered_map<string, double> * actuatorRef;
 };
 
