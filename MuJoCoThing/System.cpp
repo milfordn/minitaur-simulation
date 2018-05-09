@@ -1,6 +1,6 @@
 #include "System.h"
 
-void System::setSensorRef(unordered_map<string, double> * sref)
+void System::setSensorRef(unordered_map<string, std::vector<double>> * sref)
 {
 	this->sensorRef = sref;
 }
