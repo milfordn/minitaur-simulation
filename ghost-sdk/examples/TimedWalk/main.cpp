@@ -9,9 +9,9 @@
 
 #if defined(ROBOT_MINITAUR)
 // Subject to change for individual robots
-const float motZeros[8] = {5.65, 5.60, 2.93, 4.80, 2.98, 5.50, 4.47, 1.28};
+const float motZeros[8] = {5.45, 5.80, 4.65, 3.07, 4.32, 1.43, 5.35, 3.13};
 //this direction const is for the current config of motors
-const float motDirections[8] = {1, 1, -1, -1, -1, -1, -1, -1};
+const float motDirections[8] = {1, 1, 1, 1, -1, -1, -1, -1};
 #endif
 
 // Seconds passed
@@ -74,6 +74,15 @@ public:
 			// Reset timer
 			timer = 0;
 		}
+
+		float temp = S->imu.euler.x;
+		S->imu.euler.x = S->imu.euler.y;
+		S->imu.euler.y = -temp;
+	}
+
+	// ::end() is called when the behavior is stopped
+	void end() {
+
 	}
 };
 

@@ -10,9 +10,14 @@
 
 #if defined(ROBOT_MINITAUR)
 // Subject to change for individual robots
-const float motZeros[8] = {5.66, 5.50, 2.97, 4.66, 3.02, 5.37, 4.36, 1.27};
+//const float motZeros[8] = {5.60, 5.65, 4.80, 2.92, 4.47, 1.28, 5.50, 2.98};
+//motors that need to go up:1, 3, 5, 7
+//motors that need to go down: 0, 2, 4, 6
+ 
+const float motZeros[8] = {5.45, 5.80, 4.65, 3.07, 4.32, 1.43, 5.35, 3.13};
+//const float motZeros[8] = {5.80, 5.45, 5.00, 2.72, 4.67, 1.08, 5.70, 2.78};
 //this direction const is for the current config of motors
-const float motDirections[8] = {1, 1, -1, -1, -1, -1, -1, -1};
+const float motDirections[8] = {1, 1, 1, 1, -1, -1, -1, -1};
 #endif
 
 /**
@@ -39,7 +44,7 @@ public:
 		float extension = map(C->behavior.pose.position.z, -1.0, 1.0, 0.14, 0.25);
 
 		// And angle is calculated as the negative pitch value of the robot to keep the legs pointing down.
-		float angle = -S->imu.euler.y;
+		float angle = S->imu.euler.x;
 
 		// For each of the four legs:
 		for (int i = 0; i < P->limbs_count; ++i)
@@ -103,5 +108,5 @@ int main(int argc, char *argv[]) {
 
 // Debug is called at the DEBUG_RATE
 void debug() {
-	printf("IMU Y: %lf\r\n", S->imu.euler.y);
+	printf("IMU Y: %lf\r\n", S->imu.euler.x);
 }
