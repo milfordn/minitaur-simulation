@@ -9,13 +9,10 @@ public:
 	CPGController(double p[28]);
 	void step(double dt) override;
 private:
-	CPGNode* backLeft;
-	CPGNode* backRight;
-	CPGNode* frontLeft;
-	CPGNode* frontRight;
-	double time;
   pid* motors[8];
+	CPGNode* cpg[4];
 
+	double time;
   double pitch = 0;
   double roll = 0;
   double yaw= 0;

@@ -6,27 +6,27 @@ using std::endl;
 //7 params per CPG
 //double params[28] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 CPGController::CPGController(double params[28]){
-  backLeft = new CPGNode(params[0], params[1], params[2], params[3], params[4], params[5], params[6]);
-  backLeft = new CPGNode(params[7], params[8], params[9], params[10], params[11], params[12], params[13]);
-  backLeft = new CPGNode(params[14], params[15], params[16], params[17], params[18], params[19], params[20]);
-  backLeft = new CPGNode(params[21], params[22], params[23], params[24], params[25], params[26], params[27]);
+  int param_num = 7;
+  for(int i = 0; i < 4; i++){
+    cpg[i] = new CPGNode(params[i*param_num + 0], params[i*param_num + 1], params[i*param_num + 2], params[i*param_num + 3], params[i*param_num + 4], params[i*param_num + 5], params[i*param_num + 6]);
+  }
   for(int i = 0; i < 8; i++){
-    motors[i] = new pid(0.01, 0, 0.0);
+    motors[i] = new pid(100, 0, 0.1);
   }
 
 }
 void CPGController::step(double dt){
-  cout << "here" << endl;
   double pitch = (*sensorRef)["body_gyro"][0];
   double roll = (*sensorRef)["body_gyro"][1];
   double yaw = (*sensorRef)["body_gyro"][2];
-  double desiredAngle = 0.2*sin(time/10);
-  double desiredLength = 0.191;
 
   //set motor positions
   double L1 = 0.1;
   double L2 = 0.2;
-  for(int i = 0; i < 0; i+=2){
+  for(int i = 0; i < 8; i+=2){
+    cpg[i/2]->step(dt);
+    double desiredAngle = 3.14159/2 + cpg[i/2]->getAngle();
+    double desiredLength = 0.191 + 0.1 * cpg[i/2]->getLength();
     double currentm1pos = (*sensorRef)[sensorNames[i]][0];
     double currentm2pos = (*sensorRef)[sensorNames[i+1]][0];
     double currentAngle = (currentm1pos + currentm2pos)/2; //The current angle of the leg

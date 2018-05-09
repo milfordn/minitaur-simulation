@@ -1,10 +1,7 @@
 #include "MujocoSystem.h"
 #include "../System.h"
 #include "../render.h"
-#include <iostream>
-using std::cout;
-using std::endl;
-using std::cin;
+
 MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
 {
 	mj_copyModel(model, m);
@@ -68,7 +65,7 @@ double MujocoSystem::step()
 		lastRender = data->time;
 		lastRealTime = clock();
 	}
-	
+
 	mj_step1(model, data);
 	int offset = 0;
 	for (int i = 0; i < model->nsensor; i++) {

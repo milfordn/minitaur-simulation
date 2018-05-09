@@ -33,7 +33,13 @@ int main(int argc, char ** argv) {
 		(char*)"foot3",
 		(char*)"foot4",
 	};
-	double params[28] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	double alpha = 1;
+	double beta = 50;
+	double range = 0.12;
+	double stance = 10;
+	double swing = 5;
+
+	double params[28] = {alpha, beta, range, swing, stance, 1, 1, alpha, beta, range, swing, stance, 0, 1, alpha, beta, range, swing, stance, 1, 0, alpha, beta, range, swing, stance, 1, 1};
 
 	CPGController c(params);
 	MujocoSystem mjSys((char*)"MinitaurFull.xml");
