@@ -9,7 +9,6 @@ PIDController::PIDController()
 	this->setR = 0.15;
 	this->setT = 0;
 	this->counter = 0;
-	srand(time(NULL));
 }
 
 void PIDController::step(double dt) {

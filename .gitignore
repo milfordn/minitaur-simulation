@@ -27,6 +27,9 @@ out.txt
 *.obj
 *.tmp
 *.out
+*.o
+*.bin
+*.elf
 
 # Build results
 [Dd]ebug/

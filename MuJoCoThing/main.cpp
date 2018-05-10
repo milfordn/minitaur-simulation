@@ -1,18 +1,18 @@
 #include "Mediator.h"
 #include "Systems/MujocoSystem.h"
 #include "Controller.h"
-#include "./NewControllers/PIDController.h"
+#include "./NewControllers/LegControllerCPG.h"
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
 
-	PIDController c;
+	LegControllerCPG c("thigh1_spos", "thigh2_spos", "thigh1_a", "thigh2_a");
 	MujocoSystem mjSys("MinitaurLeg.xml");
-	mjSys.setRealTime(false);
+	mjSys.setRealTime(true);
 	mjSys.setGraphics(true);
 
 	Mediator m(&c, &mjSys);
-	m.run(5);
+	m.run(-1);
 
 	return 0;
 }
