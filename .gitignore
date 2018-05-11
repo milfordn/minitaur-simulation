@@ -26,6 +26,7 @@ out.txt
 # Build files
 *.obj
 *.tmp
+*.out
 *.o
 *.bin
 *.elf
