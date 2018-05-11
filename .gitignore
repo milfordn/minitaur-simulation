@@ -11,6 +11,9 @@ sample
 doc
 model
 
+#python binary stuff
+__pycache__
+
 # not sure what this is but I'm tossing it
 out.txt
 
