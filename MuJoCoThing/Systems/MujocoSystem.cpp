@@ -29,7 +29,7 @@ MujocoSystem::~MujocoSystem()
 {
 	mj_deleteModel(model);
 	mj_deleteData(data);
-	if (graphics) close();
+	if (render) render->close();
 }
 
 void MujocoSystem::setRealTime(bool b)
@@ -39,12 +39,12 @@ void MujocoSystem::setRealTime(bool b)
 
 void MujocoSystem::setGraphics(bool b)
 {
-	if (b)
-		init(model, 1024, 768);
-	else if (graphics)
-		close();
-
-	this->graphics = b;
+	if (b) {
+		render = new mjRender(model);
+		render->init("Minitaur", 500, 500);
+	}
+	else if (render)
+		render->close();
 }
 
 double MujocoSystem::step()
@@ -60,8 +60,8 @@ double MujocoSystem::step()
 	mj_step2(model, data);
 
 	//render
-	if (graphics && shouldRender()) {
-		render(data);
+	if (shouldRender()) {
+		render->render(data);
 		lastRender = data->time;
 		lastRealTime = clock();
 	}
@@ -82,6 +82,8 @@ double MujocoSystem::step()
 
 bool MujocoSystem::shouldRender()
 {
+	if (!render) return false;
+
 	if (realTime)
 		return data->time - lastRender > 1.0 / 60.0;
 	else
