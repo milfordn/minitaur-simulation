@@ -2,7 +2,7 @@
 #include "../System.h"
 #include "../render.h"
 
-MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
+MujocoSystem::MujocoSystem(mjModel * m, mjData * d)
 {
 	mj_copyModel(model, m);
 	mj_copyData(data, model, d);

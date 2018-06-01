@@ -166,6 +166,7 @@
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
     <ClInclude Include="render.h" />
+    <ClInclude Include="SimInterface.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Systems\MujocoSystem.h" />
   </ItemGroup>

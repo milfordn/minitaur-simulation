@@ -90,6 +90,9 @@
     <ClInclude Include="NewControllers\PIDController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SimInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
