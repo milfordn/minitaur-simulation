@@ -11,6 +11,7 @@ using std::vector;
 class Controller {
 public:
 	virtual void step(double dt) {};
+	virtual double exit(){};
 	void setSensorRef(unordered_map<string, std::vector<double>> *);
 	void setActuatorRef(unordered_map<string, double> *);
 protected:

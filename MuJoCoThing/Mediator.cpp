@@ -1,5 +1,6 @@
 #include "Mediator.h"
 #include <cstdio>
+#include <iostream>
 
 Mediator::Mediator(Controller * nc, System * ns)
 {
@@ -22,4 +23,5 @@ void Mediator::run(double secs)
 		c->step(dt);
 		this->time += dt;
 	}
+	c->exit();
 }

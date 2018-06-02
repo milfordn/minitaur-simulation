@@ -12,6 +12,7 @@ public:
 	~MujocoSystem();
 	void setGraphics(bool b);
 	void setRealTime(bool b);
+	void reset();
 	double step() override;
 private:
 	bool shouldRender();

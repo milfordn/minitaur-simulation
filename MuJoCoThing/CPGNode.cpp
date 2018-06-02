@@ -16,12 +16,10 @@ CPGNode::CPGNode(double alpha, double beta, double range, double swing, double s
 }
 
 void CPGNode::step(double dt) {
-
 	double r = x * x + y * y;
 	double w = wswing / (exp(-b * y) + 1) + wstance / (exp(b * y) + 1);
 	double dx = alpha * (mu - r) * x - w * y;
 	double dy = beta * (mu - r) * y + w * x;
-
 	x += dx * dt;
 	y += dy * dt;
 }

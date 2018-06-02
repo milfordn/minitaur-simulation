@@ -8,6 +8,8 @@ public:
   Genome operator=(const Genome& g);
   Genome crossbreed(const Genome& parent) const;
   double getCodon(int index);
+  double getFitness();
+  void setFitness(double);
 
   void printGenome();
   ~Genome();

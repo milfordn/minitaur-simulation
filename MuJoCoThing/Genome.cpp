@@ -18,13 +18,19 @@ Genome::Genome(const Genome& g){
   this->length = g.length;
   this->codonLength = g.codonLength;
   this->genome = new int[length*codonLength];
-  this->fitness = 0;
+  this->fitness = g.fitness;
   for(int i = 0; i < length*codonLength; i++){
-    genome[i] = g.genome[i];
+    this->genome[i] = g.genome[i];
   }
 }
 Genome Genome::operator=(const Genome& g){
-  return Genome(g);
+  this->length = g.length;
+  this->codonLength = g.codonLength;
+  this->fitness = g.fitness;
+  for(int i = 0; i < length*codonLength; i++){
+    genome[i] = g.genome[i];
+  }
+  return *this;
 }
 Genome::~Genome(){
   free(genome);
@@ -60,4 +66,10 @@ void Genome::printGenome(){
     cout << genome[i];
   }
   cout << endl;
+}
+void Genome::setFitness(double fitness){
+  this->fitness = fitness;
+}
+double Genome::getFitness(){
+  return this->fitness;
 }

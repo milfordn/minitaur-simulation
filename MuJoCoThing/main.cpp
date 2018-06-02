@@ -1,53 +1,84 @@
+#include <iostream>
 #include "Mediator.h"
 #include "Controller.h"
 #include "./Systems/MujocoSystem.h"
 #include "./NewControllers/CPGController.h"
+#include "./Genome.h"
+
+using std::cout;
+using std::endl;
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
-	const char * motorNames[8] = {
-		(char*)"thigh1FL_a",
-		(char*)"thigh2FL_a",
-		(char*)"thigh1FR_a",
-		(char*)"thigh2FR_a",
-		(char*)"thigh1BL_a",
-		(char*)"thigh2BL_a",
-		(char*)"thigh1BR_a",
-		(char*)"thigh2BR_a",
-	};
+	srand(time(NULL));
 
-	const char * jointNames[8] = {
-		(char*)"thigh1FL_j",
-		(char*)"thigh2FL_j",
-		(char*)"thigh1FR_j",
-		(char*)"thigh2FR_j",
-		(char*)"thigh1BL_j",
-		(char*)"thigh2BL_j",
-		(char*)"thigh1BR_j",
-		(char*)"thigh2BR_j",
-	};
+	const int params = 28;
+	const int size = 16;
+	const int population = 16;
+	const int epochs = 2000;
+	std::vector<Genome> pool;
 
-	const char * endeffectorNames[4] = {
-		(char*)"foot1",
-		(char*)"foot2",
-		(char*)"foot3",
-		(char*)"foot4",
-	};
-	double alpha = 1;
-	double beta = 50;
-	double range = 0.12;
-	double stance = 10;
-	double swing = 5;
-
-	double params[28] = {alpha, beta, range, swing, stance, 1, 1, alpha, beta, range, swing, stance, 0, 1, alpha, beta, range, swing, stance, 1, 0, alpha, beta, range, swing, stance, 1, 1};
-
-	CPGController c(params);
 	MujocoSystem mjSys((char*)"MinitaurFull.xml");
-	mjSys.setRealTime(true);
-	mjSys.setGraphics(true);
+	mjSys.setRealTime(false);
+	mjSys.setGraphics(false);
 
-	Mediator m(&c, &mjSys);
-	m.run(50);
+	for(int i = 0; i < population; i++){
+		pool.push_back(Genome(params, size));
+	}
 
+	for(int i = 0; i < epochs; i++){
+		//Run simulation for every genome in pool
+		cout << "beginning epoch " << i << " with population of " << pool.size() << endl;
+		for(int j = 0; j < pool.size(); j++){
+			double parameters[params];
+			for(int k = 0; k < params; k++){
+				parameters[k] = pool[j].getCodon(k);
+			}
+			if(j == 0 && i % 5 == 0){
+				cout << "displaying most fit genome." << endl;
+				mjSys.setRealTime(true);
+				mjSys.setGraphics(true);
+			}else{
+				mjSys.setRealTime(false);
+				mjSys.setGraphics(false);
+			}
+			CPGController c = CPGController(parameters);
+			Mediator m(&c, &mjSys);
+			m.run(4);
+			pool[j].setFitness(c.exit());
+			mjSys.reset();
+			cout << ".";
+		}
+		cout << endl;
+		//Sort genomes by fitness
+		cout << " considering " << pool.size() << " genomes.\n";
+		for(int j = 0; j < pool.size(); j++){
+			for(int k = 0; k < j; k++){
+				if(pool[j].getFitness() > pool[k].getFitness()){
+					pool.insert(pool.begin() + k, pool[j]);
+					pool.erase(pool.begin() + j);
+					break;
+				}
+			}
+		}
+
+		cout << "epoch ended. Fitnesses (in order): " << endl;
+		for(int j = 0; j < pool.size(); j++){
+			cout << pool[j].getFitness() << endl;
+		}
+		//Cull the weak
+		cout << "culling unfit genomes" << endl;
+		int inital_pop = pool.size();
+		for(int j = population; j < inital_pop; j++){
+			pool.pop_back();
+		}
+		cout << "beginning crossbreed." << endl;
+		int desired_breeding_pairs = pool.size()/2;
+		for(int j = 0; j < desired_breeding_pairs; j++){
+			pool.push_back(pool[j].crossbreed(pool[pool.size()-j-1]));
+			pool.push_back(pool[j].crossbreed(pool[j+1]));
+		}
+		cout << "pool size is now " << pool.size() << endl;
+	}
 	return 0;
 }
