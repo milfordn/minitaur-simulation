@@ -75,7 +75,7 @@
                             <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
                             <geom type='cylinder' pos='0 -0.01 0' euler='0 0 90' size='0.015 0.005' condim='3' contype='3' conaffinity='2'/>
                             <geom class='mesh-import' mesh='calf2' euler='180 90 90'/>
-                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range = "-120 60"/>
+                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
 
                             <body pos='0.24 0 0'>
                                 <inertial pos='0 0 0' mass='0'/>
@@ -116,7 +116,7 @@
                             <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
                             <geom type='cylinder' pos='0 0.01 0' euler='0 0 90' size='0.015 0.005' condim='3' contype='3' conaffinity='2'/>
                             <geom class='mesh-import' mesh='calf2' euler='180 90 90'/>
-                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range = "-120 60"/>
+                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
 
                             <body pos='0.24 0 0'>
                                 <inertial pos='0 0 0' mass='0'/>
@@ -157,7 +157,7 @@
                             <geom type='capsule' fromto='0 0 0 0.24 0 0' size='0.01'/>
                             <geom type='cylinder' pos='0 -0.01 0' euler='0 0 90' size='0.015 0.005' condim='3' contype='3' conaffinity='2'/>
                             <geom class='mesh-import' mesh='calf2' euler='180 90 90'/>
-                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range = "-120 60"/>
+                            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
 
                             <body pos='0.24 0 0'>
                                 <inertial pos='0 0 0' mass='0'/>
@@ -218,7 +218,7 @@
                     <body name='calf_short_BR' euler='0 -120 0' pos='0.1 -0.01 0'>
                         <inertial pos='0.10296 0 0.00448' mass='0.04710' fullinertia='0.00000203538 0.00019397672 0.00019542559 0 -0.00000006948 0'/>
                         <geom type='capsule' fromto='0 0 0 0.2 0 0' size='0.01' />
-						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='true' range='-60 120'/>
+						            <joint type='hinge' pos='0 0 0' axis='0 1 0' limited='false'/>
                         <geom class='mesh-import' mesh='calf1'/>
                     </body>
                 </body>
@@ -250,6 +250,7 @@
     <sensor>
         <gyro name="body_gyro" site="bodyref" />
         <accelerometer name="body_accel" site="bodyref" />
+        <framepos name="body_pos" objtype="xbody" objname="minitaur" />
         <jointpos name='thigh1FL_spos' joint='thigh1FL_j'/>
         <jointpos name='thigh2FL_spos' joint='thigh2FL_j'/>
 
