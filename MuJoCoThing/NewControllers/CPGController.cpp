@@ -85,7 +85,7 @@ double CPGController::exit(){
   rollVariance /= tick;
   yawVariance /= tick;
   double distanceTraveled = sqrt(xFinal*xFinal + yFinal*yFinal);
-  double reward = (sqrt(pitchVariance) + sqrt(rollVariance) + sqrt(0.5 * yawVariance)) * distanceTraveled/time;
+  double reward = (10.0/(pitchVariance) + 10.0/(rollVariance) + 2.0/(yawVariance)) * distanceTraveled/time;
   if(touchedGround || leftGround) reward = 0;
   return reward;
 }

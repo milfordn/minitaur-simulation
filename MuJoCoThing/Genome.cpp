@@ -9,6 +9,9 @@ Genome::Genome(int length, int size){
   this->codonLength = size;
   this->genome = new int[length*size];
   this->fitness = 0;
+  for(int i = 0; i < 500; i++){
+    rand();
+  }
   for(int i = 0; i < length*size; i++){
     if(rand() & 1) genome[i] = 0;
     else genome[i] = 1;
@@ -72,4 +75,11 @@ void Genome::setFitness(double fitness){
 }
 double Genome::getFitness(){
   return this->fitness;
+}
+double Genome::similarity(const Genome& g){
+  int sum = 0;
+  for(int i = 0; i < length*codonLength; i++){
+    if(genome[i] == g.genome[i]) sum++;
+  }
+  return (double)sum/(length*codonLength);
 }

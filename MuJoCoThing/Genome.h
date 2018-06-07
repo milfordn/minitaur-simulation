@@ -7,8 +7,10 @@ public:
   Genome(const Genome& g);
   Genome operator=(const Genome& g);
   Genome crossbreed(const Genome& parent) const;
+  bool operator<(const Genome& g) const { return fitness < g.fitness; }
   double getCodon(int index);
   double getFitness();
+  double similarity(const Genome& g);
   void setFitness(double);
 
   void printGenome();
