@@ -39,10 +39,16 @@ out.txt
 *.tmp
 *.out
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 *.csv
 *.pdf
 >>>>>>> raibert_controller
+=======
+*.o
+*.bin
+*.elf
+>>>>>>> 6d47bf2d79a054d216d600a977eaa44ba5383ecf
 
 # Build results
 [Dd]ebug/

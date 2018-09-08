@@ -6,6 +6,7 @@
 #include "./Systems/MujocoSystem.h"
 #include "./NewControllers/CPGController.h"
 #include "./Genome.h"
+#include "./NewControllers/LegControllerCPG.h"
 
 using std::cout;
 using std::endl;
@@ -57,7 +58,6 @@ int main(int argc, char ** argv) {
 		cout << "sorting " << pool.size() << " genomes.\n";
 		std::sort(pool.rbegin(), pool.rend());
 
-
 		cout << "epoch ended. Fitnesses (in order): " << endl;
 		for(int j = 0; j < pool.size(); j++){
 			cout << pool[j].getFitness() << endl;
@@ -68,7 +68,6 @@ int main(int argc, char ** argv) {
 		for(int j = population; j < inital_pop; j++){
 			pool.pop_back();
 		}
-
 		if(i % 3 == 0){
 			mjSys.setRealTime(true);
 			mjSys.setGraphics(true);

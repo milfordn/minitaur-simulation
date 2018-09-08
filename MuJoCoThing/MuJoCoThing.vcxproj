@@ -146,12 +146,11 @@
   <ItemGroup>
     <ClInclude Include="AutoPID.h" />
     <ClInclude Include="Controller.h" />
-    <ClInclude Include="Controllers\CPGNode.h" />
     <ClInclude Include="Controllers\KeyboardController.h" />
-    <ClInclude Include="Controllers\LegControllerCPG.h" />
     <ClInclude Include="Controllers\LegControllerSimple.h" />
     <ClInclude Include="Controllers\ModelController.h" />
     <ClInclude Include="Controllers\PIDController.h" />
+    <ClInclude Include="CPGNode.h" />
     <ClInclude Include="CustomSimulate.h" />
     <ClInclude Include="GaussianNoise.h" />
     <ClInclude Include="include\glfw3.h" />
@@ -162,6 +161,7 @@
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
     <ClInclude Include="Mediator.h" />
+    <ClInclude Include="NewControllers\LegControllerCPG.h" />
     <ClInclude Include="NewControllers\PIDController.h" />
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
@@ -173,15 +173,15 @@
   <ItemGroup>
     <ClCompile Include="AutoPID.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Controllers\CPGNode.cpp" />
     <ClCompile Include="Controllers\KeyboardController.cpp" />
-    <ClCompile Include="Controllers\LegControllerCPG.cpp" />
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
     <ClCompile Include="Controllers\PIDController.cpp" />
+    <ClCompile Include="CPGNode.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mediator.cpp" />
+    <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
     <ClCompile Include="NewControllers\PIDController.cpp" />
     <ClCompile Include="Noise.cpp" />
     <ClCompile Include="pid.cpp" />

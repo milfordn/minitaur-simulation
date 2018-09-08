@@ -63,13 +63,7 @@
     <ClInclude Include="AutoPID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\CPGNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\LegControllerSimple.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers\LegControllerCPG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
@@ -90,7 +84,14 @@
     <ClInclude Include="NewControllers\PIDController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="SimInterface.h">
+=======
+    <ClInclude Include="NewControllers\LegControllerCPG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPGNode.h">
+>>>>>>> 6d47bf2d79a054d216d600a977eaa44ba5383ecf
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -127,12 +128,6 @@
     <ClCompile Include="Controllers\LegControllerSimple.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controllers\CPGNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\LegControllerCPG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Mediator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,6 +144,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NewControllers\PIDController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NewControllers\LegControllerCPG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPGNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

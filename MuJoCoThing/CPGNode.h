@@ -4,7 +4,7 @@
 class CPGNode {
 public:
 	//A and B control the speed of convergence for X and Y respectively
-	//mu controls frequency and/or amplitude?
+	//mu controls frequency and/or amplitude
 	CPGNode(double alpha, double beta, double range, double swing, double stance, double x, double y);
 	void step(double dt);
 	double getAngle();
