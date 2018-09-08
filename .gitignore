@@ -1,6 +1,9 @@
 # mjkey !VERY IMPORTANT! and other mujoco files
 mjkey.txt
-/MuJoCoThing/MUJOCO_LOG.TXT
+
+# a very tenacious mujoco log file
+MuJoCoThing/MUJOCO_LOG.TXT
+MUJOCO_LOG.TXT
 
 # third party library folders
 Eigen
