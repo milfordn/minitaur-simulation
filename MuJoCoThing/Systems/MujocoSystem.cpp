@@ -47,6 +47,12 @@ void MujocoSystem::setGraphics(bool b)
 	this->graphics = b;
 }
 
+void MujocoSystem::reset(){
+	this->data = mj_makeData(model);
+	this->lastTime = data->time;
+	this->lastRender = data->time;
+}
+
 double MujocoSystem::step()
 {
 	if(!model) return 0;

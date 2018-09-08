@@ -9,7 +9,7 @@ def mass_center(model, sim):
 
 class MinitaurEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def __init__(self):
-        mujoco_env.MujocoEnv.__init__(self, '/home/jonah/Desktop/minitaur-simulation/MuJoCoThing/MinitaurFull.xml', 1)
+        mujoco_env.MujocoEnv.__init__(self, '/home/jonah/minitaur-simulation/MuJoCoThing/MinitaurFull.xml', 1)
         utils.EzPickle.__init__(self)
 
     def _get_obs(self):
