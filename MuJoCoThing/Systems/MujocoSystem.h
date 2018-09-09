@@ -7,11 +7,12 @@
 
 class MujocoSystem : public System {
 public:
-	MujocoSystem(mjData * d, mjModel * m);
+	MujocoSystem(mjModel * m, mjData * d);
 	MujocoSystem(char * file);
 	~MujocoSystem();
 	void setGraphics(bool b);
 	void setRealTime(bool b);
+	void reset();
 	double step() override;
 private:
 	bool shouldRender();

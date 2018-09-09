@@ -5,13 +5,12 @@ class CPGNode {
 public:
 	//A and B control the speed of convergence for X and Y respectively
 	//mu controls frequency and/or amplitude
-	CPGNode(double a, double b, double mu);
+	CPGNode(double alpha, double beta, double range, double swing, double stance, double x, double y);
 	void step(double dt);
-	void step(double dt, double measuredX);
-	double getValue();
-	void setPose(double wstance, double wswing);
+	double getAngle();
+	double getLength();
 private:
-	double a, b, mu;
+	double alpha, beta, b, mu;
 	double x, y;
 	double wstance, wswing;
 };

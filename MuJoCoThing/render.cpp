@@ -103,7 +103,7 @@ void init(mjModel * m, int xres, int yres) {
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetMouseButtonCallback(window, mouse_button);
 	glfwSetCursorPosCallback(window, mouse_move);
-	glfwSetScrollCallback(window, scroll); 
+	glfwSetScrollCallback(window, scroll);
 	glfwSetWindowCloseCallback(window, window_close_callback);
 
 	mjv_defaultCamera(&cam);	
