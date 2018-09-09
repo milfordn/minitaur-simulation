@@ -6,7 +6,6 @@
 #include "./Systems/MujocoSystem.h"
 #include "./NewControllers/CPGController.h"
 #include "./Genome.h"
-#include "./NewControllers/LegControllerCPG.h"
 
 using std::cout;
 using std::endl;
@@ -42,10 +41,14 @@ int main(int argc, char ** argv) {
 		cout << endl;
 		cout << "simulating genomes" << endl;
 		for(int j = 0; j < pool.size(); j++){
+			if (j % (pool.size() / 10) == 0) cout << "." << endl;
+
 			double parameters[params];
+
 			for(int k = 0; k < params; k++){
 				parameters[k] = pool[j].getCodon(k);
 			}
+
 			mjSys.setRealTime(false);
 			mjSys.setGraphics(false);
 			CPGController c = CPGController(parameters);

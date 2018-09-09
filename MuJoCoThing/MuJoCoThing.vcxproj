@@ -144,52 +144,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AutoPID.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="Controllers\KeyboardController.h" />
-    <ClInclude Include="Controllers\LegControllerSimple.h" />
-    <ClInclude Include="Controllers\ModelController.h" />
-    <ClInclude Include="Controllers\PIDController.h" />
-    <ClInclude Include="CPGNode.h" />
-    <ClInclude Include="CustomSimulate.h" />
-    <ClInclude Include="GaussianNoise.h" />
-    <ClInclude Include="include\glfw3.h" />
-    <ClInclude Include="include\mjdata.h" />
-    <ClInclude Include="include\mjmodel.h" />
-    <ClInclude Include="include\mjrender.h" />
-    <ClInclude Include="include\mjvisualize.h" />
-    <ClInclude Include="include\mjxmacro.h" />
-    <ClInclude Include="include\mujoco.h" />
-    <ClInclude Include="Mediator.h" />
-    <ClInclude Include="NewControllers\LegControllerCPG.h" />
-    <ClInclude Include="NewControllers\PIDController.h" />
-    <ClInclude Include="Noise.h" />
-    <ClInclude Include="pid.h" />
-    <ClInclude Include="render.h" />
-    <ClInclude Include="SimInterface.h" />
-    <ClInclude Include="System.h" />
-    <ClInclude Include="Systems\MujocoSystem.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="AutoPID.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Controllers\KeyboardController.cpp" />
-    <ClCompile Include="Controllers\LegControllerSimple.cpp" />
+    <ClCompile Include="Controllers\LegControllerCPG.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
-    <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="CPGNode.cpp" />
-    <ClCompile Include="GaussianNoise.cpp" />
+    <ClCompile Include="Genome.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mediator.cpp" />
-    <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
-    <ClCompile Include="NewControllers\PIDController.cpp" />
-    <ClCompile Include="Noise.cpp" />
+    <ClCompile Include="NewControllers\CPGController.cpp" />
     <ClCompile Include="pid.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Systems\MujocoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="MinitaurFull.xml" />
     <Xml Include="MinitaurLeg.xml">
       <SubType>Designer</SubType>
     </Xml>
@@ -202,6 +172,21 @@
   <ItemGroup>
     <Library Include="glfw3.lib" />
     <Library Include="mujoco150.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoPID.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Controllers\LegControllerCPG.h" />
+    <ClInclude Include="Controllers\ModelController.h" />
+    <ClInclude Include="CPGNode.h" />
+    <ClInclude Include="Genome.h" />
+    <ClInclude Include="Mediator.h" />
+    <ClInclude Include="NewControllers\CPGController.h" />
+    <ClInclude Include="NewControllers\LegControllerCPG.h" />
+    <ClInclude Include="pid.h" />
+    <ClInclude Include="render.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="Systems\MujocoSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
