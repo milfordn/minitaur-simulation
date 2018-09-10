@@ -2,7 +2,7 @@
 #include "../System.h"
 #include "../render.h"
 
-MujocoSystem::MujocoSystem(mjData * d, mjModel * m)
+MujocoSystem::MujocoSystem(mjModel * m, mjData * d)
 {
 	mj_copyModel(model, m);
 	mj_copyData(data, model, d);
@@ -39,12 +39,21 @@ void MujocoSystem::setRealTime(bool b)
 
 void MujocoSystem::setGraphics(bool b)
 {
-	if (b) {
-		render = new mjRender(model);
-		render->init("Minitaur", 500, 500);
+	if (b) { //starting graphics
+		if(!render) 
+			render = new mjRender(model);
+
+		if(!render->isOpen())
+			render->init("Minitaur", 500, 500);
 	}
-	else if (render)
+	else if (render && render->isOpen()) //ending graphics
 		render->close();
+}
+
+void MujocoSystem::reset(){
+	this->data = mj_makeData(model);
+	this->lastTime = data->time;
+	this->lastRender = data->time;
 }
 
 double MujocoSystem::step()
@@ -67,13 +76,19 @@ double MujocoSystem::step()
 	}
 
 	mj_step1(model, data);
-
-	//write sensor data
+	int offset = 0;
 	for (int i = 0; i < model->nsensor; i++) {
-		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
-		(*sensorRef)[name] = data->sensordata[i];
-	}
+		std::vector<double> temp;
+		int j = 0;
+		while(j < model->sensor_dim[i]){
+			temp.push_back(data->sensordata[offset+i+j]);
+			j++;
+		}
+		offset += j-1;
 
+		string name = mj_id2name(model, mjtObj::mjOBJ_SENSOR, i);
+		(*sensorRef)[name] = temp;
+	}
 	//timekeeping
 	double dt = data->time - lastTime;
 	lastTime = data->time;

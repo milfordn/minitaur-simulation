@@ -12,6 +12,8 @@ public:
 	void init(const char * title, int xres, int yres);
 	void close();
 	void render(mjData * d);
+	bool isOpen();
+
 	static void cb_scroll(GLFWwindow * window, double xoff, double yoff);
 	static void cb_mousemove(GLFWwindow * window, double xpos, double ypos);
 	static void cb_mousebutton(GLFWwindow * window, int button, int act, int mods);

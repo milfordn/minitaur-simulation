@@ -12,8 +12,8 @@ PIDController::PIDController()
 }
 
 void PIDController::step(double dt) {
-	double angle1 = (*sensorRef)["thigh1_spos"] + 3.14 / 2;
-	double angle2 = (*sensorRef)["thigh2_spos"] - 3.14 / 2;
+	double angle1 = (*sensorRef)["thigh1_spos"][0] + 3.14 / 2;
+	double angle2 = (*sensorRef)["thigh2_spos"][0] - 3.14 / 2;
 
 	double totalT = (angle1 + angle2);
 	double angleCorrected = (angle1 - totalT);

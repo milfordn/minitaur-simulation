@@ -1,4 +1,5 @@
 #include "render.h"
+#include <cstdio>
 
 #ifndef LEGACY_SIMULATE
 
@@ -125,7 +126,7 @@ void mjRender::init(const char * title, int xres, int yres) {
 }
 
 void mjRender::render(mjData * d) {
-	if (!window) return;
+	if (!window || glfwWindowShouldClose(window)) return;
 
 	// get framebuffer viewport
 	mjrRect viewport = { 0, 0, 0, 0 };
@@ -140,11 +141,16 @@ void mjRender::render(mjData * d) {
 
 	// process pending GUI events, call GLFW callbacks
 	glfwPollEvents();
+}
 
+bool mjRender::isOpen()
+{
+	return window;
 }
 
 void mjRender::close() {
-	glfwSetWindowShouldClose(window, 1);
+	glfwDestroyWindow(window);
+	this->window = NULL;
 }
 
 #else
