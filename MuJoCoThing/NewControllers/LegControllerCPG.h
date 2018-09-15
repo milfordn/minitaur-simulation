@@ -7,10 +7,10 @@
 
 class LegControllerCPG : public Controller {
 public:
-	LegControllerCPG(char * s1, char * s2, char * m1, char * m2);
+	LegControllerCPG(char * s1, char * s2, char * m1, char * m2, CPGNode * controller);
 	void step(double) override;
 private:
-	CPGNode radiusController;
+	CPGNode * radiusController;
 	char *sensor1, *sensor2, *motor1, *motor2;
 	pid anglectrl1, anglectrl2;
 };

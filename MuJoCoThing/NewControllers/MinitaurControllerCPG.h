@@ -7,14 +7,13 @@
 
 using std::vector;
 
-class MinitaurControllerCPG : public ModelController {
+class MinitaurControllerCPG : public Controller {
 public:
-	MinitaurControllerCPG(char * f);
-	void step() override;
+	MinitaurControllerCPG();
+	void step(double dt) override;
 private:
 	LegControllerCPG *fl, *fr, *bl, *br;
 	CPGNetwork Net;
-	mjtNum lastTime;
 };
 
 #endif

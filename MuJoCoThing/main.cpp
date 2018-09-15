@@ -1,52 +1,91 @@
-#include "CustomSimulate.h"
-#include "./Controllers/KeyboardController.h"
-#include "./Controllers/PIDController.h"
-#include "./Controllers/PositionController.h"
-#include "./Controllers/ModelController.h"
-#include "./Controllers/LegControllerSimple.h"
-#include "./Controllers/LegControllerCPG.h"
-#include "./Controllers/MinitaurControllerCPG.h"
-#include "GaussianNoise.h"
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include "Mediator.h"
+#include "Controller.h"
+#include "./Systems/MujocoSystem.h"
+#include "./NewControllers/CPGController.h"
+#include "./Genome.h"
 
+using std::cout;
+using std::endl;
+using std::flush;
+ofstream output;
 
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
-	//char * names[2] = { (char*)"motor_a", (char*)"motor_c" };
-	//int keys[2] = { GLFW_KEY_A, GLFW_KEY_D };
-	//double powers[2] = { -0.01, 0.01 };
-	//KeyboardController k(argv[1], keys, names, powers, 2);
+	srand(time(NULL));
 
-	const char * motorNames[8] = {
-		(char*)"thigh1FL_a",
-		(char*)"thigh2FL_a",
-		(char*)"thigh1FR_a",
-		(char*)"thigh2FR_a",
-		(char*)"thigh1BL_a",
-		(char*)"thigh2BL_a",
-		(char*)"thigh1BR_a",
-		(char*)"thigh2BR_a",
-	};
+	const int params = 28;
+	const int size = 16;
+	const int population = 8;
+	const int epochs = 2000;
+	std::vector<Genome> pool;
 
-	const char * jointNames[8] = {
-		(char*)"thigh1FL_j",
-		(char*)"thigh2FL_j",
-		(char*)"thigh1FR_j",
-		(char*)"thigh2FR_j",
-		(char*)"thigh1BL_j",
-		(char*)"thigh2BL_j",
-		(char*)"thigh1BR_j",
-		(char*)"thigh2BR_j",
-	};
+	MujocoSystem mjSys((char*)"MinitaurFull.xml");
 
-	const char * endeffectorNames[4] = {
-		(char*)"endeffectorFL",
-		(char*)"endeffectorFR",
-		(char*)"endeffectorBL",
-		(char*)"endeffectorBR",
-	};
+	for(int i = 0; i < population; i++){
+		pool.push_back(Genome(params, size));
+	}
 
-	MinitaurControllerCPG p("MinitaurFull.xml");
-	run(&p);
+	for(int i = 0; i < epochs; i++){
+		//Run simulation for every genome in pool
+		cout << "***************************\nbeginning epoch " << i << " with population of " << pool.size() << endl;
+		cout << "beginning crossbreed." << endl;
+		int desired_breeding_pairs = pool.size()/2;
+		for(int j = 0; j < desired_breeding_pairs; j++){
+			pool.push_back(pool[j].crossbreed(pool[pool.size()-j-1]));
+			pool.push_back(pool[j].crossbreed(pool[j+1]));
+			cout << "." << flush;
+		}
+		cout << endl;
+		cout << "simulating genomes" << endl;
+		for(int j = 0; j < pool.size(); j++){
+			if (j % (pool.size() / 10) == 0) cout << "." << endl;
+
+			double parameters[params];
+
+			for(int k = 0; k < params; k++){
+				parameters[k] = pool[j].getCodon(k);
+			}
+
+			mjSys.setRealTime(false);
+			mjSys.setGraphics(false);
+			CPGController c = CPGController(parameters);
+			Mediator m(&c, &mjSys);
+			m.run(4);
+			pool[j].setFitness(c.exit());
+			mjSys.reset();
+		}
+		cout << endl;
+		cout << "sorting " << pool.size() << " genomes.\n";
+		std::sort(pool.rbegin(), pool.rend());
+
+		cout << "epoch ended. Fitnesses (in order): " << endl;
+		for(int j = 0; j < pool.size(); j++){
+			cout << pool[j].getFitness() << endl;
+		}
+		//Cull the weak
+		//cout << "culling unfit genomes" << endl;
+		int inital_pop = pool.size();
+		for(int j = population; j < inital_pop; j++){
+			pool.pop_back();
+		}
+		if(i % 3 == 0){
+			mjSys.setRealTime(true);
+			mjSys.setGraphics(true);
+			cout << "displaying fittest genome" << endl;
+			double p[params];
+			for(int k = 0; k < params; k++){
+				p[k] = pool[0].getCodon(k);
+			}
+			CPGController c = CPGController(p);
+			Mediator m(&c, &mjSys);
+			m.run(4);
+			pool[0].printGenome();
+		}
+		cout << "***************************\n" <<  endl;
+	}
 
 	return 0;
 }

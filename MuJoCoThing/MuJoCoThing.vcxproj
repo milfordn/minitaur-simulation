@@ -145,17 +145,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AutoPID.h" />
-    <ClInclude Include="Controllers\CPGNode.h" />
     <ClInclude Include="Controllers\KeyboardController.h" />
-    <ClInclude Include="Controllers\LegControllerCPG.h" />
     <ClInclude Include="Controllers\LegControllerSimple.h" />
     <ClInclude Include="Controllers\LegPositionController.h" />
-    <ClInclude Include="Controllers\MinitaurControllerCPG.h" />
     <ClInclude Include="Controllers\ModelController.h" />
     <ClInclude Include="Controllers\PIDController.h" />
     <ClInclude Include="Controllers\PositionController.h" />
     <ClInclude Include="CPGNetwork.h" />
-    <ClInclude Include="CustomSimulate.h" />
+    <ClInclude Include="CPGNode.h" />
     <ClInclude Include="GaussianNoise.h" />
     <ClInclude Include="include\glfw3.h" />
     <ClInclude Include="include\mjdata.h" />
@@ -164,26 +161,32 @@
     <ClInclude Include="include\mjvisualize.h" />
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
+    <ClInclude Include="NewControllers\LegControllerCPG.h" />
+    <ClInclude Include="NewControllers\MinitaurControllerCPG.h" />
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoPID.cpp" />
-    <ClCompile Include="Controllers\CPGNode.cpp" />
-    <ClCompile Include="Controllers\KeyboardController.cpp" />
-    <ClCompile Include="Controllers\LegControllerCPG.cpp" />
+    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\LegPositionController.cpp" />
-    <ClCompile Include="Controllers\MinitaurControllerCPG.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
     <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="Controllers\PositionController.cpp" />
     <ClCompile Include="CPGNetwork.cpp" />
-    <ClCompile Include="CustomSimulate.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
+    <ClCompile Include="CPGNode.cpp" />
+    <ClCompile Include="Genome.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Noise.cpp" />
+    <ClCompile Include="Mediator.cpp" />
+    <ClCompile Include="NewControllers\CPGController.cpp" />
+    <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
+    <ClCompile Include="NewControllers\MinitaurControllerCPG.cpp" />
     <ClCompile Include="pid.cpp" />
+    <ClCompile Include="render.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="Systems\MujocoSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurFull.xml" />

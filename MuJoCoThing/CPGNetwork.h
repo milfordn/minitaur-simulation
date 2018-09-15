@@ -3,17 +3,17 @@
 
 #include <vector>
 #include "Eigen/Core"
-#include "Controllers/CPGNode.h"
+#include "CPGNode.h"
 
 using std::vector;
 using Eigen::Matrix;
 
 class CPGNetwork {
 public:
-	CPGNetwork(Eigen::Index size, double a, double b, double amplitude);
-	void step(mjtNum dt);
+	CPGNetwork(Eigen::Index size, vector<vector<double>> params);
+	void step(double dt);
 	Matrix<double, Eigen::Dynamic, 1> getYVector();
-	Matrix<double, Eigen::Dynamic, 1> getXVector();
+	Matrix<double, Eigen::Dynamic, 1> getAngleVector();
 	void setCoupling(Eigen::MatrixXd);
 	void applyCoupling();
 	CPGNode * getNode(int i);

@@ -2,9 +2,10 @@
 
 using std::vector;
 
-CPGNetwork::CPGNetwork(Eigen::Index size, double a, double b, double amplitude) {
+CPGNetwork::CPGNetwork(Eigen::Index size, vector<vector<double>> params) {
 	for (int i = 0; i < size; i++) {
-		Nodes.push_back(CPGNode(a, b, amplitude));
+		vector<double> nodeParams = params[i];
+		Nodes.push_back(CPGNode(nodeParams[0], nodeParams[1], nodeParams[2], nodeParams[3], nodeParams[4], nodeParams[5], nodeParams[6]));
 	}
 	coupling = Eigen::MatrixXd::Zero(size, size);
 }
@@ -12,20 +13,20 @@ CPGNetwork::CPGNetwork(Eigen::Index size, double a, double b, double amplitude) 
 Eigen::VectorXd CPGNetwork::getYVector() {
 	Eigen::VectorXd toReturn = Eigen::VectorXd::Zero(Nodes.size());
 	for (int i = 0; i < Nodes.size(); i++) {
-		toReturn[i] = Nodes[i].getValueY();
+		toReturn[i] = Nodes[i].getLength();
 	}
 	return toReturn;
 }
 
-Eigen::VectorXd CPGNetwork::getXVector() {
+Eigen::VectorXd CPGNetwork::getAngleVector() {
 	Eigen::VectorXd toReturn = Eigen::VectorXd::Zero(Nodes.size());
 	for (int i = 0; i < Nodes.size(); i++) {
-		toReturn[i] = Nodes[i].getValueX();
+		toReturn[i] = Nodes[i].getAngle();
 	}
 	return toReturn;
 }
 
-void CPGNetwork::step(mjtNum dt) {
+void CPGNetwork::step(double dt) {
 	applyCoupling();
 	for (int i = 0; i < Nodes.size(); i++) {
 		Nodes[i].step(dt);

@@ -34,7 +34,7 @@ void LegControllerSimple::step() {
 	data->ctrl[motor1] = dt - dr;
 	data->ctrl[motor2] = dt + dr;
 
-	printf("%f <-> %f | %f\n", expectedR, setR, totalT);
+	//printf("%f <-> %f | %f\n", expectedR, setR, totalT);
 	//printf("%f | %f -> %f | %f\n", data->sensordata[0], data->sensordata[1], data->ctrl[0], data->ctrl[1]);
 }
 

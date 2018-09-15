@@ -1,6 +1,6 @@
 <!-- Note: Component inertias are known to be incorrect in this version -->
 <mujoco model='Minitaur'>
-  <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='..\minitaur-stl'/>
+  <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='../minitaur-stl'/>
   <size nuser_actuator='1' nuser_sensor='1'/>
   <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -0.9806'/>
   <!-- Timestep is set to 0.0005 because our controller runs at 2 kHz (-9.806) -->

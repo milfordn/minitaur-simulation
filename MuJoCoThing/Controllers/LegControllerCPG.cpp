@@ -2,17 +2,13 @@
 #include <cstdio>
 
 LegControllerCPG::LegControllerCPG(char * f)
-	: ModelController(f),
-	ctrlR(3, 0, 0.2), ctrlT(0.5, 0, 0.05) {
+	: ModelController(f), patternGenerator(1, 50, mjPI / 2.75, 1.75, 12, 0, 0.001),
+	anglectrl1(0, 0, 0, 0, 0), anglectrl2(0, 0, 0, 0, 0) {
 	sensor1 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "thigh1_spos");
 	sensor2 = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "thigh2_spos");
 	motor1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh1_a");
 	motor2 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, "thigh2_a");
 	//sensorTouch = mj_name2id(this->model, mjtObj::mjOBJ_SENSOR, "foot_stouch");
-
-	patternGenerator = new CPGNode(1, 50, mjPI / 4);
-	patternGenerator->setPose(6, 3);
-	patternGenerator->setInitialConditions(0, mjPI / 4);
 }
 
 LegControllerCPG::LegControllerCPG(mjModel * m, mjData * d, char * s1, char * a1, char * s2, char * a2, CPGNode * cpg) 
@@ -22,8 +18,6 @@ LegControllerCPG::LegControllerCPG(mjModel * m, mjData * d, char * s1, char * a1
 	motor1 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, a1);
 	motor2 = mj_name2id(this->model, mjtObj::mjOBJ_ACTUATOR, a2);
 
-	patternGenerator = cpg;
-	patternGenerator->setPose(8, 4);
 }
 
 void LegControllerCPG::step() {
@@ -36,10 +30,9 @@ void LegControllerCPG::step() {
 	double measuredR = 0.1 * sin(angleCorrected) + 0.2 * sin(acos(cos(angleCorrected) / 2));
 
 	patternGenerator->step(data->time - timePrev);
-	timePrev = data->time;
 
-	double y = patternGenerator->getValueY();
-	double x = -patternGenerator->getValueX();
+	double y = patternGenerator->getLength();
+	double x = -patternGenerator->getAngle();
 
 	double setT = x;
 	double setR = y > 0 ? 0.125 : 0.25;
