@@ -289,3 +289,576 @@ Fri Sep 14 00:16:13 2018
 ERROR: Couldn't load model: Error: more than 6 dofs in body 'minitaur'
 Object name = minitaur, id = 1, line = 39, column = 9
 
+Sat Sep 15 18:03:29 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 0.9010.
+
+Sat Sep 15 18:03:29 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:17:36 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:17:51 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:17:59 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:07 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:14 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:22 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:30 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:37 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:45 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:18:53 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:00 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:08 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:16 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:23 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:31 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:39 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:47 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:19:56 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:20:05 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 2.7200.
+
+Sat Sep 15 18:20:05 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:23:04 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:23:09 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 1.7000.
+
+Sat Sep 15 18:23:09 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:24:03 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:24:11 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 2.6690.
+
+Sat Sep 15 18:24:11 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:29:58 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:32:24 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:32:27 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 1.1220.
+
+Sat Sep 15 18:32:27 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:32:49 2018
+WARNING: Unknown warning type Time = 0.0010.
+
+Sat Sep 15 18:32:53 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 1.1220.
+
+Sat Sep 15 18:32:53 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:34:06 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:36:46 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 53.2780.
+
+Sat Sep 15 18:36:46 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:36:50 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:37:00 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 3.3830.
+
+Sat Sep 15 18:37:00 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:37:13 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:37:35 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 7.2930.
+
+Sat Sep 15 18:37:35 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 18:38:25 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:41:27 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:43 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:44 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:45 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:46 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:47 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:48 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:49 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:49 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:50 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:51 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:52 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:53 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:54 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:55 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:56 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:57 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:43:58 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:03 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:04 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:05 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:06 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:07 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:08 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:09 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:10 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:11 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:11 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:13 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:13 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:14 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:15 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:16 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:17 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:18 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:19 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:20 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:21 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:22 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:23 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:24 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:25 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:26 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:27 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:28 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:29 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:30 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:30 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:31 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:32 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:33 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:34 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:34 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:35 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:36 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:37 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:38 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:39 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:40 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:41 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:41 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:42 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:43 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:44 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:45 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:46 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:50 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:51 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:52 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:53 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:54 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:55 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:56 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:57 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:57 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:58 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:44:59 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:45:00 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:45:01 2018
+WARNING: Unknown warning type Time = 0.0045.
+
+Sat Sep 15 18:53:37 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 19:47:14 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 20:47:06 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:47:06 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:07 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:07 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:08 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:08 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:08 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:09 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:09 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:10 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:10 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:11 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:11 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:11 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:12 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:12 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:47:13 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:47:28 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 14.8920.
+
+Sat Sep 15 20:47:28 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 20:49:01 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:02 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:02 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:02 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:03 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:03 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:04 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:04 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:05 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:05 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:05 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:06 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:06 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:07 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:07 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:08 2018
+WARNING: Unknown warning type Time = 0.0015.
+
+Sat Sep 15 20:49:08 2018
+WARNING: Unknown warning type Time = 0.0020.
+
+Sat Sep 15 20:49:18 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 10.3020.
+
+Sat Sep 15 20:49:18 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 20:51:52 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 28.5090.
+
+Sat Sep 15 20:51:52 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 20:52:30 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 20:53:05 2018
+WARNING: Unknown warning type Time = 0.0005.
+
+Sat Sep 15 20:59:38 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 21:07:51 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 21:08:35 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 21:09:13 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 0.0340.
+
+Sat Sep 15 21:09:13 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:10:29 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 21:17:23 2018
+WARNING: Unknown warning type Time = 4.0005.
+
+Sat Sep 15 21:20:25 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 59.1940.
+
+Sat Sep 15 21:20:25 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:29:46 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 18.0710.
+
+Sat Sep 15 21:29:46 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:30:14 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 12.0530.
+
+Sat Sep 15 21:30:14 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:31:09 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 16.4390.
+
+Sat Sep 15 21:31:09 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:35:28 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 19.0060.
+
+Sat Sep 15 21:35:28 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:39:34 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 5.1000.
+
+Sat Sep 15 21:39:34 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:42:39 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 9.8090.
+
+Sat Sep 15 21:42:39 2018
+ERROR: mjvScene scale too small in mjv_room2model
+
+Sat Sep 15 21:43:18 2018
+WARNING: Pre-allocated visual geom buffer is full. Increase maxgeom above 0. Time = 10.3530.
+
+Sat Sep 15 21:43:18 2018
+ERROR: mjvScene scale too small in mjv_room2model
+

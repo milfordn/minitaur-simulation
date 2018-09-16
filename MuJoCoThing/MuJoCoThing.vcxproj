@@ -129,7 +129,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -145,6 +145,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AutoPID.h" />
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="Controllers\KeyboardController.h" />
     <ClInclude Include="Controllers\LegControllerSimple.h" />
     <ClInclude Include="Controllers\LegPositionController.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="include\mjvisualize.h" />
     <ClInclude Include="include\mjxmacro.h" />
     <ClInclude Include="include\mujoco.h" />
+    <ClInclude Include="NewControllers\CPGController.h" />
     <ClInclude Include="NewControllers\LegControllerCPG.h" />
     <ClInclude Include="NewControllers\MinitaurControllerCPG.h" />
     <ClInclude Include="Noise.h" />

@@ -62,7 +62,8 @@ double Genome::getCodon(int index){
   for(int i = index*codonLength; i < index*codonLength + codonLength; i++){
     sum += genome[i] * pow(2, i - index*codonLength);
   }
-  return sum/50000;
+  double x = sum / pow(2, codonLength);
+  return x;
 }
 void Genome::printGenome(){
   for(int i = 0; i < length*codonLength; i++){

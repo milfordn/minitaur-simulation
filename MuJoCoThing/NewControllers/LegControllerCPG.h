@@ -1,5 +1,5 @@
-#ifndef CPGCTRL_H
-#define CPGCTRL_H
+#ifndef LEGCPGCTRL_H
+#define LEGCPGCTRL_H
 
 #include "../Controller.h"
 #include "../CPGNode.h"
@@ -12,7 +12,7 @@ public:
 private:
 	CPGNode * radiusController;
 	char *sensor1, *sensor2, *motor1, *motor2;
-	pid anglectrl1, anglectrl2;
+	pid ctrlR, ctrlT; //control radius, control angle (theta)
 };
 
 #endif

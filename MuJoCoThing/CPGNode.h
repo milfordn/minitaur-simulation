@@ -14,7 +14,7 @@ private:
 	double alpha, beta, b, mu;
 	double x, y;
 	double wstance, wswing;
-	double coupling;
+	double coupling = 0;
 };
 
 #endif

@@ -42,9 +42,6 @@
     <ClInclude Include="Controllers\LegControllerSimple.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\LegControllerCPG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\PositionController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -94,6 +91,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPGNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewControllers\CPGController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

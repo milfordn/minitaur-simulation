@@ -9,9 +9,9 @@ CPGController::CPGController(double params[28]){
   int param_num = 7;
   for(int i = 0; i < 4; i++){
     cpg[i] = new CPGNode(params[i*param_num + 0], params[i*param_num + 1], params[i*param_num + 2], params[i*param_num + 3], params[i*param_num + 4], params[i*param_num + 5], params[i*param_num + 6]);
-  }
-  for(int i = 0; i < 8; i++){
-    motors[i] = new pid(100, 0, 0.1);
+	legs[i] = new LegControllerCPG(sensorNames[i * 2], sensorNames[i * 2 + 1], motorNames[i * 2], motorNames[i * 2 + 1], cpg[i]);
+	legs[i]->setSensorRef(sensorRef);
+	legs[i]->setActuatorRef(actuatorRef);
   }
 }
 void CPGController::step(double dt){
@@ -51,35 +51,48 @@ void CPGController::step(double dt){
   //set motor positions
   double L1 = 0.1;
   double L2 = 0.2;
-  for(int i = 0; i < 8; i+=2){
-    cpg[i/2]->step(dt);
-    double desiredAngle = 3.14159/2 + cpg[i/2]->getAngle();
-    double desiredLength;
-    if(cpg[i/2]->getLength() > 1) desiredLength = L2 + L1;
-    else if(cpg[i/2]->getLength() < -1) desiredLength = L2 - L1;
-    else desiredLength = L2 + L1 * cpg[i/2]->getLength();
-    //double desiredAngle = 3.14159/2;
-    //double desiredLength = L2 + L1 * sin(time + (i/2 & 1));
-    double currentm1pos = (*sensorRef)[sensorNames[i]][0];
-    double currentm2pos = (*sensorRef)[sensorNames[i+1]][0];
-    double currentAngle = (currentm1pos + currentm2pos)/2;
-    double currentLength = L1 * sin(currentAngle - currentm1pos) + sqrt(L2*L2 - L1*L1*cos(currentAngle - currentm1pos)*cos(currentAngle - currentm1pos)); //The current distance from the motors to the end effector
-    double m1pos = desiredAngle - asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor1
-    double m2pos = desiredAngle + asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor2
+  //for(int i = 0; i < 8; i+=2){
+  //  cpg[i/2]->step(dt);
+  //  double desiredAngle = 3.14159/2 + cpg[i/2]->getAngle();
+  //  double desiredLength;
+  //  if(cpg[i/2]->getLength() > 1) desiredLength = L2 + L1;
+  //  else if(cpg[i/2]->getLength() < -1) desiredLength = L2 - L1;
+  //  else desiredLength = L2 + L1 * cpg[i/2]->getLength();
+  //  double currentm1pos = (*sensorRef)[sensorNames[i]][0];
+  //  double currentm2pos = (*sensorRef)[sensorNames[i+1]][0];
+  //  double currentAngle = (currentm1pos + currentm2pos)/2;
+  //  double currentLength = L1 * sin(currentAngle - currentm1pos) + sqrt(L2*L2 - L1*L1*cos(currentAngle - currentm1pos)*cos(currentAngle - currentm1pos)); //The current distance from the motors to the end effector
+  //  double m1pos = desiredAngle - asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor1
+  //  double m2pos = desiredAngle + asin((desiredLength*desiredLength + L1*L1 - L2*L2)/(2 * L1 * desiredLength)); //desired pos of motor2
+  //}
 
-    double output_1 = motors[i]->calculateOutput(time, m1pos, currentm1pos);
-    double output_2 = motors[i+1]->calculateOutput(time, m2pos, currentm2pos);
-    if(isnan(output_1)) output_1 = 0;
-    if(isnan(output_2)) output_2 = 0;
-    (*actuatorRef)[motorNames[i]] = output_1;
-    (*actuatorRef)[motorNames[i+1]] = output_2;
+  for (int i = 0; i < 4; i++) {
+	  legs[i]->step(dt);
   }
+
   pitchVariance += pitch*pitch;
   rollVariance += roll*roll;
   yawVariance += yaw*yaw;
   tick++;
   time += dt;
 }
+
+void CPGController::setSensorRef(unordered_map<string, vector<double>>* ref)
+{
+	Controller::setSensorRef(ref);
+
+	for (int i = 0; i < 4; i++)
+		legs[i]->setSensorRef(ref);
+}
+
+void CPGController::setActuatorRef(unordered_map<string, double>* ref)
+{
+	Controller::setActuatorRef(ref);
+
+	for (int i = 0; i < 4; i++)
+		legs[i]->setActuatorRef(ref);
+}
+
 double CPGController::exit(){
   pitchVariance /= tick;
   rollVariance /= tick;

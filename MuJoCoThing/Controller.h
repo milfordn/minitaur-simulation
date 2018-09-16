@@ -12,8 +12,8 @@ class Controller {
 public:
 	virtual void step(double dt) {};
 	virtual double exit() { return 0; };
-	void setSensorRef(unordered_map<string, std::vector<double>> *);
-	void setActuatorRef(unordered_map<string, double> *);
+	virtual void setSensorRef(unordered_map<string, std::vector<double>> *);
+	virtual void setActuatorRef(unordered_map<string, double> *);
 protected:
 	unordered_map<string, std::vector<double>> * sensorRef;
 	unordered_map<string, double> * actuatorRef;

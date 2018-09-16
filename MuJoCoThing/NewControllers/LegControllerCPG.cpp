@@ -2,7 +2,7 @@
 #include <cstdio>
 
 LegControllerCPG::LegControllerCPG(char * s1, char * s2, char * m1, char * m2, CPGNode * controller) :
-	anglectrl1(1, 0, 0.05), anglectrl2(1, 0, 0.05) {
+	ctrlR(5, 0, 0.2), ctrlT(0.75, 0, 0.05) {
 	radiusController = controller;
 	sensor1 = s1;
 	sensor2 = s2;
@@ -11,14 +11,25 @@ LegControllerCPG::LegControllerCPG(char * s1, char * s2, char * m1, char * m2, C
 }
 
 void LegControllerCPG::step(double dt) {
-	double angle1 = (*sensorRef)[sensor1][0];
-	double angle2 = (*sensorRef)[sensor2][0];
+	double angle1 = (*sensorRef)[sensor1][0] + 3.14 / 2;
+	double angle2 = (*sensorRef)[sensor2][0] - 3.14 / 2;
+
+	double measuredT = (angle1 + angle2);
+	double angleCorrected = (angle1 - measuredT);
+
+	double measuredR = 0.1 * sin(angleCorrected) + 0.2 * sin(acos(cos(angleCorrected) / 2));
 
 	radiusController->step(dt);
-	double nextAngle1 = radiusController->getAngle() + 3.14 / 2;
 
-	(*actuatorRef)[motor1] = anglectrl1.calculateOutput(dt, -nextAngle1, angle1);
-	(*actuatorRef)[motor2] = anglectrl2.calculateOutput(dt, nextAngle1, angle2);
+	double y = radiusController->getLength();
+	double x = -radiusController->getAngle();
 
-	printf("%f -> %f | %f -> %f\n", angle1, nextAngle1, angle2, -nextAngle1);
+	double setT = x;
+	double setR = y > 0 ? 0.125 : 0.25;
+
+	double pwrRadius = ctrlR.calculateOutput(dt, setR, measuredR);
+	double pwrAngle = ctrlT.calculateOutput(dt, setT, measuredT);
+
+	(*actuatorRef)[motor1] = pwrAngle + pwrRadius;
+	(*actuatorRef)[motor2] = pwrAngle - pwrRadius;
 }

@@ -36,3 +36,23 @@ void MinitaurControllerCPG::step(double dt) {
 	br->step(dt);
 }
 
+void MinitaurControllerCPG::setSensorRef(unordered_map<string, vector<double>>* ref)
+{
+	Controller::setSensorRef(ref);
+	
+	fl->setSensorRef(ref);
+	fr->setSensorRef(ref);
+	bl->setSensorRef(ref);
+	br->setSensorRef(ref);
+}
+
+void MinitaurControllerCPG::setActuatorRef(unordered_map<string, double>* ref)
+{
+	Controller::setActuatorRef(ref);
+
+	fl->setActuatorRef(ref);
+	fr->setActuatorRef(ref);
+	bl->setActuatorRef(ref);
+	br->setActuatorRef(ref);
+}
+

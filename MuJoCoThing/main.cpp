@@ -12,6 +12,9 @@ using std::endl;
 using std::flush;
 ofstream output;
 
+//alpha, beta, range, swing, stance, x(0), y(0)
+double paramScale[7] = { 25, 25, 3.14/2, 10, 10, 1, 1 };
+
 int main(int argc, char ** argv) {
 	mj_activate("mjkey.txt");
 	srand(time(NULL));
@@ -41,12 +44,13 @@ int main(int argc, char ** argv) {
 		cout << endl;
 		cout << "simulating genomes" << endl;
 		for(int j = 0; j < pool.size(); j++){
-			if (j % (pool.size() / 10) == 0) cout << "." << endl;
+			if (j % (pool.size() / 10) == 0) cout << "." << flush;
 
 			double parameters[params];
 
 			for(int k = 0; k < params; k++){
-				parameters[k] = pool[j].getCodon(k);
+				parameters[k] = pool[j].getCodon(k) * paramScale[k % 7];
+				//printf("%f\n", parameters[k]);
 			}
 
 			mjSys.setRealTime(false);
@@ -71,10 +75,10 @@ int main(int argc, char ** argv) {
 		for(int j = population; j < inital_pop; j++){
 			pool.pop_back();
 		}
-		if(i % 3 == 0){
+		if(i % 5 == 0){
 			mjSys.setRealTime(true);
 			mjSys.setGraphics(true);
-			cout << "displaying fittest genome" << endl;
+			cout << "displaying fittest genome:" << pool[0].getFitness() << endl;
 			double p[params];
 			for(int k = 0; k < params; k++){
 				p[k] = pool[0].getCodon(k);
