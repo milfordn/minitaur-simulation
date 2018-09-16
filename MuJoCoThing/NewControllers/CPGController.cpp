@@ -8,11 +8,14 @@ using std::endl;
 CPGController::CPGController(double params[28]){
   int param_num = 7;
   for(int i = 0; i < 4; i++){
-    cpg[i] = new CPGNode(params[i*param_num + 0], params[i*param_num + 1], params[i*param_num + 2], params[i*param_num + 3], params[i*param_num + 4], params[i*param_num + 5], params[i*param_num + 6]);
+    cpg[i] = new CPGNode(params[0], params[1], params[2], params[3], params[4], params[i*param_num + 5], params[i*param_num + 6]);
 	legs[i] = new LegControllerCPG(sensorNames[i * 2], sensorNames[i * 2 + 1], motorNames[i * 2], motorNames[i * 2 + 1], cpg[i]);
 	legs[i]->setSensorRef(sensorRef);
 	legs[i]->setActuatorRef(actuatorRef);
   }
+
+  pitch = 0;
+  tick = 0;
 }
 void CPGController::step(double dt){
   double dps = 35;
@@ -97,8 +100,8 @@ double CPGController::exit(){
   pitchVariance /= tick;
   rollVariance /= tick;
   yawVariance /= tick;
-  double distanceTraveled = sqrt(xFinal*xFinal + yFinal*yFinal);
-  double reward = (10.0/(pitchVariance) + 10.0/(rollVariance) + 2.0/(yawVariance)) * distanceTraveled/time;
+  double distanceTraveled = xFinal*xFinal - yFinal*yFinal;
+  double reward = distanceTraveled;//(10.0/(pitchVariance) + 10.0/(rollVariance) + 2.0/(yawVariance)) * distanceTraveled/time;
   if(touchedGround || leftGround) reward = 0;
   return reward;
 }

@@ -2,7 +2,7 @@
 #include <cstdio>
 
 LegControllerCPG::LegControllerCPG(char * s1, char * s2, char * m1, char * m2, CPGNode * controller) :
-	ctrlR(5, 0, 0.2), ctrlT(0.75, 0, 0.05) {
+	ctrlR(10, 0, 0.2), ctrlT(0.75, 0, 0.05) {
 	radiusController = controller;
 	sensor1 = s1;
 	sensor2 = s2;

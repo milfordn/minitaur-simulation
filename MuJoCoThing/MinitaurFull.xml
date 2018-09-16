@@ -53,13 +53,13 @@
             <joint type='slide' limited='false' axis='0 1 0'/>
 
             <!-- Pitch only -->
-            <!--<joint type='hinge' limited='false' axis='0 1 0'/>-->
+            <joint type='hinge' limited='false' axis='0 1 0'/>
 
             <!-- Roll only -->
             <!--<joint type='hinge' limited='false' axis='1 0 0'/>-->
 
             <!-- Rotation -->
-            <joint type='ball' limited='false'/>
+            <!--<joint type='ball' limited='false'/>-->
 
             <!-- front left leg-->
             <body pos='0.2 0.14 0' euler='0 0 0'>

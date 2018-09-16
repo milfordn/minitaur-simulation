@@ -57,7 +57,7 @@ int main(int argc, char ** argv) {
 			mjSys.setGraphics(false);
 			CPGController c = CPGController(parameters);
 			Mediator m(&c, &mjSys);
-			m.run(4);
+			m.run(7);
 			pool[j].setFitness(c.exit());
 			mjSys.reset();
 		}
@@ -85,7 +85,7 @@ int main(int argc, char ** argv) {
 			}
 			CPGController c = CPGController(p);
 			Mediator m(&c, &mjSys);
-			m.run(4);
+			m.run(7);
 			pool[0].printGenome();
 		}
 		cout << "***************************\n" <<  endl;
