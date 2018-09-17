@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mediator.cpp" />
-    <ClCompile Include="Systems\MujocoSystem.cpp" />
-    <ClCompile Include="Controllers\LegControllerCPG.cpp" />
-    <ClCompile Include="Controllers\ModelController.cpp" />
-    <ClCompile Include="CPGNode.cpp" />
-    <ClCompile Include="AutoPID.cpp" />
-    <ClCompile Include="NewControllers\CPGController.cpp" />
-    <ClCompile Include="pid.cpp" />
-    <ClCompile Include="Genome.cpp" />
-    <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="System.cpp" />
-    <ClCompile Include="render.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Library Include="glfw3.lib" />
     <Library Include="mujoco150.lib" />
   </ItemGroup>
@@ -45,44 +30,123 @@
     </Xml>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mediator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\MujocoSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NewControllers\LegControllerCPG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers\LegControllerCPG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Controllers\ModelController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CPGNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AutoPID.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NewControllers\CPGController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="pid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Genome.h">
+    <ClInclude Include="Controllers\LegControllerSimple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\PositionController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\LegPositionController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPGNetwork.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\KeyboardController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers\PIDController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GaussianNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glfw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mjdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mjmodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mjrender.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mjvisualize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mjxmacro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\mujoco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewControllers\LegControllerCPG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewControllers\MinitaurControllerCPG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPGNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NewControllers\CPGController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="System.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="render.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="MinitaurLeg.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="MinitaurFull.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoPID.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Controllers\LegControllerSimple.cpp" />
+    <ClCompile Include="Controllers\LegPositionController.cpp" />
+    <ClCompile Include="Controllers\ModelController.cpp" />
+    <ClCompile Include="Controllers\PIDController.cpp" />
+    <ClCompile Include="Controllers\PositionController.cpp" />
+    <ClCompile Include="CPGNetwork.cpp" />
+    <ClCompile Include="GaussianNoise.cpp" />
+    <ClCompile Include="CPGNode.cpp" />
+    <ClCompile Include="Genome.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mediator.cpp" />
+    <ClCompile Include="NewControllers\CPGController.cpp" />
+    <ClCompile Include="pid.cpp" />
+    <ClCompile Include="render.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="Systems\MujocoSystem.cpp" />
+    <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
+    <ClCompile Include="NewControllers\MinitaurControllerCPG.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="glfw3.dll">
+      <Filter>Library files</Filter>
+    </None>
+    <None Include="mujoco150.dll">
+      <Filter>Library files</Filter>
+    </None>
+    <None Include="MinitaurLegSimple.mjb">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="glfw3.lib">
+      <Filter>Library files</Filter>
+    </Library>
+    <Library Include="mujoco150.lib">
+      <Filter>Library files</Filter>
+    </Library>
   </ItemGroup>
 </Project>
