@@ -40,7 +40,20 @@ Genome::~Genome(){
 }
 Genome Genome::crossbreed(const Genome& partner) const{
   Genome offspring(length, codonLength);
-  for(int i = 0; i < length*codonLength; i+= codonLength){
+
+  int geneLength = length * codonLength;
+
+  //new way - one crossover point
+  int crossover = rand() % geneLength;
+  for (int i = 0; i < geneLength; i++) {
+	  if (i < crossover)
+		  offspring.genome[i] = genome[i];
+	  else
+		  offspring.genome[i] = partner.genome[i];
+  }
+
+  //old way - randomly choose codons from parents
+  /*for(int i = 0; i < length*codonLength; i+= codonLength){
     if(rand() & 1){
       for(int j = 0; j < codonLength; j++){
         offspring.genome[i+j] = partner.genome[i+j];
@@ -50,7 +63,9 @@ Genome Genome::crossbreed(const Genome& partner) const{
         offspring.genome[i+j] = genome[i+j];
       }
     }
-  }
+  }*/
+
+  //mutation
   if(rand() % 100 < 2) {
     int idx = rand()%(length*codonLength);
     offspring.genome[idx] = !offspring.genome[idx];
@@ -58,17 +73,23 @@ Genome Genome::crossbreed(const Genome& partner) const{
   return offspring;
 }
 double Genome::getCodon(int index){
-  double sum = 0;
-  for(int i = index*codonLength; i < index*codonLength + codonLength; i++){
-    sum += genome[i] * pow(2, i - index*codonLength);
-  }
-  return sum/50000;
+	double sum = 0;
+	for (int i = index*codonLength; i < index*codonLength + codonLength; i++) {
+		sum += genome[i] * pow(2, i - index*codonLength);
+	}
+	double x = sum / pow(2, codonLength); //normalize 0-1
+  return x;
 }
 void Genome::printGenome(){
-  for(int i = 0; i < length*codonLength; i++){
-    cout << genome[i];
-  }
-  cout << endl;
+	for (int i = 0; i < length * codonLength; i += codonLength) {
+		double sum = 0;
+		for (int j = i*codonLength; j < i*codonLength + codonLength; j++) {
+			sum += genome[j] * pow(2, j - i*codonLength);
+		}
+		double x = sum / pow(2, codonLength); //normalize 0-1
+		cout << x << ", ";
+	}
+	cout << endl;
 }
 void Genome::setFitness(double fitness){
   this->fitness = fitness;

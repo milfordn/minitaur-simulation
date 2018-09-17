@@ -8,6 +8,7 @@
 class ModelController {
 public:
 	ModelController(const char *);
+	ModelController(mjModel *, mjData *);
 	virtual void step();
 	virtual void keyboardCallback(GLFWwindow *, int, int, int, int);
 

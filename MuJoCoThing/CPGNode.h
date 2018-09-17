@@ -9,10 +9,12 @@ public:
 	void step(double dt);
 	double getAngle();
 	double getLength();
+	void setCoupling(double);
 private:
 	double alpha, beta, b, mu;
 	double x, y;
 	double wstance, wswing;
+	double coupling = 0;
 };
 
 #endif

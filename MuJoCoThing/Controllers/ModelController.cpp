@@ -12,6 +12,12 @@ ModelController::ModelController(const char * f) {
 	this->data = mj_makeData(model);
 }
 
+ModelController::ModelController(mjModel * m, mjData * d) {
+	this->model = m;
+	this->data = d;
+	setModelFile("");
+}
+
 void ModelController::setModelFile(const char * f) {
 	file = f;
 }

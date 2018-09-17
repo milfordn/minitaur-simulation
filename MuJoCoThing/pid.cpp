@@ -32,27 +32,25 @@ double pid::limit(double output){
   return output;
 }
 double pid::calculateOutput(double tick, double setpoint, double position){
-	double deltaT = tick - lastTick;
+	double deltaT = tick;
 
-  double error = setpoint - position;
+	double error = setpoint - position;
 
 	double derivative;
 	if(deltaT == 0){
 		derivative = 0;
-    integral = 0;
 	}else{
-    integral += error * deltaT;
-    derivative = (lastPosition - position)/deltaT;
+		integral += error * deltaT;
+		derivative = (lastPosition - position)/deltaT;
 	}
-  if(isnan(integral)) integral = 0;
+	if(isnan(integral)) integral = 0;
 
-  lastTick = tick;
-  lastPosition = position;
-  return limit(error*KP + integral*KI + derivative*KD);
+	lastTick = tick;
+	lastPosition = position;
+	return limit(error*KP + integral*KI + derivative*KD);
 }
 double pid::calculateOutput(double tick, double setpoint, double position, double velocity){
-	int deltaT = tick - lastTick;
-
+	double deltaT = tick;
 	double error = setpoint - position;
     integral += error * deltaT;
 

@@ -5,24 +5,27 @@
 #include "../Controller.h"
 #include "../pid.h"
 #include "../CPGNode.h"
+#include "LegControllerCPG.h"
 
 using std::ofstream;
 
 class CPGController : public Controller {
 public:
 	CPGController(double p[28]);
-	void reset();
 	void step(double dt) override;
+	void setSensorRef(unordered_map<string, vector<double>> *) override;
+	void setActuatorRef(unordered_map<string, double> *) override;
+
 	double exit() override;
 private:
-  pid* motors[8];
-	CPGNode* cpg[4];
+	CPGNode * cpg[4];
+	LegControllerCPG * legs[4];
 
 	double time = 0;
 	unsigned long tick = 0;
-  double pitch = 0;
-  double roll = 0;
-  double yaw = 0;
+	double pitch = 0;
+	double roll = 0;
+	double yaw = 0;
 	double gimbal_lock_x = 0;
 	double gimbal_lock_y = 0;
 
