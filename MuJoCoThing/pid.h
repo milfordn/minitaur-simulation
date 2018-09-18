@@ -17,6 +17,5 @@ class pid{
         double integral;
         double lastPosition;
         double upper, lower;
-        double limit(double outputer);
 };
 #endif
