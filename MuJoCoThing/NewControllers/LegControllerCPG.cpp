@@ -12,12 +12,15 @@ LegControllerCPG::LegControllerCPG(char * s1, char * s2, char * m1, char * m2, C
 
 void LegControllerCPG::step(double dt) {
 	double angle1 = (*sensorRef)[sensor1][0] + 3.14 / 2;
-	double angle2 = (*sensorRef)[sensor2][0] - 3.14 / 2;
+	double angle2 = 3.14 / 2 - (*sensorRef)[sensor2][0];
 
-	double measuredT = (angle1 + angle2);
-	double angleCorrected = (angle1 - measuredT);
+	double totalT = (angle1 - angle2);
+	double angleBetween = 3.14 - angle1 - angle2;
 
-	double measuredR = 0.1 * sin(angleCorrected) + 0.2 * sin(acos(cos(angleCorrected) / 2));
+	double len1 = 0.1, len2 = 0.2;
+	double auxLen = sin(angleBetween / 2) * len1; //length from "knee" to axis of the leg
+
+	double expectedR = len1 * cos(angleBetween / 2) + sqrt(len2 * len2 - auxLen * auxLen);
 
 	radiusController->step(dt);
 
@@ -27,8 +30,8 @@ void LegControllerCPG::step(double dt) {
 	double setT = x;
 	double setR = y > 0 ? 0.125 : 0.25;
 
-	double pwrRadius = ctrlR.calculateOutput(dt, setR, measuredR);
-	double pwrAngle = ctrlT.calculateOutput(dt, setT, measuredT);
+	double pwrRadius = ctrlR.calculateOutput(dt, setR, expectedR);
+	double pwrAngle = ctrlT.calculateOutput(dt, setT, totalT);
 
 	(*actuatorRef)[motor1] = pwrAngle + pwrRadius;
 	(*actuatorRef)[motor2] = pwrAngle - pwrRadius;

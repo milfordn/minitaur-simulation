@@ -54,9 +54,6 @@
     <ClInclude Include="Controllers\KeyboardController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controllers\PIDController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GaussianNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
     <ClInclude Include="Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NewControllers\PIDController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="MinitaurLeg.xml">
@@ -114,7 +114,6 @@
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\LegPositionController.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
-    <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="Controllers\PositionController.cpp" />
     <ClCompile Include="CPGNetwork.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
@@ -129,6 +128,7 @@
     <ClCompile Include="Systems\MujocoSystem.cpp" />
     <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
     <ClCompile Include="NewControllers\MinitaurControllerCPG.cpp" />
+    <ClCompile Include="NewControllers\PIDController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw3.dll">

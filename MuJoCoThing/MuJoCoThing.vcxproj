@@ -150,7 +150,6 @@
     <ClInclude Include="Controllers\LegControllerSimple.h" />
     <ClInclude Include="Controllers\LegPositionController.h" />
     <ClInclude Include="Controllers\ModelController.h" />
-    <ClInclude Include="Controllers\PIDController.h" />
     <ClInclude Include="Controllers\PositionController.h" />
     <ClInclude Include="CPGNetwork.h" />
     <ClInclude Include="CPGNode.h" />
@@ -165,6 +164,7 @@
     <ClInclude Include="NewControllers\CPGController.h" />
     <ClInclude Include="NewControllers\LegControllerCPG.h" />
     <ClInclude Include="NewControllers\MinitaurControllerCPG.h" />
+    <ClInclude Include="NewControllers\PIDController.h" />
     <ClInclude Include="Noise.h" />
     <ClInclude Include="pid.h" />
   </ItemGroup>
@@ -174,7 +174,6 @@
     <ClCompile Include="Controllers\LegControllerSimple.cpp" />
     <ClCompile Include="Controllers\LegPositionController.cpp" />
     <ClCompile Include="Controllers\ModelController.cpp" />
-    <ClCompile Include="Controllers\PIDController.cpp" />
     <ClCompile Include="Controllers\PositionController.cpp" />
     <ClCompile Include="CPGNetwork.cpp" />
     <ClCompile Include="GaussianNoise.cpp" />
@@ -185,6 +184,7 @@
     <ClCompile Include="NewControllers\CPGController.cpp" />
     <ClCompile Include="NewControllers\LegControllerCPG.cpp" />
     <ClCompile Include="NewControllers\MinitaurControllerCPG.cpp" />
+    <ClCompile Include="NewControllers\PIDController.cpp" />
     <ClCompile Include="pid.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="System.cpp" />
