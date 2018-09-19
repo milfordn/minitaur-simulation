@@ -67,6 +67,14 @@ double pid::calculateOutput(double tick, double setpoint, double position, doubl
     return error*KP + integral*KI + derivative*KD;
 }
 
-void pid::setPgain(double p){
+void pid::setKp(double p){
 	KP = p;
+}
+
+void pid::setKi(double i) {
+	KI = i;
+}
+
+void pid::setKd(double d) {
+	KD = d;
 }

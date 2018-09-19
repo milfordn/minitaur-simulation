@@ -3,17 +3,38 @@
 #include <ctime>
 #include <cstdio>
 
-PIDController::PIDController()
+PIDController::PIDController(char * s1, char * s2, char * a1, char * a2)
 	: ctrlR(3, 0.5, 0.25), ctrlT(0.75, 0.05, 0.15)
 {
-	this->setR = 0.15;
-	this->setT = 0;
-	this->counter = 0;
+	sensor1 = s1;
+	sensor2 = s2;
+	actuator1 = a1;
+	actuator2 = a2;
+}
+
+void PIDController::setpoint(double radius, double angle)
+{
+	setR = radius;
+	setT = angle;
+}
+
+void PIDController::setRadiusGains(double kp, double ki, double kd)
+{
+	ctrlR.setKp(kp);
+	ctrlR.setKi(ki);
+	ctrlR.setKd(kd);
+}
+
+void PIDController::setAngleGains(double kp, double ki, double kd)
+{
+	ctrlT.setKp(kp);
+	ctrlT.setKi(ki);
+	ctrlT.setKd(kd);
 }
 
 void PIDController::step(double dt) {
-	double angle1 = (*sensorRef)["thigh1_spos"][0] + 3.14 / 2;
-	double angle2 = 3.14 / 2 - (*sensorRef)["thigh2_spos"][0];
+	double angle1 = (*sensorRef)[sensor1][0] + 3.14 / 2;
+	double angle2 = 3.14 / 2 - (*sensorRef)[sensor2][0];
 
 	double totalT = (angle1 - angle2);
 	double angleBetween = 3.14 - angle1 - angle2;
@@ -23,31 +44,9 @@ void PIDController::step(double dt) {
 
 	double expectedR = len1 * cos(angleBetween / 2) + sqrt(len2 * len2 - auxLen * auxLen);
 
-	//setR = 0.075 * cos(counter * 3.14 * 1.75) + 0.2;
-	//setT = 3.14 / 3 * -sin(counter * 3.14 * 1.75);// +3.14 / 6;
-	if (counter < 0.5) {
-		setR = 0.125;
-		setT = 3.14 / 4;
-	}
-	else if (counter < 1) {
-		setR = 0.225;
-		setT = 3.14 / 4;
-	}
-	else if (counter < 1.5) {
-		setR = 0.225;
-		setT = -3.14 / 4;
-	}
-	else if (counter < 2) {
-		setR = 0.125;
-		setT = -3.14 / 4;
-	}
-	else counter = 0;
-
 	double dr = ctrlR.calculateOutput(dt, setR, expectedR);
 	double dth = ctrlT.calculateOutput(dt, setT, totalT);
 
-	counter += dt;
-
-	(*actuatorRef)["thigh1_a"] = dth + dr;
-	(*actuatorRef)["thigh2_a"] = dth - dr;
+	(*actuatorRef)[actuator1] = dth + dr;
+	(*actuatorRef)[actuator2] = dth - dr;
 }
