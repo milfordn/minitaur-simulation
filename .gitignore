@@ -12,7 +12,6 @@ Eigen
 include
 sample
 doc
-model
 
 #python binary stuff
 __pycache__

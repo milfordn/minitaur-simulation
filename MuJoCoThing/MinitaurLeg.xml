@@ -1,44 +1,10 @@
-<!-- Note: Component inertias are known to be incorrect in this version -->
-<mujoco model='Minitaur'>
-  <compiler inertiafromgeom='false' angle='degree' eulerseq='zyx' meshdir='../minitaur-stl'/>
-  <size nuser_actuator='1' nuser_sensor='1'/>
-  <option timestep='0.0005' iterations='50' solver='PGS' gravity='0 0 -0.9806'/>
-  <!-- Timestep is set to 0.0005 because our controller runs at 2 kHz (-9.806) -->
-  <!-- Larger values still have stable dynamics -->
-
-  <visual>
-    <quality shadowsize='4096'/>
-    <map znear='0.05'/>
-  </visual>
-
-  <default>
-    <joint limited='true'/>
-    <geom contype='0' conaffinity='0' condim='1' solref=".005 1" solimp=".8 .8 .01" material='collision'/>
-    <equality solref='0.005 1'/>
-    <motor ctrllimited='true'/>
-    <mesh scale='0.001 0.001 0.001'/>
-    <default class='mesh-import'>
-      <geom type='mesh' euler='0 90 90' material='cassie'/>
-    </default>
-  </default>
-
-  <asset>
-    <texture type='skybox' builtin='gradient' width='128' height='128' rgb1='0.725490196078431   0.403921568627451   1.000000000000000' rgb2='1.000000000000000   0.984313725490196   0.588235294117647'/>
-    <texture name='plane' type='2d' builtin='checker'  rgb1='1 0 0' rgb2='1 1 0' width='128' height='128'/>
-    <material name='plane' reflectance='0.0' texture='plane' texrepeat='4 4' texuniform='true'/>
-    <material name='cassie' rgba='0.003921568627451   0.803921568627451   0.996078431372549 1'/>
-    <material name='collision' rgba='0 1 0 0.25'/>
-    <mesh name='thigh' file='thigh.STL'/>
-    <mesh name='foot' file='foot.STL'/>
-    <mesh name='calf1' file='calf.STL'/>
-    <mesh name='calf2' file='ankle.STL'/>
-  </asset>
+<mujoco model='Minitaur' xmlns:xi="http://www.w3.org/2001/XInclude">
 
   <worldbody>
     <geom type='plane' size='1 1 1' material='plane' condim='3' contype='1' conaffinity='1'/>
 
     <body name='hip' pos='0 0 0.35'>
-      <inertial pos='0 0 0' mass='0.000001' diaginertia='0.001 0.001 0.001'/>
+      <inertial pos='0 0 0' mass='0.0001' diaginertia='0.0000000001 0.0000000001 0.0000000001'/>
       <geom type='box' size='0.01 0.01 0.01'/>
       <!--<joint type='slide' range='-0.4 10' pos='0 0 0' axis='0 0 1' stiffness='10'/>-->
       <!--<joint type='slide' limited='false' pos='0 0 0' axis='1 0 0' frictionloss='0.1'/>-->
@@ -91,8 +57,8 @@
 
   <actuator>
     <!-- I don't know the actual numbers for these -->
-    <motor name='thigh1_a' joint='thigh1_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
-    <motor name='thigh2_a' joint='thigh2_j' gear='1' ctrllimited='true' ctrlrange='-15 15'/>
+    <motor name='thigh1_a' joint='thigh1_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+    <motor name='thigh2_a' joint='thigh2_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
   </actuator>
 
   <sensor>

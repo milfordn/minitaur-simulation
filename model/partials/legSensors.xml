@@ -1,0 +1,4 @@
+<jointpos name='thigh1_spos' joint='thigh1_j'/>
+<jointpos name='thigh2_spos' joint='thigh2_j'/>
+<jointvel name='thigh1_svel' joint='thigh1_j'/>
+<jointvel name='thigh2_svel' joint='thigh2_j'/>

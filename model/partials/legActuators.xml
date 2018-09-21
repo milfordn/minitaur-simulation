@@ -1,0 +1,2 @@
+<motor name='thigh1_a' joint='thigh1_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>
+<motor name='thigh2_a' joint='thigh2_j' gear='1' ctrllimited='true' ctrlrange='-10 10'/>

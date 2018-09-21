@@ -1,0 +1,7 @@
+<mujoco model='{{name}}'>
+
+    {{> partials/header.xml}}
+
+    {{> templates/!!TEMPLATE_FILE!!}}
+
+</mujoco>
