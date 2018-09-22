@@ -1,12 +1,16 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+TEMP="temp"
+
 ls ./templates | while read FILE
 do
-    . mo # This loads the "mo" function
+    TRIMMED="${FILE%.*}" # remove file extension
+    DEST="compiled/$TRIMMED.xml"
 
-    export name="" # TODO: get model name from file name
-    frame=$(sed -e "s|!!TEMPLATE_FILE!!|$FILE|g" frames/MujocoGeneral.xml) # replace marker with actual template file
+    # replace token with actual partial
+    sed -e "s|!!TEMPLATE_FILE!!|$TRIMMED|g" frames/MujocoGeneral.xml > "$TEMP.xml"
 
-    echo "$frame" | mo > "compiled/$FILE"
+    hbs -P "{partials/*,templates/*}" "$TEMP.xml" 
+    mv "$TEMP.html" "$DEST"
 done
