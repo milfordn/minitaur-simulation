@@ -7,3 +7,8 @@ Download Mujoco Here: https://www.roboti.us/index.html
 
 Download Eigen here: http://eigen.tuxfamily.org/index.php?title=Main_Page
 - In the eigen-eigen-[Hash] folder, there should be an "Eigen" folder. Copy that into the same folder as above.
+
+To Compile Models:
+- download and install handlebars (best way to do this is with npm): https://www.npmjs.com/package/handlebars
+- run model/make-model.bash
+- compiled models should show up in model/compiled
