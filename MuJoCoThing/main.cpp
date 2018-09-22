@@ -25,7 +25,7 @@ int main(int argc, char ** argv) {
 	const int epochs = 2000;
 	std::vector<Genome> pool;
 
-	MujocoSystem mjSys((char*)"MinitaurFull.xml");
+	MujocoSystem mjSys((char*)"../model/compiled/MinitaurFull.xml");
 
 	for(int i = 0; i < population; i++){
 		pool.push_back(Genome(params, size));
