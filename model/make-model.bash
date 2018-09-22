@@ -14,3 +14,5 @@ do
     hbs -P "{partials/*,templates/*}" "$TEMP.xml" 
     mv "$TEMP.html" "$DEST"
 done
+
+rm "$TEMP.xml"

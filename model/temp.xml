@@ -1,7 +1,0 @@
-<mujoco model='{{name}}'>
-
-    {{> header}}
-
-    {{> MinitaurLegLeft}}
-
-</mujoco>
