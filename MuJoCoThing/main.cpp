@@ -54,7 +54,7 @@ int main(int argc, char ** argv) {
 			}
 
 			mjSys.setRealTime(false);
-			mjSys.setGraphics(false);
+			mjSys.setGraphics(j % 2 == 0);
 			CPGController c = CPGController(parameters);
 			Mediator m(&c, &mjSys);
 			m.run(7);

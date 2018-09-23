@@ -1,26 +1,37 @@
 #include "render.h"
+#include <cstdio>
 
 #ifndef LEGACY_SIMULATE
 
-mjModel* model = NULL;                  // MuJoCo model
-mjvCamera cam;                      // abstract camera
-mjvPerturb pert;                    // perturbation object
-mjvOption opt;                      // visualization options
-mjvScene scn;                       // abstract scene
-mjrContext con;                     // custom GPU context
+void mjRender::cb_scroll(GLFWwindow * window, double xoff, double yoff) {
+	((mjRender*)(glfwGetWindowUserPointer(window)))->scroll(xoff, yoff);
+}
 
-mjtNum simstart;
+void mjRender::cb_mousemove(GLFWwindow * window, double xpos, double ypos) {
+	((mjRender*)(glfwGetWindowUserPointer(window)))->mouse_move(xpos, ypos);
+}
 
-GLFWwindow * window = NULL;
+void mjRender::cb_mousebutton(GLFWwindow * window, int button, int act, int mods) {
+	((mjRender*)(glfwGetWindowUserPointer(window)))->mouse_button(button, act, mods);
+}
 
-bool button_left;
-bool button_middle;
-bool button_right;
-double lastx, lasty;
+void mjRender::cb_keyboard(GLFWwindow * window, int key, int scancode, int act, int mods) {
+	((mjRender*)(glfwGetWindowUserPointer(window)))->keyboard(key, scancode, act, mods);
+}
 
-int lastKey;
+void mjRender::cb_close(GLFWwindow * window) {
+	((mjRender*)(glfwGetWindowUserPointer(window)))->win_close();
+}
 
-void scroll(GLFWwindow* window, double xoffset, double yoffset) {
+mjRender::mjRender(mjModel * m) {
+	this->model = m;
+}
+
+mjRender::~mjRender() {
+	this->close();
+}
+
+void mjRender::scroll(double xoffset, double yoffset) {
 	// require model
 	if (!model)
 		return;
@@ -29,13 +40,13 @@ void scroll(GLFWwindow* window, double xoffset, double yoffset) {
 	mjv_moveCamera(model, mjMOUSE_ZOOM, 0, -0.05*yoffset, &scn, &cam);
 }
 
-void mouse_button(GLFWwindow * w, int button, int act, int mods) {
-	button_left = (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS);
-	button_middle = (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS);
-	button_right = (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS);
+void mjRender::mouse_button(int button, int act, int mods) {
+	button_left = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS);
+	button_middle = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE) == GLFW_PRESS);
+	button_right = (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS);
 }
 
-void mouse_move(GLFWwindow* window, double xpos, double ypos) {
+void mjRender::mouse_move(double xpos, double ypos) {
 	// no buttons down: nothing to do
 	if (!button_left && !button_middle && !button_right) {
 		lastx = xpos;
@@ -74,7 +85,7 @@ void mouse_move(GLFWwindow* window, double xpos, double ypos) {
 	mjv_moveCamera(model, action, dx / height, dy / height, &scn, &cam);
 }
 
-void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
+void mjRender::keyboard(int key, int scanCode, int action, int mods) {
 	if (action == GLFW_PRESS) {
 		lastKey = key;
 	}
@@ -83,28 +94,28 @@ void key_callback(GLFWwindow * w, int key, int scanCode, int action, int mods) {
 	}
 }
 
-void window_close_callback(GLFWwindow * w) {
+void mjRender::win_close() {
 	// close GLFW, free visualization storage
 	glfwTerminate();
 	mjv_freeScene(&scn);
 	mjr_freeContext(&con);
 }
 
-void init(mjModel * m, int xres, int yres) {
+void mjRender::init(const char * title, int xres, int yres) {
 	if (window) return;
-
-	model = m;
 
 	glfwInit();
 	window = glfwCreateWindow(xres, yres, "Minitaur", NULL, NULL);
 	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1);
 
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetMouseButtonCallback(window, mouse_button);
-	glfwSetCursorPosCallback(window, mouse_move);
-	glfwSetScrollCallback(window, scroll);
-	glfwSetWindowCloseCallback(window, window_close_callback);
+	glfwSetKeyCallback(window, cb_keyboard);
+	glfwSetMouseButtonCallback(window, cb_mousebutton);
+	glfwSetCursorPosCallback(window, cb_mousemove);
+	glfwSetScrollCallback(window, cb_scroll); 
+	glfwSetWindowCloseCallback(window, cb_close);
+
+	glfwSetWindowUserPointer(window, this);
 
 	mjv_defaultCamera(&cam);	
 	mjv_defaultPerturb(&pert);
@@ -114,8 +125,8 @@ void init(mjModel * m, int xres, int yres) {
 	mjr_makeContext(model, &con, mjFONTSCALE_100);     // model-specific context
 }
 
-void render(mjData * d) {
-	if (!window) return;
+void mjRender::render(mjData * d) {
+	if (!window || glfwWindowShouldClose(window)) return;
 
 	// get framebuffer viewport
 	mjrRect viewport = { 0, 0, 0, 0 };
@@ -130,11 +141,16 @@ void render(mjData * d) {
 
 	// process pending GUI events, call GLFW callbacks
 	glfwPollEvents();
-
 }
 
-void close() {
-	if (window) glfwSetWindowShouldClose(window, true);
+bool mjRender::isOpen()
+{
+	return window;
+}
+
+void mjRender::close() {
+	glfwDestroyWindow(window);
+	this->window = NULL;
 }
 
 #else
