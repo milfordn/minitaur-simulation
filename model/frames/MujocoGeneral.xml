@@ -1,0 +1,7 @@
+<mujoco model='{{name}}'>
+
+    {{> header}}
+
+    {{> !!TEMPLATE_FILE!!}}
+
+</mujoco>
