@@ -54,8 +54,8 @@ void LegPositionController::step(struct _mjData* data, struct _mjModel* model) {
 	}
 }
 void LegPositionController::setPgain(double p){
-	this->m1->setPgain(p);
-	this->m2->setPgain(p);
+	this->m1->setKp(p);
+	this->m2->setKp(p);
 }
 void LegPositionController::release(){
 	active = false;
